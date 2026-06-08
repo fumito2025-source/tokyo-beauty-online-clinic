@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
 import { createAdminClient } from "@/lib/supabase/server"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
-
 export async function POST(req: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_dummy")
   const body = await req.text()
   const sig = req.headers.get("stripe-signature")!
 
@@ -30,7 +29,7 @@ export async function POST(req: NextRequest) {
       .in("id", productIds)
 
     const orderItems = items.map((item: any) => {
-      const product = products?.find((p) => p.id === item.productId)
+      const product = products?.find((p: any) => p.id === item.productId)
       return {
         product_id: item.productId,
         product_name: product?.name || "",
