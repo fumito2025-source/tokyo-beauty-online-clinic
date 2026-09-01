@@ -33,9 +33,10 @@ async function getAccessToken(clientEmail: string, privateKey: string): Promise<
   const signingInput = `${encode(header)}.${encode(payload)}`
 
   const crypto = await import("crypto")
+  const keyObject = crypto.createPrivateKey({ key: privateKey, format: "pem" })
   const sign = crypto.createSign("RSA-SHA256")
   sign.update(signingInput)
-  const signature = sign.sign(privateKey, "base64url")
+  const signature = sign.sign(keyObject, "base64url")
 
   const jwt = `${signingInput}.${signature}`
 
