@@ -83,19 +83,24 @@ export async function appendReservationToSheet(data: any) {
       new Date().toLocaleDateString("ja-JP"),
     ]
 
-    await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/%E4%BA%88%E7%B4%84%E4%B8%80%E8%A6%A7!A:O:append?valueInputOption=USER_ENTERED`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ values: [row] }),
-      }
-    )
+    const range = encodeURIComponent("予約一覧!A:O")
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`
 
-    console.log("スプレッドシートへの書き込み完了")
+    const sheetsRes = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ values: [row] }),
+    })
+
+    const sheetsData = await sheetsRes.json()
+    if (!sheetsRes.ok) {
+      console.error("Sheets APIエラー:", JSON.stringify(sheetsData))
+    } else {
+      console.log("スプレッドシートへの書き込み完了:", sheetsData.updates?.updatedRange)
+    }
   } catch (err) {
     console.error("スプレッドシートエラー:", err)
   }
