@@ -1,3 +1,42 @@
+interface ReminderEmailParams {
+  full_name: string
+  email: string
+  reserved_at: string
+  plans: string[]
+}
+
+export async function sendReminderEmail(params: ReminderEmailParams) {
+  const { full_name, email, reserved_at, plans } = params
+  const planLabels = plans.map((p: string) => PLAN_LABELS[p] || p).join("・")
+  const dateStr = formatDateTime(reserved_at)
+
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) return
+
+  const nodemailer = await import("nodemailer")
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
+  })
+
+  await transporter.sendMail({
+    from: process.env.GMAIL_USER,
+    to: email,
+    subject: "【東京美容オンラインクリニック】明日のご予約のリマインド",
+    text: `
+${full_name} 様
+
+明日のご予約のリマインドです。
+
+■ 予約日時：${dateStr}
+■ 希望プラン：${planLabels}
+
+ご不明な点はLINE公式アカウントよりお問い合わせください。
+
+東京美容オンラインクリニック
+    `.trim(),
+  })
+}
+
 const PLAN_LABELS: Record<string, string> = {
   whitening: "美白プラン",
   aga: "AGAプラン",
