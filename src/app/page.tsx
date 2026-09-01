@@ -36,8 +36,8 @@ export default async function HomePage() {
             美白・AGA・美容サプリまで、全てスマートフォンで完結します。
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
-            <Link href="/products?category=consultation" className="btn-primary">
-              オンライン診療を予約する
+            <Link href="/reservation" className="btn-primary">
+              ご予約・問診票はこちら
             </Link>
             <Link href="/products" className="btn-outline">
               商品・サービスを見る
