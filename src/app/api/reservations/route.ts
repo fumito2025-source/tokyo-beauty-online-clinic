@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { sendReservationEmail } from "@/lib/email"
+import { appendReservationToSheet } from "@/lib/sheets"
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,6 +37,9 @@ export async function POST(req: NextRequest) {
 
     // Gmail通知を送信
     await sendReservationEmail({ full_name, email, phone, reserved_at, plans, concern })
+
+    // スプレッドシートに追記
+    await appendReservationToSheet(body)
 
     return NextResponse.json({ success: true })
   } catch (error) {
