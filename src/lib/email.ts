@@ -5,8 +5,8 @@ interface ReminderEmailParams {
   plans: string[]
 }
 
-export async function sendReminderEmail(params: ReminderEmailParams) {
-  const { full_name, email, reserved_at, plans } = params
+export async function sendReminderEmail(params: ReminderEmailParams & { isToday?: boolean }) {
+  const { full_name, email, reserved_at, plans, isToday = false } = params
   const planLabels = plans.map((p: string) => PLAN_LABELS[p] || p).join("・")
   const dateStr = formatDateTime(reserved_at)
 
@@ -18,14 +18,20 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
     auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
   })
 
+  const subject = isToday
+    ? "【東京美容オンラインクリニック】本日のご予約のリマインド"
+    : "【東京美容オンラインクリニック】明日のご予約のリマインド"
+
+  const timing = isToday ? "本日" : "明日"
+
   await transporter.sendMail({
     from: process.env.GMAIL_USER,
     to: email,
-    subject: "【東京美容オンラインクリニック】明日のご予約のリマインド",
+    subject,
     text: `
 ${full_name} 様
 
-明日のご予約のリマインドです。
+${timing}のご予約のリマインドです。
 
 ■ 予約日時：${dateStr}
 ■ 希望プラン：${planLabels}

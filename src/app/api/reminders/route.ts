@@ -4,7 +4,8 @@ import { sendReminderEmail } from "@/lib/email"
 
 async function handleReminder(req: NextRequest) {
   const authHeader = req.headers.get("authorization")
-  const cronSecret = req.nextUrl?.searchParams.get("secret")
+  const params = req.nextUrl?.searchParams
+  const cronSecret = params?.get("secret")
   if (
     authHeader !== `Bearer ${process.env.CRON_SECRET}` &&
     cronSecret !== process.env.CRON_SECRET
@@ -12,10 +13,16 @@ async function handleReminder(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
+  // typeパラメータ: "today"=当日8:30リマインド, "tomorrow"=前日22時リマインド
+  const type = params?.get("type") ?? "tomorrow"
+  const isToday = type === "today"
+
   const supabase = createAdminClient()
-  const tomorrow = new Date()
-  tomorrow.setDate(tomorrow.getDate() + 1)
-  const dateStr = tomorrow.toISOString().slice(0, 10)
+  const target = new Date()
+  // JSTに変換（UTC+9）
+  target.setHours(target.getHours() + 9)
+  if (!isToday) target.setDate(target.getDate() + 1)
+  const dateStr = target.toISOString().slice(0, 10)
 
   const { data: reservations, error } = await supabase
     .from("reservations")
@@ -28,7 +35,7 @@ async function handleReminder(req: NextRequest) {
   }
 
   if (!reservations || reservations.length === 0) {
-    return NextResponse.json({ message: "明日の予約なし" })
+    return NextResponse.json({ message: `${isToday ? "本日" : "明日"}の予約なし` })
   }
 
   await Promise.all(
@@ -38,6 +45,7 @@ async function handleReminder(req: NextRequest) {
         email: r.email,
         reserved_at: r.reserved_at,
         plans: r.plans,
+        isToday,
       })
     )
   )
