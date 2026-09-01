@@ -2,10 +2,13 @@ import { NextRequest, NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { sendReminderEmail } from "@/lib/email"
 
-export async function POST(req: NextRequest) {
-  // 簡単なAPIキー認証
+async function handleReminder(req: NextRequest) {
   const authHeader = req.headers.get("authorization")
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const cronSecret = req.nextUrl?.searchParams.get("secret")
+  if (
+    authHeader !== `Bearer ${process.env.CRON_SECRET}` &&
+    cronSecret !== process.env.CRON_SECRET
+  ) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
@@ -40,4 +43,12 @@ export async function POST(req: NextRequest) {
   )
 
   return NextResponse.json({ message: `${reservations.length}件のリマインダーを送信しました` })
+}
+
+export async function POST(req: NextRequest) {
+  return handleReminder(req)
+}
+
+export async function GET(req: NextRequest) {
+  return handleReminder(req)
 }
