@@ -16,6 +16,42 @@ function formatDateTime(iso: string) {
   return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}（${days[d.getDay()]}）${d.getHours()}:${String(d.getMinutes()).padStart(2, "0")}`
 }
 
+async function getAccessToken(clientEmail: string, privateKey: string): Promise<string> {
+  const now = Math.floor(Date.now() / 1000)
+  const header = { alg: "RS256", typ: "JWT" }
+  const payload = {
+    iss: clientEmail,
+    scope: "https://www.googleapis.com/auth/spreadsheets",
+    aud: "https://oauth2.googleapis.com/token",
+    exp: now + 3600,
+    iat: now,
+  }
+
+  const encode = (obj: object) =>
+    Buffer.from(JSON.stringify(obj)).toString("base64url")
+
+  const signingInput = `${encode(header)}.${encode(payload)}`
+
+  const crypto = await import("crypto")
+  const sign = crypto.createSign("RSA-SHA256")
+  sign.update(signingInput)
+  const signature = sign.sign(privateKey, "base64url")
+
+  const jwt = `${signingInput}.${signature}`
+
+  const res = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion: jwt,
+    }),
+  })
+
+  const data = await res.json()
+  return data.access_token
+}
+
 export async function appendReservationToSheet(data: any) {
   const clientEmail = process.env.GOOGLE_CLIENT_EMAIL
   const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n")
@@ -26,38 +62,41 @@ export async function appendReservationToSheet(data: any) {
     return
   }
 
-  const { GoogleAuth } = await import("google-auth-library")
-  const { google } = await import("googleapis")
+  try {
+    const accessToken = await getAccessToken(clientEmail, privateKey)
 
-  const auth = new GoogleAuth({
-    credentials: { client_email: clientEmail, private_key: privateKey },
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-  })
+    const row = [
+      formatDateTime(data.reserved_at),
+      data.full_name,
+      data.date_of_birth,
+      data.gender === "male" ? "男性" : data.gender === "female" ? "女性" : "その他",
+      data.phone,
+      data.email,
+      data.postal_code,
+      data.address,
+      data.plans?.map((p: string) => PLAN_LABELS[p] || p).join("・"),
+      FOLLOW_LABELS[data.follow_up] || data.follow_up,
+      data.concern,
+      data.medical_history || "",
+      data.current_medications || "",
+      data.pregnancy === "yes" ? "あり" : data.pregnancy === "no" ? "なし" : "該当しない",
+      new Date().toLocaleDateString("ja-JP"),
+    ]
 
-  const sheets = google.sheets({ version: "v4", auth })
+    await fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/%E4%BA%88%E7%B4%84%E4%B8%80%E8%A6%A7!A:O:append?valueInputOption=USER_ENTERED`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ values: [row] }),
+      }
+    )
 
-  const row = [
-    formatDateTime(data.reserved_at),
-    data.full_name,
-    data.date_of_birth,
-    data.gender === "male" ? "男性" : data.gender === "female" ? "女性" : "その他",
-    data.phone,
-    data.email,
-    data.postal_code,
-    data.address,
-    data.plans?.map((p: string) => PLAN_LABELS[p] || p).join("・"),
-    FOLLOW_LABELS[data.follow_up] || data.follow_up,
-    data.concern,
-    data.medical_history || "",
-    data.current_medications || "",
-    data.pregnancy === "yes" ? "あり" : data.pregnancy === "no" ? "なし" : "該当しない",
-    new Date().toLocaleDateString("ja-JP"),
-  ]
-
-  await sheets.spreadsheets.values.append({
-    spreadsheetId: sheetId,
-    range: "予約一覧!A:O",
-    valueInputOption: "USER_ENTERED",
-    requestBody: { values: [row] },
-  })
+    console.log("スプレッドシートへの書き込み完了")
+  } catch (err) {
+    console.error("スプレッドシートエラー:", err)
+  }
 }
