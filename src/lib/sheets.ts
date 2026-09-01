@@ -32,12 +32,28 @@ async function getAccessToken(clientEmail: string, privateKey: string): Promise<
 
   const signingInput = `${encode(header)}.${encode(payload)}`
 
-  const crypto = await import("crypto")
-  const keyObject = crypto.createPrivateKey({ key: privateKey, format: "pem" })
-  const sign = crypto.createSign("RSA-SHA256")
-  sign.update(signingInput)
-  const signature = sign.sign(keyObject, "base64url")
+  // Web Crypto API (OpenSSL 3 / Node.js 18+ 対応)
+  const pemBody = privateKey
+    .replace(/-----BEGIN PRIVATE KEY-----/, "")
+    .replace(/-----END PRIVATE KEY-----/, "")
+    .replace(/\s+/g, "")
 
+  const keyBuffer = Buffer.from(pemBody, "base64")
+  const cryptoKey = await globalThis.crypto.subtle.importKey(
+    "pkcs8",
+    keyBuffer,
+    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+    false,
+    ["sign"]
+  )
+
+  const signatureBuffer = await globalThis.crypto.subtle.sign(
+    "RSASSA-PKCS1-v1_5",
+    cryptoKey,
+    new TextEncoder().encode(signingInput)
+  )
+
+  const signature = Buffer.from(signatureBuffer).toString("base64url")
   const jwt = `${signingInput}.${signature}`
 
   const res = await fetch("https://oauth2.googleapis.com/token", {
@@ -50,6 +66,9 @@ async function getAccessToken(clientEmail: string, privateKey: string): Promise<
   })
 
   const data = await res.json()
+  if (!data.access_token) {
+    console.error("アクセストークン取得失敗:", JSON.stringify(data))
+  }
   return data.access_token
 }
 
