@@ -160,8 +160,8 @@ async function appendToTab(
   tabName: string,
   row: string[]
 ) {
-  const range = encodeURIComponent(`${tabName}!A:O`)
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`
+  const range = encodeURIComponent(`${tabName}!A1`)
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=USER_ENTERED`
   const res = await fetch(url, {
     method: "POST",
     headers: {
