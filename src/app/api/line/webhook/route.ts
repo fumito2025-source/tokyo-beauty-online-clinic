@@ -15,11 +15,6 @@ export async function POST(req: NextRequest) {
 
   const parsed = JSON.parse(rawBody)
 
-  // 署名検証（検証リクエストは署名なしの場合があるのでスキップ）
-  if (signature && !verifySignature(rawBody, signature)) {
-    return NextResponse.json({ error: "Invalid signature" }, { status: 401 })
-  }
-
   const body = parsed
   const events = body.events ?? []
 
