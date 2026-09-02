@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { sendReminderEmail } from "@/lib/email"
 import { getAccessToken, updateTodaySchedule } from "@/lib/sheets"
+import { sendLineMessage, reminderLineMessage } from "@/lib/line"
 
 async function handleReminder(req: NextRequest) {
   const authHeader = req.headers.get("authorization")
@@ -40,29 +41,36 @@ async function handleReminder(req: NextRequest) {
   }
 
   await Promise.all(
-    reservations.map((r: any) =>
-      sendReminderEmail({
+    reservations.map(async (r: any) => {
+      // メールリマインダー
+      await sendReminderEmail({
         full_name: r.full_name,
         email: r.email,
         reserved_at: r.reserved_at,
         plans: r.plans,
         isToday,
       })
-    )
+
+      // LINEリマインダー（LINE連携済みの患者のみ）
+      if (r.line_user_id) {
+        await sendLineMessage(
+          r.line_user_id,
+          reminderLineMessage({ full_name: r.full_name, reserved_at: r.reserved_at, plans: r.plans, isToday })
+        )
+      }
+    })
   )
 
-  // 本日のスケジュールシートを更新（前日22時のcronのみ）
-  if (!isToday) {
-    const clientEmail = process.env.GOOGLE_CLIENT_EMAIL
-    const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n")
-    const sheetId = process.env.GOOGLE_SHEET_ID
-    if (clientEmail && privateKey && sheetId) {
-      try {
-        const accessToken = await getAccessToken(clientEmail, privateKey)
-        await updateTodaySchedule(accessToken, sheetId)
-      } catch (e) {
-        console.error("スケジュールシート更新エラー:", e)
-      }
+  // 本日のスケジュールシートを更新（8:30・22時どちらのcronでも実行）
+  const clientEmail = process.env.GOOGLE_CLIENT_EMAIL
+  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n")
+  const sheetId = process.env.GOOGLE_SHEET_ID
+  if (clientEmail && privateKey && sheetId) {
+    try {
+      const accessToken = await getAccessToken(clientEmail, privateKey)
+      await updateTodaySchedule(accessToken, sheetId)
+    } catch (e) {
+      console.error("スケジュールシート更新エラー:", e)
     }
   }
 

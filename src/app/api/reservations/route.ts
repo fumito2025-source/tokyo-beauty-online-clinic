@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { sendReservationEmail } from "@/lib/email"
 import { appendReservationToSheet } from "@/lib/sheets"
+import { sendLineMessage, reservationConfirmMessage } from "@/lib/line"
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,6 +41,20 @@ export async function POST(req: NextRequest) {
 
     // スプレッドシートに追記
     await appendReservationToSheet(body)
+
+    // LINEメッセージ送信（メールアドレスでLine User IDを検索）
+    const { data: lineUser } = await supabase
+      .from("line_users")
+      .select("line_user_id")
+      .eq("email", email)
+      .single()
+
+    if (lineUser?.line_user_id) {
+      await sendLineMessage(
+        lineUser.line_user_id,
+        reservationConfirmMessage({ full_name, reserved_at, plans })
+      )
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
