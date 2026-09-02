@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { sendReminderEmail } from "@/lib/email"
+import { getAccessToken, updateTodaySchedule } from "@/lib/sheets"
 
 async function handleReminder(req: NextRequest) {
   const authHeader = req.headers.get("authorization")
@@ -49,6 +50,21 @@ async function handleReminder(req: NextRequest) {
       })
     )
   )
+
+  // 本日のスケジュールシートを更新（前日22時のcronのみ）
+  if (!isToday) {
+    const clientEmail = process.env.GOOGLE_CLIENT_EMAIL
+    const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n")
+    const sheetId = process.env.GOOGLE_SHEET_ID
+    if (clientEmail && privateKey && sheetId) {
+      try {
+        const accessToken = await getAccessToken(clientEmail, privateKey)
+        await updateTodaySchedule(accessToken, sheetId)
+      } catch (e) {
+        console.error("スケジュールシート更新エラー:", e)
+      }
+    }
+  }
 
   return NextResponse.json({ message: `${reservations.length}件のリマインダーを送信しました` })
 }
