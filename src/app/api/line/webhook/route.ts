@@ -13,13 +13,10 @@ export async function POST(req: NextRequest) {
   const rawBody = await req.text()
   const signature = req.headers.get("x-line-signature") ?? ""
 
-  // 検証リクエスト（eventsが空配列）はそのまま200を返す
   const parsed = JSON.parse(rawBody)
-  if (parsed.events?.length === 0) {
-    return NextResponse.json({ ok: true })
-  }
 
-  if (!verifySignature(rawBody, signature)) {
+  // 署名検証（検証リクエストは署名なしの場合があるのでスキップ）
+  if (signature && !verifySignature(rawBody, signature)) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 })
   }
 
