@@ -40,6 +40,15 @@ function medicationMenuMessage(): LineMessage[] {
             ],
           },
           {
+            thumbnailImageUrl: `${BASE_URL}/medication/obesity.png`,
+            imageSize: "cover",
+            title: "肥満・ダイエット",
+            text: "マンジャロ・リベルサス・防風通聖散など",
+            actions: [
+              { type: "uri", label: "詳しく見る", uri: `${BASE_URL}/medication#obesity` },
+            ],
+          },
+          {
             thumbnailImageUrl: `${BASE_URL}/medication/moisturizing.png`,
             imageSize: "cover",
             title: "保湿・外用薬",
