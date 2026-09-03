@@ -13,6 +13,8 @@ function medicationMenuMessage(): LineMessage[] {
         type: "carousel",
         columns: [
           {
+            thumbnailImageUrl: `${BASE_URL}/medication/aga.png`,
+            imageSize: "cover",
             title: "AGA治療薬",
             text: "フィナステリド・デュタステリド",
             actions: [
@@ -20,6 +22,8 @@ function medicationMenuMessage(): LineMessage[] {
             ],
           },
           {
+            thumbnailImageUrl: `${BASE_URL}/medication/whitening.png`,
+            imageSize: "cover",
             title: "美白・肝斑",
             text: "トランサミン・シナール・ハイチオールなど",
             actions: [
@@ -27,6 +31,8 @@ function medicationMenuMessage(): LineMessage[] {
             ],
           },
           {
+            thumbnailImageUrl: `${BASE_URL}/medication/acne.png`,
+            imageSize: "cover",
             title: "ニキビ治療",
             text: "アダパレンゲル・ゼビアックスなど",
             actions: [
@@ -34,6 +40,8 @@ function medicationMenuMessage(): LineMessage[] {
             ],
           },
           {
+            thumbnailImageUrl: `${BASE_URL}/medication/moisturizing.png`,
+            imageSize: "cover",
             title: "保湿・外用薬",
             text: "ヒルドイド・ビマトプロストなど",
             actions: [
