@@ -24,9 +24,30 @@ export async function POST(req: NextRequest) {
       // メッセージイベント
       if (event.type === "message" && event.message?.type === "text") {
         const text: string = event.message.text ?? ""
+
         if (text.includes("予約")) {
           await replyLineMessage(event.replyToken, [
             textMessage(`ご予約はこちらから承ります。\n\nhttps://tokyo-beauty-online-clinic.vercel.app/reservation\n\nご不明な点はこのチャットよりお問い合わせください。`),
+          ])
+        } else if (text === "経過・ご相談") {
+          // リッチメニューの経過・ご相談ボタンを押した場合
+          await replyLineMessage(event.replyToken, [
+            textMessage(
+              "経過・ご相談を承ります。\n\n📷 経過写真を送る場合\nそのまま写真を送信してください。\n\n💬 症状をご相談される場合\nこのチャットに症状・お悩みをテキストでお送りください。\n\n担当医が確認次第、ご返信いたします。\n\n東京美容オンラインクリニック"
+            ),
+          ])
+        } else if (text.includes("お問い合わせ")) {
+          await replyLineMessage(event.replyToken, [
+            textMessage(
+              "お問い合わせありがとうございます。\n\nご質問・ご不明点はこのチャットにそのままメッセージをお送りください。担当スタッフが確認後、ご返信いたします。\n\n受付時間：10:00〜18:00（土日祝除く）\n\n東京美容オンラインクリニック"
+            ),
+          ])
+        } else {
+          // 一般的なテキストメッセージ（症状相談など）→ 受付確認を返す
+          await replyLineMessage(event.replyToken, [
+            textMessage(
+              "メッセージを受け取りました。\n\n担当医が内容を確認し、順次ご返信いたします。\n\n※お急ぎの場合は、お電話にてお問い合わせください。\n\n東京美容オンラインクリニック"
+            ),
           ])
         }
       }
@@ -34,7 +55,7 @@ export async function POST(req: NextRequest) {
       // 写真メッセージイベント（経過報告）
       if (event.type === "message" && event.message?.type === "image") {
         await replyLineMessage(event.replyToken, [
-          textMessage("写真を受け取りました。担当医が確認後、ご連絡いたします。\n\n東京美容オンラインクリニック"),
+          textMessage("写真を受け取りました。\n\n担当医が確認後、ご連絡いたします。\n\n東京美容オンラインクリニック"),
         ])
       }
 
