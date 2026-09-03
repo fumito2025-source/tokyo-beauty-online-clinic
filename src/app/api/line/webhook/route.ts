@@ -10,14 +10,36 @@ function medicationMenuMessage(): LineMessage[] {
       type: "template",
       altText: "薬の説明 — カテゴリを選択してください",
       template: {
-        type: "buttons",
-        title: "薬の説明",
-        text: "ご確認したいカテゴリをお選びください",
-        actions: [
-          { type: "uri", label: "💊 AGA治療薬", uri: `${BASE_URL}/medication#aga` },
-          { type: "uri", label: "✨ 美白・肝斑", uri: `${BASE_URL}/medication#whitening` },
-          { type: "uri", label: "🌿 ニキビ治療", uri: `${BASE_URL}/medication#acne` },
-          { type: "uri", label: "💧 保湿・外用薬", uri: `${BASE_URL}/medication#moisturizing` },
+        type: "carousel",
+        columns: [
+          {
+            title: "AGA治療薬",
+            text: "フィナステリド・デュタステリド",
+            actions: [
+              { type: "uri", label: "詳しく見る", uri: `${BASE_URL}/medication#aga` },
+            ],
+          },
+          {
+            title: "美白・肝斑",
+            text: "トランサミン・シナール・ハイチオールなど",
+            actions: [
+              { type: "uri", label: "詳しく見る", uri: `${BASE_URL}/medication#whitening` },
+            ],
+          },
+          {
+            title: "ニキビ治療",
+            text: "アダパレンゲル・ゼビアックスなど",
+            actions: [
+              { type: "uri", label: "詳しく見る", uri: `${BASE_URL}/medication#acne` },
+            ],
+          },
+          {
+            title: "保湿・外用薬",
+            text: "ヒルドイド・ビマトプロストなど",
+            actions: [
+              { type: "uri", label: "詳しく見る", uri: `${BASE_URL}/medication#moisturizing` },
+            ],
+          },
         ],
       },
     },
