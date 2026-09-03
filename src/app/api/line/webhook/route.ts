@@ -1,6 +1,28 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
-import { replyLineMessage, textMessage } from "@/lib/line"
+import { replyLineMessage, textMessage, LineMessage } from "@/lib/line"
+
+const BASE_URL = "https://tokyo-beauty-online-clinic.vercel.app"
+
+function medicationMenuMessage(): LineMessage[] {
+  return [
+    {
+      type: "template",
+      altText: "薬の説明 — カテゴリを選択してください",
+      template: {
+        type: "buttons",
+        title: "薬の説明",
+        text: "ご確認したいカテゴリをお選びください",
+        actions: [
+          { type: "uri", label: "💊 AGA治療薬", uri: `${BASE_URL}/medication#aga` },
+          { type: "uri", label: "✨ 美白・肝斑", uri: `${BASE_URL}/medication#whitening` },
+          { type: "uri", label: "🌿 ニキビ治療", uri: `${BASE_URL}/medication#acne` },
+          { type: "uri", label: "💧 保湿・外用薬", uri: `${BASE_URL}/medication#moisturizing` },
+        ],
+      },
+    },
+  ]
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -25,7 +47,9 @@ export async function POST(req: NextRequest) {
       if (event.type === "message" && event.message?.type === "text") {
         const text: string = event.message.text ?? ""
 
-        if (text.includes("予約")) {
+        if (text === "薬の説明") {
+          await replyLineMessage(event.replyToken, medicationMenuMessage())
+        } else if (text.includes("予約")) {
           await replyLineMessage(event.replyToken, [
             textMessage(`ご予約はこちらから承ります。\n\nhttps://tokyo-beauty-online-clinic.vercel.app/reservation\n\nご不明な点はこのチャットよりお問い合わせください。`),
           ])
