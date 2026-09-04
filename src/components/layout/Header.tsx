@@ -1,27 +1,24 @@
 "use client"
 import Link from "next/link"
 import { useState } from "react"
-import { useCart } from "@/lib/store/cart"
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const itemCount = useCart((s) => s.itemCount())
 
   const nav = [
-    { href: "/products", label: "商品・診療一覧" },
-    { href: "/products?category=consultation", label: "オンライン診療" },
-    { href: "/products?category=prescription", label: "処方薬" },
-    { href: "/products?category=supplement", label: "サプリ・美容品" },
-    { href: "/account", label: "マイページ" },
+    { href: "/#how-it-works", label: "診療の流れ" },
+    { href: "/medication", label: "薬の説明" },
+    { href: "/faq", label: "よくある質問" },
+    { href: "/#contact", label: "お問い合わせ" },
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-clinic-black border-b border-clinic-gold/30">
+    <header className="sticky top-0 z-50 bg-clinic-black/95 backdrop-blur-sm border-b border-clinic-gold/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-18 py-4">
           {/* ロゴ */}
           <Link href="/" className="flex-shrink-0">
-            <span className="font-serif text-lg text-clinic-gold tracking-[0.2em]">
+            <span className="font-serif text-base md:text-lg text-clinic-gold tracking-[0.15em]">
               東京美容オンラインクリニック
             </span>
           </Link>
@@ -32,28 +29,22 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-xs text-clinic-offwhite/70 hover:text-clinic-gold tracking-widest transition-colors duration-300 font-serif"
+                className="text-xs text-clinic-offwhite/55 hover:text-clinic-offwhite tracking-widest transition-colors duration-300 font-sans"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          {/* カートアイコン */}
+          {/* ご予約ボタン + モバイルメニュー */}
           <div className="flex items-center gap-4">
-            <Link href="/cart" className="relative p-2">
-              <svg className="w-5 h-5 text-clinic-offwhite/70 hover:text-clinic-gold transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-              {itemCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-clinic-gold text-clinic-black text-xs rounded-full w-4 h-4 flex items-center justify-center font-sans font-bold">
-                  {itemCount}
-                </span>
-              )}
+            <Link
+              href="/reservation"
+              className="hidden md:inline-flex items-center border border-clinic-gold text-clinic-gold hover:bg-clinic-gold hover:text-clinic-black transition-colors px-5 py-2 text-xs tracking-[0.25em] font-sans"
+            >
+              ご予約
             </Link>
 
-            {/* モバイルメニューボタン */}
             <button
               className="md:hidden p-2"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -72,18 +63,27 @@ export function Header() {
 
       {/* モバイルメニュー */}
       {menuOpen && (
-        <div className="md:hidden border-t border-clinic-gold/20 bg-clinic-gray-dark">
-          <nav className="px-4 py-6 space-y-4">
+        <div className="md:hidden border-t border-clinic-gold/20 bg-clinic-black">
+          <nav className="px-6 py-6 space-y-1">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block text-xs text-clinic-offwhite/70 py-2 border-b border-clinic-gold/10 tracking-widest hover:text-clinic-gold transition-colors"
+                className="block text-xs text-clinic-offwhite/60 py-3 border-b border-clinic-gold/10 tracking-widest hover:text-clinic-gold transition-colors font-sans"
                 onClick={() => setMenuOpen(false)}
               >
                 {item.label}
               </Link>
             ))}
+            <div className="pt-4">
+              <Link
+                href="/reservation"
+                className="block text-center border border-clinic-gold text-clinic-gold py-3 text-xs tracking-[0.3em] font-sans hover:bg-clinic-gold hover:text-clinic-black transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                ご予約
+              </Link>
+            </div>
           </nav>
         </div>
       )}
