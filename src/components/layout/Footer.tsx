@@ -40,11 +40,10 @@ export function Footer() {
             <p className="text-clinic-gold text-xs mb-6 tracking-[0.3em]">GUIDE</p>
             <ul className="space-y-3 text-sm">
               {[
-                ["特定商取引法に基づく表記", "/legal/tokusho"],
-                ["プライバシーポリシー", "/legal/privacy"],
-                ["利用規約", "/legal/terms"],
-                ["お問い合わせ", "/contact"],
+                ["特定商取引法に基づく表記", "/legal"],
+                ["プライバシーポリシー", "/privacy"],
                 ["よくある質問", "/faq"],
+                ["お問い合わせ", "/"],
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link href={href} className="text-clinic-offwhite/50 hover:text-clinic-gold transition-colors tracking-wide text-xs">{label}</Link>
