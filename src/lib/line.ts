@@ -40,26 +40,53 @@ export function textMessage(text: string): LineMessage {
   return { type: "text", text }
 }
 
-// 予約確認メッセージ
+const PLAN_LABELS: Record<string, string> = {
+  aga: "AGA治療",
+  whitening: "美白・肝斑",
+  acne: "ニキビ治療",
+  obesity: "肥満・ダイエット",
+  moisturizing: "保湿・外用薬",
+  other: "その他・相談",
+}
+
+function formatReservedAt(reserved_at: string) {
+  const d = new Date(reserved_at)
+  const days = "日月火水木金土"
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）${d.getHours()}:${String(d.getMinutes()).padStart(2,"0")}`
+}
+
+// 予約確認メッセージ（患者向け）
 export function reservationConfirmMessage(params: {
   full_name: string
   reserved_at: string
   plans: string[]
 }): LineMessage[] {
-  const PLAN_LABELS: Record<string, string> = {
-    whitening: "美白プラン",
-    aga: "AGAプラン",
-    obesity: "肥満プラン",
-  }
-  const d = new Date(params.reserved_at)
-  const days = "日月火水木金土"
-  const dateStr = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${days[d.getDay()]}）${d.getHours()}:${String(d.getMinutes()).padStart(2, "0")}`
-  const planStr = params.plans.map((p) => PLAN_LABELS[p] || p).join("・")
+  const dateStr = formatReservedAt(params.reserved_at)
+  const planStr = params.plans.map(p => PLAN_LABELS[p] || p).join("・")
 
   return [
     {
       type: "text",
-      text: `${params.full_name} 様\n\nご予約ありがとうございます。\n\n📅 予約日時：${dateStr}\n💊 希望プラン：${planStr}\n\nご不明な点はこちらのチャットよりお気軽にお問い合わせください。\n\n東京美容オンラインクリニック`,
+      text: `${params.full_name} 様\n\nご予約ありがとうございます。\n\n📅 予約日時：${dateStr}\n💊 ご希望：${planStr}\n\n問診票の内容を確認の上、担当医より順次ご連絡いたします。\n\nご不明な点はこのチャットよりお気軽にどうぞ。\n\n東京美容オンラインクリニック`,
+    },
+  ]
+}
+
+// 予約通知メッセージ（院長向け）
+export function reservationAdminMessage(params: {
+  full_name: string
+  reserved_at: string
+  plans: string[]
+  phone: string
+  concern: string
+}): LineMessage[] {
+  const dateStr = formatReservedAt(params.reserved_at)
+  const planStr = params.plans.map(p => PLAN_LABELS[p] || p).join("・")
+
+  return [
+    {
+      type: "text",
+      text: `【新規予約】\n\n👤 ${params.full_name}\n📅 ${dateStr}\n💊 ${planStr}\n📞 ${params.phone}\n\n■ 相談内容\n${params.concern || "（未記入）"}\n\n管理画面で詳細を確認してください。`,
     },
   ]
 }

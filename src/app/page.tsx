@@ -256,6 +256,46 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── LINEで完結 ──────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-clinic-black border-y border-clinic-gold/10 relative overflow-hidden">
+        <div className="absolute inset-0 hero-glow pointer-events-none opacity-60" />
+        <Reveal className="max-w-4xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+            {/* LINEアイコン風 */}
+            <div className="flex-shrink-0">
+              <div className="w-20 h-20 rounded-2xl bg-[#06C755]/10 border border-[#06C755]/30 flex items-center justify-center">
+                <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
+                  <path d="M20 4C11.163 4 4 10.268 4 18c0 4.418 2.343 8.372 6 11.07V34l5.333-2.933C16.82 31.68 18.38 32 20 32c8.837 0 16-6.268 16-14S28.837 4 20 4z" fill="#06C755" opacity=".2"/>
+                  <path d="M20 4C11.163 4 4 10.268 4 18c0 4.418 2.343 8.372 6 11.07V34l5.333-2.933C16.82 31.68 18.38 32 20 32c8.837 0 16-6.268 16-14S28.837 4 20 4z" stroke="#06C755" strokeWidth="1.5"/>
+                  <circle cx="13" cy="18" r="1.5" fill="#06C755"/>
+                  <circle cx="20" cy="18" r="1.5" fill="#06C755"/>
+                  <circle cx="27" cy="18" r="1.5" fill="#06C755"/>
+                </svg>
+              </div>
+            </div>
+
+            <div className="flex-1 text-center md:text-left">
+              <p className="text-[10px] tracking-[0.4em] text-clinic-gold/60 mb-3 font-sans">LINE ONLY</p>
+              <h2 className="font-serif font-light text-2xl md:text-3xl tracking-[0.15em] text-clinic-offwhite mb-4">
+                全て、LINEで完結します。
+              </h2>
+              <p className="text-clinic-offwhite/45 text-sm leading-relaxed tracking-wide mb-6">
+                アプリのインストールも、会員登録も不要。<br />
+                LINEの友だち追加だけで、予約・診察・処方・相談まで<br className="hidden md:block" />
+                すべてそのままチャットで完結します。
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                {["予約・問診", "医師との相談", "経過フォロー", "薬の説明"].map(tag => (
+                  <span key={tag} className="text-xs text-clinic-gold/70 border border-clinic-gold/25 px-3 py-1.5 tracking-wider">
+                    ✓ {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
       {/* ─── ご利用の流れ ─────────────────────────────── */}
       <section className="py-28 md:py-36 bg-clinic-gray-dark relative overflow-hidden">
         <div className="absolute inset-0 section-glow-left pointer-events-none" />

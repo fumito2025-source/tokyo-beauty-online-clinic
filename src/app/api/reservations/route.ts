@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { createAdminClient } from "@/lib/supabase/server"
 import { sendReservationEmail } from "@/lib/email"
 import { appendReservationToSheet } from "@/lib/sheets"
-import { sendLineMessage, reservationConfirmMessage } from "@/lib/line"
+import { sendLineMessage, reservationConfirmMessage, reservationAdminMessage } from "@/lib/line"
 
 export async function POST(req: NextRequest) {
   try {
@@ -49,10 +49,20 @@ export async function POST(req: NextRequest) {
       .eq("email", email)
       .single()
 
+    // 患者へのLINE通知
     if (lineUser?.line_user_id) {
       await sendLineMessage(
         lineUser.line_user_id,
         reservationConfirmMessage({ full_name, reserved_at, plans })
+      )
+    }
+
+    // 院長へのLINE通知
+    const adminLineId = process.env.ADMIN_LINE_USER_ID
+    if (adminLineId) {
+      await sendLineMessage(
+        adminLineId,
+        reservationAdminMessage({ full_name, reserved_at, plans, phone, concern })
       )
     }
 
