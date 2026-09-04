@@ -166,7 +166,7 @@ export default function FAQPage() {
             解決しなかった場合はLINEよりご相談ください
           </p>
           <a
-            href="https://lin.ee/YOUR_LINE_ID"
+            href="https://line.me/R/ti/p/@555glibw"
             className="inline-flex items-center gap-3 border border-clinic-gold/40 text-clinic-gold hover:bg-clinic-gold/10 transition-colors px-8 py-3 text-sm tracking-[0.2em] font-sans"
           >
             LINEで相談する

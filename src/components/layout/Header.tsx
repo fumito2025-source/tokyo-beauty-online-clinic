@@ -6,10 +6,10 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const nav = [
-    { href: "/#how-it-works", label: "診療の流れ" },
+    { href: "/flow", label: "診療の流れ" },
     { href: "/medication", label: "薬の説明" },
     { href: "/faq", label: "よくある質問" },
-    { href: "/#contact", label: "お問い合わせ" },
+    { href: "/contact", label: "お問い合わせ" },
   ]
 
   return (
@@ -38,6 +38,15 @@ export function Header() {
 
           {/* ご予約ボタン + モバイルメニュー */}
           <div className="flex items-center gap-4">
+            <a
+              href="https://line.me/R/ti/p/@555glibw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-1.5 text-[#06C755]/70 hover:text-[#06C755] transition-colors text-xs tracking-widest font-sans"
+            >
+              <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5"><path d="M8 1.5C4.41 1.5 1.5 4.02 1.5 7.13c0 1.77.94 3.35 2.4 4.43V14l2.13-1.17c.61.17 1.25.3 1.97.3 3.59 0 6.5-2.52 6.5-5.63s-2.91-5.5-6.5-5.5z"/></svg>
+              LINE相談
+            </a>
             <Link
               href="/reservation"
               className="hidden md:inline-flex items-center border border-clinic-gold text-clinic-gold hover:bg-clinic-gold hover:text-clinic-black transition-colors px-5 py-2 text-xs tracking-[0.25em] font-sans"
