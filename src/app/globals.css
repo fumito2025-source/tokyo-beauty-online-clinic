@@ -4,10 +4,13 @@
 
 @layer base {
   :root {
-    --color-black: #0A0A0A;
-    --color-gold: #C9A84C;
-    --color-gold-light: #E0C87A;
-    --color-offwhite: #F5F0E8;
+    --color-cream:    #EDE8DC;
+    --color-cream2:   #E5DFD1;
+    --color-gold:     #B89050;
+    --color-gold-lt:  #C9A870;
+    --color-charcoal: #2A2520;
+    --color-brown:    #5C5248;
+    --color-border:   #D8D2C4;
   }
 
   html {
@@ -15,18 +18,18 @@
   }
 
   body {
-    background-color: #0A0A0A;
-    color: #F5F0E8;
+    background-color: #EDE8DC;
+    color: #2A2520;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply border border-clinic-gold text-clinic-gold px-8 py-3 text-sm tracking-widest hover:bg-clinic-gold hover:text-clinic-black transition-all duration-300 font-serif;
+    @apply border border-clinic-gold text-clinic-gold px-8 py-3 text-sm tracking-widest hover:bg-clinic-gold hover:text-clinic-gray-mid transition-all duration-300 font-serif;
   }
 
   .btn-outline {
-    @apply border border-clinic-offwhite text-clinic-offwhite px-8 py-3 text-sm tracking-widest hover:border-clinic-gold hover:text-clinic-gold transition-all duration-300 font-serif;
+    @apply border border-clinic-offwhite/40 text-clinic-offwhite/70 px-8 py-3 text-sm tracking-widest hover:border-clinic-gold hover:text-clinic-gold transition-all duration-300 font-serif;
   }
 
   .section-title {
@@ -47,9 +50,9 @@
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: #EDE8DC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C9A84C;
+  background: #B89050;
   border-radius: 2px;
 }

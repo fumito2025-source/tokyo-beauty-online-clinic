@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&family=Noto+Sans+JP:wght@300;400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background: #0A0A0A;
+  }
+
+  .bg {
+    width: 1080px;
+    height: 1920px;
+    background: #0A0A0A;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 背景の繊細なゴールドパターン */
+  .bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 800px 800px at 50% 30%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 600px 600px at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+
+  /* 上部の細い横線装飾 */
+  .line-top {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.6), transparent);
+  }
+
+  /* 下部の細い横線装飾 */
+  .line-bottom {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.6), transparent);
+  }
+
+  /* コーナー装飾 */
+  .corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+  }
+  .corner-tl { top: 60px; left: 60px; border-top: 1px solid rgba(201,168,76,0.4); border-left: 1px solid rgba(201,168,76,0.4); }
+  .corner-tr { top: 60px; right: 60px; border-top: 1px solid rgba(201,168,76,0.4); border-right: 1px solid rgba(201,168,76,0.4); }
+  .corner-bl { bottom: 60px; left: 60px; border-bottom: 1px solid rgba(201,168,76,0.4); border-left: 1px solid rgba(201,168,76,0.4); }
+  .corner-br { bottom: 60px; right: 60px; border-bottom: 1px solid rgba(201,168,76,0.4); border-right: 1px solid rgba(201,168,76,0.4); }
+
+  .center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    z-index: 1;
+  }
+
+  /* ゴールドの薄い円 */
+  .emblem {
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .emblem::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 50%;
+  }
+
+  .emblem svg {
+    width: 100px;
+    height: 100px;
+    opacity: 0.5;
+  }
+
+  .clinic-name-en {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: 28px;
+    letter-spacing: 0.4em;
+    color: rgba(201,168,76,0.5);
+    text-align: center;
+  }
+
+  .divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+  }
+
+  .clinic-name-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 42px;
+    letter-spacing: 0.25em;
+    color: rgba(245,240,232,0.35);
+    text-align: center;
+  }
+
+  .tagline {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    color: rgba(201,168,76,0.3);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="bg">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+  <div class="line-top"></div>
+  <div class="line-bottom"></div>
+
+  <div class="center-content">
+    <div class="emblem">
+      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="28" stroke="#C9A84C" stroke-width="0.8"/>
+        <path d="M20 38 C20 28 28 22 30 18 C32 22 40 28 40 38" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
+        <path d="M24 38 C24 32 27 28 30 26 C33 28 36 32 36 38" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
+        <line x1="18" y1="40" x2="42" y2="40" stroke="#C9A84C" stroke-width="0.8"/>
+      </svg>
+    </div>
+
+    <div class="clinic-name-en">TOKYO BEAUTY<br>ONLINE CLINIC</div>
+
+    <div class="divider"></div>
+
+    <div class="clinic-name-jp">東京美容オンラインクリニック</div>
+
+    <div class="tagline">美しさと、健康を。</div>
+  </div>
+</div>
+</body>
+</html>

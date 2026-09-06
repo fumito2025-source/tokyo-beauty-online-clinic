@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&family=Noto+Sans+JP:wght@300;400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    height: 878px;
+    overflow: hidden;
+    background: #0A0A0A;
+  }
+
+  .cover {
+    width: 1080px;
+    height: 878px;
+    background: #0A0A0A;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 900px 500px at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+  }
+
+  .line-top, .line-bottom {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+  }
+  .line-top { top: 80px; }
+  .line-bottom { bottom: 80px; }
+
+  .name-en {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: 22px;
+    letter-spacing: 0.5em;
+    color: rgba(201,168,76,0.55);
+    text-align: center;
+    z-index: 1;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(201,168,76,0.35);
+    z-index: 1;
+  }
+
+  .name-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 48px;
+    letter-spacing: 0.2em;
+    color: rgba(245,240,232,0.85);
+    text-align: center;
+    z-index: 1;
+  }
+
+  .tagline {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: 20px;
+    letter-spacing: 0.25em;
+    color: rgba(245,240,232,0.3);
+    text-align: center;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="line-top"></div>
+  <div class="line-bottom"></div>
+
+  <div class="name-en">TOKYO BEAUTY ONLINE CLINIC</div>
+  <div class="divider"></div>
+  <div class="name-jp">東京美容オンラインクリニック</div>
+  <div class="tagline">美しさと、健康を。</div>
+</div>
+</body>
+</html>

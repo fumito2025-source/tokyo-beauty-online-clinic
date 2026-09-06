@@ -54,13 +54,12 @@ export default function FlowPage() {
   return (
     <main className="min-h-screen bg-clinic-black text-clinic-offwhite">
       {/* Hero */}
-      <section className="relative py-24 border-b border-clinic-gold/10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_800px_400px_at_50%_0%,rgba(201,168,76,0.06),transparent)]" />
-        <div className="relative max-w-3xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.4em] text-clinic-gold/60 mb-6 font-sans uppercase">How It Works</p>
-          <h1 className="font-serif font-light text-4xl tracking-[0.15em] mb-4">診療の流れ</h1>
-          <div className="w-12 h-px bg-clinic-gold/40 mx-auto mb-6" />
-          <p className="text-sm text-clinic-offwhite/50 tracking-wider leading-relaxed">
+      <section className="py-24 border-b border-clinic-gray-light">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-[10px] tracking-[0.55em] text-clinic-gold mb-4 font-sans">HOW IT WORKS</p>
+          <div className="w-6 h-px bg-clinic-gold mx-auto mb-8" />
+          <h1 className="font-serif font-light text-4xl tracking-[0.15em] mb-5 text-clinic-offwhite">診療の流れ</h1>
+          <p className="text-sm text-clinic-offwhite/45 tracking-wider leading-relaxed">
             友だち追加から薬のお届けまで、全てLINEで完結します
           </p>
         </div>
@@ -70,7 +69,7 @@ export default function FlowPage() {
       <section className="max-w-3xl mx-auto px-6 py-20">
         <div className="relative">
           {/* 縦ライン */}
-          <div className="absolute left-[27px] top-8 bottom-8 w-px bg-gradient-to-b from-clinic-gold/30 via-clinic-gold/15 to-transparent hidden sm:block" />
+          <div className="absolute left-[27px] top-8 bottom-8 w-px bg-gradient-to-b from-clinic-gold/40 via-clinic-gold/20 to-transparent hidden sm:block" />
 
           <div className="space-y-0">
             {steps.map((step, i) => (
@@ -117,12 +116,12 @@ export default function FlowPage() {
       </section>
 
       {/* よくある質問（抜粋） */}
-      <section className="border-t border-clinic-gold/10 py-16">
+      <section className="border-t border-clinic-gray-light py-16">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="font-serif font-light text-lg tracking-[0.2em] text-clinic-gold mb-8 text-center">よくある質問</h2>
           <div className="space-y-px mb-10">
             {faqs.map((item) => (
-              <div key={item.q} className="border border-clinic-gold/10 px-6 py-5 bg-clinic-gray-dark/20">
+              <div key={item.q} className="border border-clinic-gray-light px-6 py-5 bg-clinic-gray-dark/50">
                 <p className="text-sm text-clinic-offwhite/80 mb-2 flex gap-3">
                   <span className="text-clinic-gold/60 font-serif flex-shrink-0">Q</span>{item.q}
                 </p>
@@ -141,7 +140,7 @@ export default function FlowPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-clinic-gold/10 py-16">
+      <section className="border-t border-clinic-gray-light py-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="text-sm text-clinic-offwhite/40 tracking-wider mb-8">まずはLINEで友だち追加してください</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
