@@ -1,6 +1,5 @@
 "use client"
 import Link from "next/link"
-import Image from "next/image"
 import { useEffect, useRef } from "react"
 
 function useReveal() {
@@ -28,51 +27,11 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 }
 
 const TREATMENTS = [
-  {
-    id: "aga",
-    label: "AGA治療",
-    en: "HAIR LOSS",
-    desc: "フィナステリド・デュタステリドによる男性型脱毛症の進行抑制",
-    href: "/medication#aga",
-    // 頭皮・ヘアケアイメージ
-    img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80",
-  },
-  {
-    id: "whitening",
-    label: "美白・肝斑",
-    en: "WHITENING",
-    desc: "トラネキサム酸・ビタミンC・L-システインによるシミ・肝斑改善",
-    href: "/medication#whitening",
-    // フェイスケアイメージ
-    img: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80",
-  },
-  {
-    id: "acne",
-    label: "ニキビ治療",
-    en: "ACNE",
-    desc: "アダパレン・ベピオゲルによるコメド・炎症性ニキビへのアプローチ",
-    href: "/medication#acne",
-    // スキンケアイメージ
-    img: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80",
-  },
-  {
-    id: "obesity",
-    label: "肥満・ダイエット",
-    en: "DIET",
-    desc: "マンジャロ・リベルサスなどGLP-1製剤による医学的肥満治療",
-    href: "/medication#obesity",
-    // ウェルネス・ボディイメージ
-    img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80",
-  },
-  {
-    id: "moisturizing",
-    label: "保湿・外用薬",
-    en: "SKIN CARE",
-    desc: "ヒルドイド・ビマトプロストなど皮膚科医が処方する外用薬",
-    href: "/medication#moisturizing",
-    // スキンケア製品イメージ
-    img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80",
-  },
+  { id: "aga",          label: "AGA治療",        en: "HAIR LOSS",  desc: "フィナステリド・デュタステリドによる男性型脱毛症の進行抑制", href: "/medication#aga" },
+  { id: "whitening",    label: "美白・肝斑",      en: "WHITENING",  desc: "トラネキサム酸・ビタミンC・L-システインによるシミ・肝斑改善", href: "/medication#whitening" },
+  { id: "acne",         label: "ニキビ治療",      en: "ACNE",       desc: "アダパレン・ベピオゲルによるコメド・炎症性ニキビへのアプローチ", href: "/medication#acne" },
+  { id: "obesity",      label: "肥満・ダイエット", en: "DIET",       desc: "マンジャロ・リベルサスなどGLP-1製剤による医学的肥満治療", href: "/medication#obesity" },
+  { id: "moisturizing", label: "保湿・外用薬",    en: "SKIN CARE",  desc: "ヒルドイド・ビマトプロストなど皮膚科医が処方する外用薬", href: "/medication#moisturizing" },
 ]
 
 const STEPS = [
@@ -92,25 +51,42 @@ export default function HomePage() {
           transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
         }
         .reveal-block.revealed { opacity: 1; transform: translateY(0); }
+
+        /* Hero arch shapes */
+        .arch { border-radius: 200px 200px 0 0; position: relative; overflow: hidden; }
+        .arch::after {
+          content: '';
+          position: absolute; inset: 0;
+          background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(0,0,0,.12) 100%);
+        }
+        .arch-stripe {
+          position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+          width: 3px; height: 55%; background: #B89050; opacity: .5; z-index: 1;
+        }
       `}</style>
 
       {/* ─── HERO ─────────────────────────────────────── */}
       <section className="relative min-h-[90vh] flex items-end overflow-hidden">
-        {/* 背景写真: 清潔感のある白いクリニック空間 */}
-        <Image
-          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&q=85"
-          alt="クリニックイメージ"
-          fill
-          className="object-cover object-center"
-          priority
-        />
-        {/* warm overlay */}
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(to top, rgba(30,25,20,.75) 0%, rgba(30,25,20,.35) 50%, rgba(30,25,20,.1) 100%)"
+          background: "linear-gradient(145deg, #D8CEBC 0%, #C9BFA8 35%, #B8AE98 65%, #A89E88 100%)"
         }} />
-        {/* side warm tint */}
+
+        {/* arch decorations */}
+        <div className="absolute inset-0 flex items-start justify-center gap-5 pt-14 pointer-events-none hidden md:flex">
+          <div className="arch w-36 h-96 mt-20" style={{background:"linear-gradient(180deg,#C8BEA8,#B0A692)"}}>
+            <div className="arch-stripe" />
+          </div>
+          <div className="arch w-36 h-[28rem]" style={{background:"linear-gradient(180deg,#CEC4B0,#B8AE98)"}}>
+            <div className="arch-stripe" />
+          </div>
+          <div className="arch w-36 h-80 mt-28" style={{background:"linear-gradient(180deg,#C4BAA4,#ACA28C)"}}>
+            <div className="arch-stripe" />
+          </div>
+        </div>
+
+        {/* overlay */}
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(to right, rgba(184,144,80,.08) 0%, transparent 60%)"
+          background: "linear-gradient(to top, rgba(42,37,32,.65) 0%, rgba(42,37,32,.15) 55%, transparent 100%)"
         }} />
 
         {/* content */}
@@ -162,42 +138,33 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-clinic-gray-light">
             {[
               {
-                icon: <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><circle cx="20" cy="14" r="7" stroke="#B89050" strokeWidth="1"/><path d="M8 36c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#B89050" strokeWidth="1"/></svg>,
+                icon: (
+                  <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><circle cx="20" cy="14" r="7" stroke="#B89050" strokeWidth="1"/><path d="M8 36c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#B89050" strokeWidth="1"/></svg>
+                ),
                 title: "医師が直接対応",
                 desc: "全工程を医師が担当。AIや看護師への丸投げは一切ありません。",
-                img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80",
               },
               {
-                icon: <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><rect x="8" y="6" width="24" height="28" rx="2" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="14" x2="27" y2="14" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="20" x2="27" y2="20" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="26" x2="20" y2="26" stroke="#B89050" strokeWidth="1"/></svg>,
+                icon: (
+                  <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><rect x="8" y="6" width="24" height="28" rx="2" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="14" x2="27" y2="14" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="20" x2="27" y2="20" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="26" x2="20" y2="26" stroke="#B89050" strokeWidth="1"/></svg>
+                ),
                 title: "完全オンライン完結",
                 desc: "予約・診察・処方・配送まで全てスマートフォンで完結します。",
-                img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80",
               },
               {
-                icon: <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><path d="M20 6l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" stroke="#B89050" strokeWidth="1"/></svg>,
+                icon: (
+                  <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><path d="M20 6l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" stroke="#B89050" strokeWidth="1"/></svg>
+                ),
                 title: "プライバシー配慮",
                 desc: "個人情報は暗号化して管理。プライバシー配慮の梱包でお届けします。",
-                img: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80",
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 100} className="bg-clinic-gray-mid">
-                <div className="h-full flex flex-col">
-                  {/* 特徴画像 */}
-                  <div className="relative h-44 overflow-hidden">
-                    <Image
-                      src={item.img}
-                      alt={item.title}
-                      fill
-                      className="object-cover object-center transition-transform duration-700 hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-clinic-offwhite/5" />
-                  </div>
-                  <div className="text-center px-8 py-10 flex-1 flex flex-col items-center">
-                    <div className="flex justify-center mb-5 opacity-75">{item.icon}</div>
-                    <div className="w-6 h-px bg-clinic-gold/40 mx-auto mb-5" />
-                    <h3 className="font-serif font-light text-base tracking-[0.2em] text-clinic-offwhite mb-3">{item.title}</h3>
-                    <p className="text-clinic-offwhite/65 text-xs leading-relaxed tracking-wide">{item.desc}</p>
-                  </div>
+                <div className="text-center px-10 py-14">
+                  <div className="flex justify-center mb-7 opacity-80">{item.icon}</div>
+                  <div className="w-6 h-px bg-clinic-gold/40 mx-auto mb-5" />
+                  <h3 className="font-serif font-light text-base tracking-[0.2em] text-clinic-offwhite mb-4">{item.title}</h3>
+                  <p className="text-clinic-offwhite/60 text-xs leading-relaxed tracking-wide">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -216,53 +183,27 @@ export default function HomePage() {
             </h2>
           </Reveal>
 
-          {/* カードグリッド */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-px bg-clinic-gray-light mb-12">
-            {TREATMENTS.map((t, i) => (
-              <Reveal key={t.id} delay={i * 60}>
-                <Link href={t.href} className="group block bg-clinic-gray-mid hover:bg-white transition-colors">
-                  <div className="relative aspect-[3/4] overflow-hidden">
-                    <Image
-                      src={t.img}
-                      alt={t.label}
-                      fill
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-clinic-offwhite/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <p className="text-[8px] tracking-[0.4em] text-clinic-gold mb-1 font-sans">{t.en}</p>
-                      <p className="font-serif font-light text-sm tracking-[0.12em] text-clinic-offwhite leading-tight">
-                        {t.label}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* 詳細リスト */}
           <div className="space-y-px">
             {TREATMENTS.map((t, i) => (
-              <Reveal key={`list-${t.id}`} delay={i * 40}>
-                <Link href={t.href} className="group flex items-center gap-6 md:gap-10 px-6 md:px-8 py-5 bg-clinic-gray-mid border border-clinic-gray-light hover:border-clinic-gold hover:bg-white transition-all duration-300 block">
-                  <span className="font-serif text-xl text-clinic-offwhite/20 tracking-wider w-7 flex-shrink-0 text-right group-hover:text-clinic-gold/40 transition-colors">
+              <Reveal key={t.id} delay={i * 60}>
+                <Link href={t.href} className="group flex items-center gap-6 md:gap-10 px-6 md:px-10 py-7 bg-clinic-gray-mid border border-clinic-gray-light hover:border-clinic-gold hover:bg-clinic-gray-dark transition-all duration-300 block">
+                  <span className="font-serif text-2xl text-clinic-offwhite/20 tracking-wider w-8 flex-shrink-0 text-right group-hover:text-clinic-gold/50 transition-colors">
                     {String(i+1).padStart(2,"0")}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[9px] tracking-[0.4em] text-clinic-gold/80 mb-0.5 font-sans">{t.en}</p>
-                    <h3 className="font-serif font-light text-base tracking-[0.15em] text-clinic-offwhite group-hover:text-clinic-gold transition-colors duration-300">
+                    <p className="text-[9px] tracking-[0.4em] text-clinic-gold/70 mb-1 font-sans">{t.en}</p>
+                    <h3 className="font-serif font-light text-base md:text-lg tracking-[0.15em] text-clinic-offwhite group-hover:text-clinic-gold transition-colors duration-300">
                       {t.label}
                     </h3>
-                    <p className="text-xs text-clinic-offwhite/55 mt-1 tracking-wide leading-relaxed hidden md:block">{t.desc}</p>
+                    <p className="text-xs text-clinic-offwhite/50 mt-1.5 tracking-wide leading-relaxed hidden md:block">{t.desc}</p>
                   </div>
-                  <span className="text-clinic-gold/30 group-hover:text-clinic-gold transition-colors duration-300 flex-shrink-0">→</span>
+                  <span className="text-clinic-gold/30 group-hover:text-clinic-gold transition-colors duration-300 text-lg flex-shrink-0">→</span>
                 </Link>
               </Reveal>
             ))}
           </div>
 
-          <Reveal className="text-center mt-10">
+          <Reveal className="text-center mt-12">
             <Link href="/medication" className="inline-flex items-center gap-2 text-xs text-clinic-gold/70 hover:text-clinic-gold tracking-[0.3em] transition-colors border-b border-clinic-gold/30 hover:border-clinic-gold pb-1">
               薬の詳しい説明を見る
             </Link>
@@ -344,23 +285,14 @@ export default function HomePage() {
       </section>
 
       {/* ─── CTA ──────────────────────────────────────── */}
-      <section className="relative py-28 md:py-40 overflow-hidden">
-        {/* CTA背景画像 */}
-        <Image
-          src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1600&q=80"
-          alt="スキンケアイメージ"
-          fill
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-clinic-offwhite/75" />
-
+      <section className="py-28 md:py-40 bg-clinic-gray-dark">
         <Reveal className="relative z-10 max-w-2xl mx-auto px-6 text-center">
           <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-6 font-sans">GET STARTED</p>
           <div className="w-6 h-px bg-clinic-gold mx-auto mb-8" />
-          <h2 className="font-serif font-light text-3xl md:text-4xl tracking-[0.15em] text-white mb-4">
+          <h2 className="font-serif font-light text-3xl md:text-4xl tracking-[0.15em] text-clinic-offwhite mb-4">
             まずは、ご予約から。
           </h2>
-          <p className="text-white/70 text-sm tracking-wider leading-relaxed mb-12">
+          <p className="text-clinic-offwhite/60 text-sm tracking-wider leading-relaxed mb-12">
             初診・再診どちらも対応しています。<br />
             気になることはLINEでお気軽にご相談ください。
           </p>
@@ -374,14 +306,14 @@ export default function HomePage() {
             </Link>
             <Link
               href="/faq"
-              className="inline-flex items-center justify-center border border-white/50 text-white px-8 py-4 text-xs tracking-[0.2em] font-sans hover:border-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center justify-center border border-clinic-gold/50 text-clinic-gold px-8 py-4 text-xs tracking-[0.2em] font-sans hover:border-clinic-gold hover:bg-clinic-gold/10 transition-colors"
             >
               よくある質問
             </Link>
           </div>
 
-          <div className="mt-14 pt-8 border-t border-white/20">
-            <p className="text-xs text-white/45 tracking-wider leading-relaxed">
+          <div className="mt-16 pt-10 border-t border-clinic-gray-light">
+            <p className="text-xs text-clinic-offwhite/35 tracking-wider leading-relaxed">
               ※ 本サービスは自由診療のみです。健康保険は適用されません。<br />
               ※ 処方は医師の診察・判断のもとに行います。
             </p>
