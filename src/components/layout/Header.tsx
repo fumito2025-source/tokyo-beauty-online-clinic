@@ -17,10 +17,22 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* ロゴ */}
-          <Link href="/" className="flex-shrink-0">
-            <span className="font-serif text-sm tracking-[0.22em] text-clinic-offwhite">
-              TOKYO BEAUTY ONLINE CLINIC
-            </span>
+          <Link href="/" className="flex-shrink-0 flex items-center gap-3">
+            {/* ダイヤフレームシンボル */}
+            <svg width="22" height="22" viewBox="0 0 58 58" fill="none" aria-hidden="true">
+              <rect x="29" y="3" width="37" height="37" rx="1.5"
+                stroke="#B89050" strokeWidth="1.1" transform="rotate(45 29 29)"/>
+              <rect x="29" y="9" width="28" height="28" rx="1"
+                stroke="#B89050" strokeWidth="0.5" opacity="0.38" transform="rotate(45 29 29)"/>
+            </svg>
+            <div className="flex flex-col gap-0.5">
+              <span className="font-serif font-light text-[13px] tracking-[0.28em] text-clinic-offwhite leading-none">
+                TBC
+              </span>
+              <span className="font-sans text-[6px] tracking-[0.32em] text-clinic-gold leading-none hidden sm:block">
+                TOKYO BEAUTY ONLINE CLINIC
+              </span>
+            </div>
           </Link>
 
           {/* デスクトップナビ */}
