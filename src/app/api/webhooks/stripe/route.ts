@@ -2,59 +2,93 @@ import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
 import { createAdminClient } from "@/lib/supabase/server"
 
+export const runtime = "nodejs"
+
+async function notifyAdmin(message: string) {
+  const token = process.env.LINE_CHANNEL_ACCESS_TOKEN
+  const userId = process.env.ADMIN_LINE_USER_ID
+  if (!token || !userId) return
+
+  await fetch("https://api.line.me/v2/bot/message/push", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      to: userId,
+      messages: [{ type: "text", text: message }],
+    }),
+  })
+}
+
 export async function POST(req: NextRequest) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_dummy")
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
   const body = await req.text()
   const sig = req.headers.get("stripe-signature")!
 
   let event: Stripe.Event
   try {
     event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!)
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Webhook検証失敗" }, { status: 400 })
   }
 
   const supabase = createAdminClient()
 
+  // サブスクリプション決済完了
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session
-    const metadata = session.metadata!
+    if (session.mode !== "subscription") return NextResponse.json({ received: true })
 
-    // 注文を DB に保存
-    const items = JSON.parse(metadata.items || "[]")
-    const productIds = items.map((i: any) => i.productId)
-    const { data: products } = await supabase
-      .from("products")
-      .select("id, name, price")
-      .in("id", productIds)
+    const metadata = session.metadata ?? {}
 
-    const orderItems = items.map((item: any) => {
-      const product = products?.find((p: any) => p.id === item.productId)
-      return {
-        product_id: item.productId,
-        product_name: product?.name || "",
-        price: product?.price || 0,
-        quantity: item.quantity,
-      }
-    })
-
-    const subtotal = orderItems.reduce(
-      (sum: number, i: any) => sum + i.price * i.quantity, 0
-    )
-
-    await supabase.from("orders").insert({
-      user_id: metadata.user_id,
+    await supabase.from("subscriptions").upsert({
       stripe_session_id: session.id,
-      stripe_payment_intent_id: session.payment_intent as string,
-      status: "paid",
-      items: orderItems,
-      subtotal,
-      tax: 0,
-      total: session.amount_total || subtotal,
-      shipping_address: metadata.shipping_address
-        ? JSON.parse(metadata.shipping_address)
-        : null,
+      stripe_subscription_id: session.subscription as string,
+      stripe_customer_id: session.customer as string,
+      user_id: metadata.user_id,
+      plan_id: metadata.plan_id,
+      plan_name: metadata.plan_name,
+      status: "pending_review", // 医師確認待ち
+      amount: session.amount_total ?? 0,
+      created_at: new Date().toISOString(),
     })
+
+    await notifyAdmin(
+      `🆕 新規サブスクリプション申込\n` +
+        `プラン: ${metadata.plan_name ?? metadata.plan_id}\n` +
+        `金額: ¥${(session.amount_total ?? 0).toLocaleString()}/月\n` +
+        `ユーザーID: ${metadata.user_id}\n` +
+        `セッション: ${session.id}\n\n` +
+        `→ 医師確認後に発送処理を行ってください`
+    )
+  }
+
+  // サブスクリプション更新（毎月の請求成功）
+  if (event.type === "invoice.payment_succeeded") {
+    const invoice = event.data.object as Stripe.Invoice
+    if (!invoice.subscription) return NextResponse.json({ received: true })
+
+    await supabase
+      .from("subscriptions")
+      .update({ status: "active", last_paid_at: new Date().toISOString() })
+      .eq("stripe_subscription_id", invoice.subscription as string)
+  }
+
+  // サブスクリプションキャンセル
+  if (event.type === "customer.subscription.deleted") {
+    const sub = event.data.object as Stripe.Subscription
+    await supabase
+      .from("subscriptions")
+      .update({ status: "cancelled", cancelled_at: new Date().toISOString() })
+      .eq("stripe_subscription_id", sub.id)
+
+    await notifyAdmin(
+      `❌ サブスクリプションキャンセル\n` +
+        `プラン: ${sub.metadata?.plan_name ?? sub.metadata?.plan_id}\n` +
+        `Subscription ID: ${sub.id}`
+    )
   }
 
   return NextResponse.json({ received: true })

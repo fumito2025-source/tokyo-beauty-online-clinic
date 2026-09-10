@@ -3,90 +3,52 @@ import Stripe from "stripe"
 import { createServerSupabaseClient } from "@/lib/supabase/server"
 
 export async function POST(req: NextRequest) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_dummy")
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+
   try {
     const supabase = await createServerSupabaseClient()
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
-    if (!user) {
-      return NextResponse.json({ error: "ログインが必要です" }, { status: 401 })
+    const { priceId, addonPriceIds = [], planId, planName } = await req.json()
+
+    if (!priceId) {
+      return NextResponse.json({ error: "プランを選択してください" }, { status: 400 })
     }
 
-    const { items, shippingAddress } = await req.json()
-
-    if (!items || items.length === 0) {
-      return NextResponse.json({ error: "カートが空です" }, { status: 400 })
-    }
-
-    // 商品の検証
-    const productIds = items.map((i: any) => i.productId)
-    const { data: products } = await supabase
-      .from("products")
-      .select("*")
-      .in("id", productIds)
-      .eq("is_active", true)
-
-    if (!products || products.length !== productIds.length) {
-      return NextResponse.json({ error: "商品が見つかりません" }, { status: 400 })
-    }
-
-    // 処方薬が含まれる場合は問診確認
-    const requiresConsultation = products.some((p) => p.requires_consultation)
-    if (requiresConsultation) {
-      // 完了済みの問診があるか確認
-      const { data: consultations } = await supabase
-        .from("consultations")
-        .select("id")
-        .eq("user_id", user.id)
-        .eq("status", "completed")
-        .limit(1)
-
-      if (!consultations || consultations.length === 0) {
-        return NextResponse.json(
-          { error: "処方薬を購入するには問診が必要です", requiresConsultation: true },
-          { status: 400 }
-        )
-      }
-    }
-
-    // Stripe Checkout セッション作成
-    const lineItems = items.map((item: any) => {
-      const product = products.find((p) => p.id === item.productId)!
-      return {
-        price_data: {
-          currency: "jpy",
-          product_data: {
-            name: product.name,
-            description: product.description || undefined,
-            images: product.images?.[0] ? [product.images[0]] : undefined,
-          },
-          unit_amount: product.price,
-        },
-        quantity: item.quantity,
-      }
-    })
+    // サブスクリプションラインアイテム（メインプラン + アドオン）
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
+      { price: priceId, quantity: 1 },
+      ...addonPriceIds.map((id: string) => ({ price: id, quantity: 1 })),
+    ]
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
-      mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/cart`,
-      customer_email: user.email,
+      mode: "subscription",
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL || "https://tokyo-beauty-online-clinic.vercel.app"}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || "https://tokyo-beauty-online-clinic.vercel.app"}/plans`,
       locale: "ja",
+      ...(user?.email ? { customer_email: user.email } : {}),
       metadata: {
-        user_id: user.id,
-        items: JSON.stringify(items),
-        shipping_address: JSON.stringify(shippingAddress),
+        user_id: user?.id ?? "guest",
+        plan_id: planId,
+        plan_name: planName,
+        addon_price_ids: JSON.stringify(addonPriceIds),
+      },
+      subscription_data: {
+        metadata: {
+          user_id: user?.id ?? "guest",
+          plan_id: planId,
+          plan_name: planName,
+        },
       },
     })
 
     return NextResponse.json({ url: session.url })
   } catch (error: any) {
     console.error("Checkout error:", error)
-    return NextResponse.json(
-      { error: "チェックアウトに失敗しました" },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: "チェックアウトに失敗しました" }, { status: 500 })
   }
 }

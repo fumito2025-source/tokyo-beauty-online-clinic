@@ -6,6 +6,7 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const nav = [
+    { href: "/plans", label: "プラン" },
     { href: "/flow", label: "診療の流れ" },
     { href: "/medication", label: "薬の説明" },
     { href: "/faq", label: "よくある質問" },
