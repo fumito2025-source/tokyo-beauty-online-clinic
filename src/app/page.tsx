@@ -115,7 +115,7 @@ export default function HomePage() {
               href="https://line.me/R/ti/p/@555glibw"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 border border-white/35 bg-white/10 text-white px-6 py-3.5 text-xs tracking-[0.2em] font-sans hover:bg-white/20 transition-colors backdrop-blur-sm"
+              className="inline-flex items-center gap-2.5 border border-[#06C755] bg-[#06C755] text-white px-6 py-3.5 text-xs tracking-[0.2em] font-sans hover:bg-[#05B34D] hover:border-[#05B34D] transition-colors"
             >
               <svg viewBox="0 0 14 14" fill="currentColor" className="w-3.5 h-3.5"><path d="M7 1C3.69 1 1 3.29 1 6.11c0 1.55.82 2.94 2.1 3.9V12L5 10.97c.63.18 1.3.27 2 .27 3.31 0 6-2.29 6-5.11S10.31 1 7 1z"/></svg>
               LINEで友だち追加
