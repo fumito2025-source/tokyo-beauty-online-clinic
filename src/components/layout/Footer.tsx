@@ -6,10 +6,24 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 sm:px-10 py-16">
         <div className="flex flex-col md:flex-row justify-between gap-12 pb-12 border-b border-white/10">
           <div>
-            <p className="font-serif text-sm tracking-[0.28em] text-white/70 mb-3">
-              TOKYO BEAUTY ONLINE CLINIC
-            </p>
-            <div className="w-8 h-px bg-clinic-gold/60 mb-5" />
+            {/* ダイヤロゴ */}
+            <div className="flex items-center gap-3 mb-5">
+              <svg width="20" height="20" viewBox="0 0 58 58" fill="none" aria-hidden="true">
+                <rect x="29" y="3" width="37" height="37" rx="1.5"
+                  stroke="#B89050" strokeWidth="1.1" transform="rotate(45 29 29)"/>
+                <rect x="29" y="9" width="28" height="28" rx="1"
+                  stroke="#B89050" strokeWidth="0.5" opacity="0.38" transform="rotate(45 29 29)"/>
+              </svg>
+              <div className="flex flex-col gap-1">
+                <span className="font-serif font-light text-[13px] tracking-[0.28em] text-white/70 leading-none">
+                  TBC
+                </span>
+                <span className="font-sans text-[6px] tracking-[0.32em] text-clinic-gold/70 leading-none">
+                  TOKYO BEAUTY ONLINE CLINIC
+                </span>
+              </div>
+            </div>
+            <div className="w-8 h-px bg-clinic-gold/40 mb-5" />
             <p className="text-xs text-white/35 leading-loose tracking-wide max-w-xs">
               自由診療専門のオンラインクリニックです。<br />
               美白・AGA・ニキビ・ダイエットなど、<br />
