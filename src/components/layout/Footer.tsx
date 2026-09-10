@@ -24,12 +24,12 @@ export function Footer() {
               </div>
             </div>
             <div className="w-8 h-px bg-clinic-gold/40 mb-5" />
-            <p className="text-xs text-white/35 leading-loose tracking-wide max-w-xs">
+            <p className="text-xs text-white/55 leading-loose tracking-wide max-w-xs">
               自由診療専門のオンラインクリニックです。<br />
               美白・AGA・ニキビ・ダイエットなど、<br />
               医師が丁寧にサポートします。
             </p>
-            <p className="text-[10px] text-white/20 mt-4 tracking-wide">
+            <p className="text-[10px] text-white/40 mt-4 tracking-wide">
               ※本サービスは自由診療のみです。保険診療は行っておりません。
             </p>
           </div>
@@ -45,7 +45,7 @@ export function Footer() {
                   ["お問い合わせ", "/contact"],
                 ].map(([label, href]) => (
                   <li key={href}>
-                    <Link href={href} className="text-[11px] text-white/35 hover:text-clinic-gold transition-colors tracking-wide">{label}</Link>
+                    <Link href={href} className="text-[11px] text-white/55 hover:text-clinic-gold transition-colors tracking-wide">{label}</Link>
                   </li>
                 ))}
               </ul>
@@ -58,7 +58,7 @@ export function Footer() {
                   ["プライバシーポリシー", "/privacy"],
                 ].map(([label, href]) => (
                   <li key={href}>
-                    <Link href={href} className="text-[11px] text-white/35 hover:text-clinic-gold transition-colors tracking-wide">{label}</Link>
+                    <Link href={href} className="text-[11px] text-white/55 hover:text-clinic-gold transition-colors tracking-wide">{label}</Link>
                   </li>
                 ))}
               </ul>
@@ -67,10 +67,10 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
-          <p className="text-[10px] text-white/20 tracking-wide">
+          <p className="text-[10px] text-white/40 tracking-wide">
             © {new Date().getFullYear()} Tokyo Beauty Online Clinic. All rights reserved.
           </p>
-          <p className="text-[10px] text-white/20 tracking-wide">
+          <p className="text-[10px] text-white/40 tracking-wide">
             医療機関コード: XXXXXXXX（都道府県知事許可）
           </p>
         </div>

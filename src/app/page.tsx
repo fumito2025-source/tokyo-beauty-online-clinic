@@ -91,7 +91,7 @@ export default function HomePage() {
 
         {/* content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 pb-20">
-          <p className="text-[10px] tracking-[0.55em] text-white/60 mb-5 font-sans">
+          <p className="text-[10px] tracking-[0.55em] text-white/70 mb-5 font-sans">
             TOKYO BEAUTY ONLINE CLINIC
           </p>
           <h1 className="font-serif font-extralight text-5xl md:text-7xl leading-tight tracking-[0.07em] text-white mb-4">
@@ -100,7 +100,7 @@ export default function HomePage() {
           <span className="block font-serif italic text-sm tracking-[0.22em] text-white/50 mb-8">
             Adding beauty to my true self.
           </span>
-          <p className="text-sm text-white/70 leading-loose tracking-wide mb-10 max-w-sm">
+          <p className="text-sm text-white/82 leading-loose tracking-wide mb-10 max-w-sm">
             自由診療専門のオンラインクリニック。<br />
             スマートフォン一つで、医師が直接診察・処方いたします。
           </p>
@@ -164,7 +164,7 @@ export default function HomePage() {
                   <div className="flex justify-center mb-7 opacity-80">{item.icon}</div>
                   <div className="w-6 h-px bg-clinic-gold/40 mx-auto mb-5" />
                   <h3 className="font-serif font-light text-base tracking-[0.2em] text-clinic-offwhite mb-4">{item.title}</h3>
-                  <p className="text-clinic-offwhite/60 text-xs leading-relaxed tracking-wide">{item.desc}</p>
+                  <p className="text-clinic-offwhite/75 text-xs leading-relaxed tracking-wide">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -191,11 +191,11 @@ export default function HomePage() {
                     {String(i+1).padStart(2,"0")}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[9px] tracking-[0.4em] text-clinic-gold/70 mb-1 font-sans">{t.en}</p>
+                    <p className="text-[9px] tracking-[0.4em] text-clinic-gold mb-1 font-sans">{t.en}</p>
                     <h3 className="font-serif font-light text-base md:text-lg tracking-[0.15em] text-clinic-offwhite group-hover:text-clinic-gold transition-colors duration-300">
                       {t.label}
                     </h3>
-                    <p className="text-xs text-clinic-offwhite/50 mt-1.5 tracking-wide leading-relaxed hidden md:block">{t.desc}</p>
+                    <p className="text-xs text-clinic-offwhite/72 mt-1.5 tracking-wide leading-relaxed hidden md:block">{t.desc}</p>
                   </div>
                   <span className="text-clinic-gold/30 group-hover:text-clinic-gold transition-colors duration-300 text-lg flex-shrink-0">→</span>
                 </Link>
@@ -232,14 +232,14 @@ export default function HomePage() {
               <h2 className="font-serif font-light text-2xl md:text-3xl tracking-[0.15em] text-clinic-offwhite mb-4">
                 全て、LINEで完結します。
               </h2>
-              <p className="text-clinic-offwhite/65 text-sm leading-relaxed tracking-wide mb-6">
+              <p className="text-clinic-offwhite/80 text-sm leading-relaxed tracking-wide mb-6">
                 アプリのインストールも、会員登録も不要。<br />
                 LINEの友だち追加だけで、予約・診察・処方・相談まで<br className="hidden md:block" />
                 すべてそのままチャットで完結します。
               </p>
               <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                 {["予約・問診", "医師との相談", "経過フォロー", "薬の説明"].map(tag => (
-                  <span key={tag} className="text-xs text-clinic-offwhite/70 border border-clinic-gray-light px-3 py-1.5 tracking-wider">
+                  <span key={tag} className="text-xs text-clinic-offwhite/82 border border-clinic-gray-light px-3 py-1.5 tracking-wider">
                     ✓ {tag}
                   </span>
                 ))}
@@ -275,7 +275,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="font-serif text-sm text-clinic-offwhite tracking-wider mb-2 md:mb-3">{s.title}</h3>
-                    <p className="text-xs text-clinic-offwhite/55 leading-relaxed tracking-wide">{s.desc}</p>
+                    <p className="text-xs text-clinic-offwhite/75 leading-relaxed tracking-wide">{s.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -292,7 +292,7 @@ export default function HomePage() {
           <h2 className="font-serif font-light text-3xl md:text-4xl tracking-[0.15em] text-clinic-offwhite mb-4">
             まずは、ご予約から。
           </h2>
-          <p className="text-clinic-offwhite/60 text-sm tracking-wider leading-relaxed mb-12">
+          <p className="text-clinic-offwhite/78 text-sm tracking-wider leading-relaxed mb-12">
             初診・再診どちらも対応しています。<br />
             気になることはLINEでお気軽にご相談ください。
           </p>
@@ -313,7 +313,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-16 pt-10 border-t border-clinic-gray-light">
-            <p className="text-xs text-clinic-offwhite/35 tracking-wider leading-relaxed">
+            <p className="text-xs text-clinic-offwhite/55 tracking-wider leading-relaxed">
               ※ 本サービスは自由診療のみです。健康保険は適用されません。<br />
               ※ 処方は医師の診察・判断のもとに行います。
             </p>
