@@ -9,7 +9,7 @@
     "lint": "next lint",
     "db:push": "supabase db push",
     "db:generate": "supabase gen types typescript --local > src/types/database.ts",
-    "stripe:seed": "npx tsx scripts/stripe-seed.ts"
+    "stripe:seed": "npx tsx --env-file=.env.local scripts/stripe-seed.ts"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^3.0.0",

@@ -5,10 +5,7 @@
  */
 
 import Stripe from "stripe"
-import * as dotenv from "dotenv"
-import * as path from "path"
-
-dotenv.config({ path: path.join(__dirname, "../.env.local") })
+// .env.local は tsx 実行前に手動で読み込む（dotenv不要）
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2025-06-30.basil" })
 
