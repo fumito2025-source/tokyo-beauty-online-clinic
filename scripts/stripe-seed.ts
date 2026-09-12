@@ -7,7 +7,7 @@
 import Stripe from "stripe"
 // .env.local は tsx 実行前に手動で読み込む（dotenv不要）
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2025-06-30.basil" })
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 interface PlanDef {
   id: string
