@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import Image from "next/image"
 import { useEffect, useRef } from "react"
 
 function useReveal() {
@@ -66,60 +67,57 @@ export default function HomePage() {
       `}</style>
 
       {/* ─── HERO ─────────────────────────────────────── */}
-      <section className="relative min-h-[90vh] flex items-end overflow-hidden">
-        <div className="absolute inset-0" style={{
-          background: "linear-gradient(145deg, #D8CEBC 0%, #C9BFA8 35%, #B8AE98 65%, #A89E88 100%)"
-        }} />
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+        {/* 背景写真 */}
+        <Image
+          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1800&q=85"
+          alt="hero"
+          fill
+          priority
+          className="object-cover object-center"
+        />
 
-        {/* arch decorations */}
-        <div className="absolute inset-0 flex items-start justify-center gap-5 pt-14 pointer-events-none hidden md:flex">
-          <div className="arch w-36 h-96 mt-20" style={{background:"linear-gradient(180deg,#C8BEA8,#B0A692)"}}>
-            <div className="arch-stripe" />
-          </div>
-          <div className="arch w-36 h-[28rem]" style={{background:"linear-gradient(180deg,#CEC4B0,#B8AE98)"}}>
-            <div className="arch-stripe" />
-          </div>
-          <div className="arch w-36 h-80 mt-28" style={{background:"linear-gradient(180deg,#C4BAA4,#ACA28C)"}}>
-            <div className="arch-stripe" />
-          </div>
-        </div>
-
-        {/* overlay */}
+        {/* 左側グラデーションオーバーレイ（写真の右半分は見せる） */}
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(to top, rgba(42,37,32,.65) 0%, rgba(42,37,32,.15) 55%, transparent 100%)"
+          background: "linear-gradient(to right, rgba(255,252,248,0.92) 0%, rgba(255,252,248,0.75) 40%, rgba(255,252,248,0.15) 70%, transparent 100%)"
         }} />
 
         {/* content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 pb-20">
-          <p className="text-[10px] tracking-[0.55em] text-white/70 mb-5 font-sans">
-            TOKYO BEAUTY ONLINE CLINIC
-          </p>
-          <h1 className="font-serif font-extralight text-5xl md:text-7xl leading-tight tracking-[0.07em] text-white mb-4">
-            美しさと、<br />健康を。
-          </h1>
-          <span className="block font-serif italic text-sm tracking-[0.22em] text-white/50 mb-8">
-            Adding beauty to my true self.
-          </span>
-          <p className="text-sm text-white/82 leading-loose tracking-wide mb-10 max-w-sm">
-            自由診療専門のオンラインクリニック。<br />
-            スマートフォン一つで、医師が直接診察・処方いたします。
-          </p>
-          <div className="flex gap-3 flex-wrap">
-            <Link
-              href="/reservation"
-              className="inline-flex items-center gap-3 bg-clinic-gold text-white px-8 py-3.5 text-xs tracking-[0.25em] font-sans hover:opacity-85 transition-opacity"
-            >
-              無料で予約する
-            </Link>
-            <a
-              href="https://line.me/R/ti/p/@555glibw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 border border-[#06C755] bg-[#06C755] text-white px-6 py-3.5 text-xs tracking-[0.2em] font-sans hover:bg-[#05B34D] hover:border-[#05B34D] transition-colors"
-            >
-              <svg viewBox="0 0 14 14" fill="currentColor" className="w-3.5 h-3.5"><path d="M7 1C3.69 1 1 3.29 1 6.11c0 1.55.82 2.94 2.1 3.9V12L5 10.97c.63.18 1.3.27 2 .27 3.31 0 6-2.29 6-5.11S10.31 1 7 1z"/></svg>
-              LINEで友だち追加
-            </a>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-14 py-24">
+          <div className="max-w-lg">
+            <p className="text-[10px] tracking-[0.55em] text-clinic-gold mb-5 font-sans">
+              BEAUTY, BACKED BY MEDICINE.
+            </p>
+            <div className="w-8 h-px bg-clinic-gold mb-8" />
+            <h1 className="font-serif font-light text-5xl md:text-6xl leading-tight tracking-[0.06em] text-clinic-offwhite mb-6">
+              肌に、確かな<br />選択を。
+            </h1>
+            <p className="text-sm text-clinic-offwhite/70 leading-loose tracking-wide mb-10 max-w-sm">
+              医師の診療から処方・配送までオンラインで。<br />
+              あなたの毎日に、続けやすい美容医療を。
+            </p>
+            <div className="flex gap-3 flex-wrap">
+              <Link
+                href="/reservation"
+                className="inline-flex items-center gap-2 bg-clinic-offwhite text-white px-7 py-3.5 text-xs tracking-[0.22em] font-sans hover:opacity-85 transition-opacity"
+              >
+                オンライン診療を予約 <span className="text-clinic-gold">›</span>
+              </Link>
+              <Link
+                href="/plans"
+                className="inline-flex items-center gap-2 border border-clinic-offwhite/30 text-clinic-offwhite px-7 py-3.5 text-xs tracking-[0.22em] font-sans hover:border-clinic-gold hover:text-clinic-gold transition-colors"
+              >
+                プランを見る <span>›</span>
+              </Link>
+            </div>
+            <div className="flex items-center gap-6 mt-10">
+              {["医師が診察", "明瞭な料金", "全国配送"].map((item, i) => (
+                <span key={item} className="flex items-center gap-2 text-[10px] text-clinic-offwhite/60 tracking-wider font-sans">
+                  {i > 0 && <span className="text-clinic-gold/40">|</span>}
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>

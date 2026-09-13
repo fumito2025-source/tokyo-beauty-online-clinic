@@ -14,7 +14,7 @@ export function Header() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-clinic-black/95 backdrop-blur-sm border-b border-clinic-gray-light">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-clinic-gray-light shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* ロゴ */}
@@ -27,7 +27,7 @@ export function Header() {
                 stroke="#B89050" strokeWidth="0.5" opacity="0.38" transform="rotate(45 29 29)"/>
             </svg>
             <div className="flex flex-col gap-0.5">
-              <span className="font-serif font-light text-[13px] tracking-[0.28em] text-clinic-offwhite leading-none">
+              <span className="font-serif font-light text-[13px] tracking-[0.28em] text-clinic-offwhite/90 leading-none">
                 TBC
               </span>
               <span className="font-sans text-[6px] tracking-[0.32em] text-clinic-gold leading-none hidden sm:block">
@@ -42,7 +42,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[11px] text-clinic-offwhite/55 hover:text-clinic-gold tracking-[0.2em] transition-colors duration-300 font-sans"
+                className="text-[11px] text-clinic-offwhite/70 hover:text-clinic-gold tracking-[0.2em] transition-colors duration-300 font-sans"
               >
                 {item.label}
               </Link>
@@ -85,7 +85,7 @@ export function Header() {
 
       {/* モバイルメニュー */}
       {menuOpen && (
-        <div className="md:hidden border-t border-clinic-gray-light bg-clinic-black">
+        <div className="md:hidden border-t border-clinic-gray-light bg-white">
           <nav className="px-6 py-6 space-y-1">
             {nav.map((item) => (
               <Link
