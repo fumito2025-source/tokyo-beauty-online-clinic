@@ -89,10 +89,10 @@ export default function HomePage() {
               BEAUTY, BACKED BY MEDICINE.
             </p>
             <div className="w-8 h-px bg-clinic-gold mb-8" />
-            <h1 className="font-serif font-light text-5xl md:text-6xl leading-tight tracking-[0.04em] text-clinic-offwhite mb-6">
+            <h1 className="font-serif font-medium text-5xl md:text-6xl leading-tight tracking-[0.04em] text-clinic-offwhite mb-6">
               肌に、確かな選択を。
             </h1>
-            <p className="text-sm md:text-base text-clinic-offwhite/75 leading-[2] tracking-wide mb-10">
+            <p className="text-base md:text-lg text-clinic-offwhite/90 font-medium leading-[2] tracking-wide mb-10">
               医師の診療から処方・配送までオンラインで。<br />
               あなたの毎日に、続けやすい美容医療を。
             </p>
