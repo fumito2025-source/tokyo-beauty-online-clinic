@@ -79,7 +79,7 @@ export default function HomePage() {
 
         {/* 左側グラデーションオーバーレイ（写真の右半分は見せる） */}
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(to right, rgba(255,252,248,0.92) 0%, rgba(255,252,248,0.75) 40%, rgba(255,252,248,0.15) 70%, transparent 100%)"
+          background: "linear-gradient(to right, rgba(250,247,242,0.97) 0%, rgba(250,247,242,0.92) 30%, rgba(250,247,242,0.55) 55%, rgba(250,247,242,0.10) 78%, transparent 100%)"
         }} />
 
         {/* content */}

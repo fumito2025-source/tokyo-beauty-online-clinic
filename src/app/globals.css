@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --color-cream:    #EDE8DC;
-    --color-cream2:   #E5DFD1;
+    --color-cream:    #FAF7F2;
+    --color-cream2:   #F3EEE6;
     --color-gold:     #B89050;
     --color-gold-lt:  #C9A870;
-    --color-charcoal: #2A2520;
+    --color-charcoal: #1A1510;
     --color-brown:    #5C5248;
-    --color-border:   #D8D2C4;
+    --color-border:   #E0D9CE;
   }
 
   html {
@@ -18,8 +18,8 @@
   }
 
   body {
-    background-color: #EDE8DC;
-    color: #2A2520;
+    background-color: #FAF7F2;
+    color: #1A1510;
   }
 }
 
