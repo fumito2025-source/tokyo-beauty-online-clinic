@@ -85,34 +85,34 @@ export default function HomePage() {
         {/* content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-14 py-24">
           <div className="max-w-xl">
-            <p className="text-[10px] tracking-[0.55em] text-clinic-gold mb-5 font-sans">
+            <p className="text-[11px] tracking-[0.5em] text-clinic-gold mb-5 font-sans">
               BEAUTY, BACKED BY MEDICINE.
             </p>
-            <div className="w-8 h-px bg-clinic-gold mb-8" />
-            <h1 className="font-serif font-medium text-5xl md:text-6xl leading-tight tracking-[0.04em] text-clinic-offwhite mb-6">
+            <div className="w-10 h-px bg-clinic-gold mb-8" />
+            <h1 className="font-serif font-medium text-6xl md:text-7xl leading-tight tracking-[0.03em] text-clinic-offwhite mb-7">
               肌に、確かな選択を。
             </h1>
-            <p className="text-base md:text-lg text-clinic-offwhite/90 font-medium leading-[2] tracking-wide mb-10">
+            <p className="text-lg md:text-xl text-clinic-offwhite/90 font-medium leading-[1.9] tracking-wide mb-10">
               医師の診療から処方・配送までオンラインで。<br />
               あなたの毎日に、続けやすい美容医療を。
             </p>
             <div className="flex gap-4 flex-wrap">
               <Link
                 href="/reservation"
-                className="inline-flex items-center gap-2 bg-clinic-offwhite text-white px-8 py-4 text-sm tracking-[0.15em] font-sans hover:opacity-85 transition-opacity"
+                className="inline-flex items-center gap-2 bg-clinic-offwhite text-white px-10 py-4 text-sm tracking-[0.15em] font-sans hover:opacity-85 transition-opacity"
               >
                 オンライン診療を予約 <span className="text-clinic-gold">›</span>
               </Link>
               <Link
                 href="/plans"
-                className="inline-flex items-center gap-2 border border-clinic-offwhite/40 text-clinic-offwhite px-8 py-4 text-sm tracking-[0.15em] font-sans hover:border-clinic-gold hover:text-clinic-gold transition-colors"
+                className="inline-flex items-center gap-2 border border-clinic-offwhite/40 text-clinic-offwhite px-10 py-4 text-sm tracking-[0.15em] font-sans hover:border-clinic-gold hover:text-clinic-gold transition-colors"
               >
                 プランを見る <span>›</span>
               </Link>
             </div>
             <div className="flex items-center gap-6 mt-10">
               {["医師が診察", "明瞭な料金", "全国配送"].map((item, i) => (
-                <span key={item} className="flex items-center gap-2 text-[11px] text-clinic-offwhite/60 tracking-wider font-sans">
+                <span key={item} className="flex items-center gap-2 text-xs text-clinic-offwhite/65 tracking-wider font-sans">
                   {i > 0 && <span className="text-clinic-gold/40">|</span>}
                   {item}
                 </span>
