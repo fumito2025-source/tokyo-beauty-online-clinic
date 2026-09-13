@@ -70,7 +70,7 @@ export default function HomePage() {
       <section className="relative min-h-[92vh] flex items-center overflow-hidden">
         {/* 背景写真 */}
         <Image
-          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1800&q=85"
+          src="/hero.png"
           alt="hero"
           fill
           priority
