@@ -76,7 +76,7 @@ export default function HomePage() {
           priority
           quality={100}
           sizes="100vw"
-          className="object-cover object-[65%_25%] md:object-[60%_35%]"
+          className="object-cover object-[65%_25%] md:object-[60%_35%] hero-kenburns"
         />
 
         {/* グラデーションオーバーレイ — モバイル:下から上、PC:左から右 */}
