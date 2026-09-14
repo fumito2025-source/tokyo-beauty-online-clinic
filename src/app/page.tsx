@@ -67,13 +67,15 @@ export default function HomePage() {
       `}</style>
 
       {/* ─── HERO ─────────────────────────────────────── */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[75vh] flex items-center overflow-hidden">
         {/* 背景写真 */}
         <Image
           src="/hero.png"
           alt="hero"
           fill
           priority
+          quality={100}
+          sizes="100vw"
           className="object-cover object-center"
         />
 
