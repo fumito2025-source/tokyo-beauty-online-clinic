@@ -67,7 +67,7 @@ export default function HomePage() {
       `}</style>
 
       {/* ─── HERO ─────────────────────────────────────── */}
-      <section className="relative min-h-[75vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[82vh] flex items-center overflow-hidden">
         {/* 背景写真 */}
         <Image
           src="/hero2.png"
@@ -76,7 +76,7 @@ export default function HomePage() {
           priority
           quality={100}
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-[60%_35%]"
         />
 
         {/* 左側グラデーションオーバーレイ（写真の右半分は見せる） */}
