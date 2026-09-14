@@ -67,7 +67,7 @@ export default function HomePage() {
       `}</style>
 
       {/* ─── HERO ─────────────────────────────────────── */}
-      <section className="relative min-h-[82vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[82vh] flex items-end md:items-center overflow-hidden">
         {/* 背景写真 */}
         <Image
           src="/hero2.png"
@@ -76,43 +76,46 @@ export default function HomePage() {
           priority
           quality={100}
           sizes="100vw"
-          className="object-cover object-[60%_35%]"
+          className="object-cover object-[65%_25%] md:object-[60%_35%]"
         />
 
-        {/* 左側グラデーションオーバーレイ（写真の右半分は見せる） */}
-        <div className="absolute inset-0" style={{
+        {/* グラデーションオーバーレイ — モバイル:下から上、PC:左から右 */}
+        <div className="absolute inset-0 md:hidden" style={{
+          background: "linear-gradient(to top, rgba(250,247,242,0.98) 0%, rgba(250,247,242,0.85) 35%, rgba(250,247,242,0.30) 65%, transparent 100%)"
+        }} />
+        <div className="absolute inset-0 hidden md:block" style={{
           background: "linear-gradient(to right, rgba(250,247,242,0.97) 0%, rgba(250,247,242,0.92) 30%, rgba(250,247,242,0.55) 55%, rgba(250,247,242,0.10) 78%, transparent 100%)"
         }} />
 
         {/* content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-14 py-24">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-14 py-12 md:py-24">
           <div className="max-w-xl">
             <p className="text-[11px] tracking-[0.5em] text-clinic-gold mb-5 font-sans">
               BEAUTY, BACKED BY MEDICINE.
             </p>
             <div className="w-10 h-px bg-clinic-gold mb-8" />
-            <h1 className="font-serif font-medium text-6xl md:text-7xl leading-tight tracking-[0.03em] text-clinic-offwhite mb-7">
+            <h1 className="font-serif font-medium text-4xl md:text-7xl leading-tight tracking-[0.03em] text-clinic-offwhite mb-5 md:mb-7">
               肌に、確かな選択を。
             </h1>
-            <p className="text-lg md:text-xl text-clinic-offwhite/90 font-medium leading-[1.9] tracking-wide mb-10">
+            <p className="text-base md:text-xl text-clinic-offwhite/90 font-medium leading-[1.9] tracking-wide mb-8 md:mb-10">
               医師の診療から処方・配送までオンラインで。<br />
               あなたの毎日に、続けやすい美容医療を。
             </p>
-            <div className="flex gap-4 flex-wrap">
+            <div className="flex gap-3 md:gap-4 flex-wrap">
               <Link
                 href="/reservation"
-                className="inline-flex items-center gap-2 bg-clinic-offwhite text-white px-10 py-4 text-sm tracking-[0.15em] font-sans hover:opacity-85 transition-opacity"
+                className="inline-flex items-center gap-2 bg-clinic-offwhite text-white px-8 md:px-10 py-3 md:py-4 text-sm tracking-[0.15em] font-sans hover:opacity-85 transition-opacity"
               >
                 オンライン診療を予約 <span className="text-clinic-gold">›</span>
               </Link>
               <Link
                 href="/plans"
-                className="inline-flex items-center gap-2 border border-clinic-offwhite/40 text-clinic-offwhite px-10 py-4 text-sm tracking-[0.15em] font-sans hover:border-clinic-gold hover:text-clinic-gold transition-colors"
+                className="inline-flex items-center gap-2 border border-clinic-offwhite/40 text-clinic-offwhite px-8 md:px-10 py-3 md:py-4 text-sm tracking-[0.15em] font-sans hover:border-clinic-gold hover:text-clinic-gold transition-colors"
               >
                 プランを見る <span>›</span>
               </Link>
             </div>
-            <div className="flex items-center gap-6 mt-10">
+            <div className="flex items-center gap-6 mt-8 md:mt-10">
               {["医師が診察", "明瞭な料金", "全国配送"].map((item, i) => (
                 <span key={item} className="flex items-center gap-2 text-xs text-clinic-offwhite/65 tracking-wider font-sans">
                   {i > 0 && <span className="text-clinic-gold/40">|</span>}
