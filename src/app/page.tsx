@@ -52,7 +52,7 @@ function HeroSlideshow() {
           priority={i === 0}
           quality={100}
           sizes="100vw"
-          className={`object-cover ${img.pos} transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
+          className={`object-cover ${img.pos} hero-kenburns transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
           style={{ position: "absolute" }}
         />
       ))}
@@ -85,7 +85,7 @@ function MobileHeroSlideshow() {
           priority={i === 0}
           quality={100}
           sizes="100vw"
-          className={`object-cover ${img.pos} transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
+          className={`object-cover ${img.pos} hero-kenburns transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
           style={{ position: "absolute" }}
         />
       ))}
