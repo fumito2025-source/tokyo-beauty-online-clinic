@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null)
@@ -24,6 +24,72 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
     <div ref={ref} className={`reveal-block ${className}`} style={{ transitionDelay: `${delay}ms` }}>
       {children}
     </div>
+  )
+}
+
+const HERO_IMAGES = [
+  { src: "/hero2.png", pos: "object-[75%_15%]" },
+  { src: "/hero3.png", pos: "object-[60%_30%]" },
+  { src: "/hero4.png", pos: "object-[65%_20%]" },
+]
+
+function HeroSlideshow() {
+  const [current, setCurrent] = useState(0)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent(i => (i + 1) % HERO_IMAGES.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [])
+  return (
+    <>
+      {HERO_IMAGES.map((img, i) => (
+        <Image
+          key={img.src}
+          src={img.src}
+          alt="hero"
+          fill
+          priority={i === 0}
+          quality={100}
+          sizes="100vw"
+          className={`object-cover ${img.pos} transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
+          style={{ position: "absolute" }}
+        />
+      ))}
+    </>
+  )
+}
+
+const MOBILE_HERO_IMAGES = [
+  { src: "/hero2.png", pos: "object-[50%_22%]" },
+  { src: "/hero3.png", pos: "object-[50%_30%]" },
+  { src: "/hero4.png", pos: "object-[50%_25%]" },
+]
+
+function MobileHeroSlideshow() {
+  const [current, setCurrent] = useState(0)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent(i => (i + 1) % MOBILE_HERO_IMAGES.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [])
+  return (
+    <>
+      {MOBILE_HERO_IMAGES.map((img, i) => (
+        <Image
+          key={img.src}
+          src={img.src}
+          alt="hero"
+          fill
+          priority={i === 0}
+          quality={100}
+          sizes="100vw"
+          className={`object-cover ${img.pos} transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
+          style={{ position: "absolute" }}
+        />
+      ))}
+    </>
   )
 }
 
@@ -71,15 +137,7 @@ export default function HomePage() {
       <div className="md:hidden flex flex-col">
         {/* 画像エリア */}
         <div className="relative w-full overflow-hidden" style={{ height: "52vw", minHeight: 220 }}>
-          <Image
-            src="/hero2.png"
-            alt="hero"
-            fill
-            priority
-            quality={100}
-            sizes="100vw"
-            className="object-cover object-[50%_22%] hero-kenburns"
-          />
+          <MobileHeroSlideshow />
           {/* 下端フェード */}
           <div className="absolute inset-x-0 bottom-0 h-10" style={{
             background: "linear-gradient(to top, #FAF7F2, transparent)"
@@ -117,15 +175,7 @@ export default function HomePage() {
 
       {/* PC: フルブリード背景レイアウト（変更なし） */}
       <section className="relative hidden md:flex min-h-[82vh] items-center overflow-hidden">
-        <Image
-          src="/hero2.png"
-          alt="hero"
-          fill
-          priority
-          quality={100}
-          sizes="100vw"
-          className="object-cover object-[75%_15%] hero-kenburns"
-        />
+        <HeroSlideshow />
         <div className="absolute inset-0" style={{
           background: "linear-gradient(to right, rgba(250,247,242,0.97) 0%, rgba(250,247,242,0.92) 30%, rgba(250,247,242,0.55) 55%, rgba(250,247,242,0.10) 78%, transparent 100%)"
         }} />
