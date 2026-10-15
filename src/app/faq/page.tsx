@@ -1,120 +1,98 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "よくある質問 | 東京美容オンラインクリニック",
-  description: "東京美容オンラインクリニックへのよくある質問をまとめました。",
+  description: "医療ダイエットプログラムに関するよくある質問をまとめました。",
 }
 
 const faqs = [
   {
-    category: "診療について",
+    category: "プログラムについて",
     items: [
-      { q: "どのような診療を行っていますか？", a: "AGA治療、美白・肝斑治療、ニキビ治療、肥満・ダイエット治療、保湿・外用薬の処方など、美容・予防医療を中心としたオンライン診療を行っております。" },
-      { q: "対応エリアはどこですか？", a: "全国どこからでもご利用いただけます。オンラインで完結するため、ご来院は不要です。" },
-      { q: "診察はどのように行われますか？", a: "LINEを通じてご予約・問診・医師との相談を行います。写真や症状をお送りいただき、医師が確認後に処方いたします。" },
-      { q: "担当医師について教えてください。", a: "日本の医師免許を持つ医師が診察を担当します。詳細はお問い合わせください。" },
-      { q: "診察時間を教えてください。", a: "10:00〜18:00（土日祝除く）。LINEでのメッセージは24時間受け付けており、診察時間内に順次ご返信いたします。" },
+      { q: "どんな人が対象ですか？", a: "本気で体重を改善したいとお考えの35〜50代女性を主なターゲットとしています。BMIや健康状態を踏まえて医師が適応を判断します。まずはLINEでご相談ください。" },
+      { q: "定員10名とはどういう意味ですか？", a: "一人ひとりに丁寧に向き合うため、同時受け入れ人数を10名に制限しています。定員に達している場合はキャンセル待ちのご案内になる場合があります。" },
+      { q: "いつでも退会できますか？", a: "プログラムは月額制で、1ヶ月単位での継続です。翌月の更新前にご連絡いただければ、いつでも退会できます。" },
+      { q: "完全オンラインですか？", a: "はい、診察・面談・相談・処方・配送まですべてオンラインで完結します。来院の必要はありません。" },
     ],
   },
   {
-    category: "予約・キャンセルについて",
+    category: "料金・支払いについて",
     items: [
-      { q: "予約方法を教えてください。", a: "LINEの公式アカウントから「ご予約」ボタンを押し、予約フォームよりお申し込みください。" },
-      { q: "初診でも利用できますか？", a: "はい、初診の方もご利用いただけます。問診票にご記入いただいた後、医師が診察いたします。" },
-      { q: "キャンセル・変更はできますか？", a: "予約日の前日までにLINEよりご連絡ください。当日キャンセルはキャンセル料が発生する場合があります。" },
+      { q: "月額198,000円に含まれるものは？", a: "医師の初回診察・月2回の定期診察、週1回のカウンセラー面談、毎日のLINEフォロー、24時間相談対応が含まれます。薬代・配送料は別途となります。" },
+      { q: "薬代はどれくらいかかりますか？", a: "使用する製剤・用量により異なります。マンジャロ（チルゼパチド）の場合、月あたりの目安は約30,000〜60,000円です。詳細はプランページをご確認ください。" },
+      { q: "健康保険は使えますか？", a: "本サービスは自由診療のため、健康保険は適用されません。全額自己負担となります。" },
+      { q: "支払い方法は？", a: "クレジットカード払いに対応しています。詳細は相談時にご案内します。" },
     ],
   },
   {
-    category: "費用・お支払いについて",
+    category: "薬・治療について",
     items: [
-      { q: "保険は適用されますか？", a: "当クリニックは自由診療となり、健康保険は適用されません。" },
-      { q: "支払い方法を教えてください。", a: "クレジットカード（VISA・Mastercard・JCB・AMEX）がご利用いただけます。詳細は特定商取引法に基づく表記をご確認ください。" },
-      { q: "料金はどのくらいですか？", a: "診療内容・処方薬によって異なります。各プランページをご確認いただくか、LINEよりお気軽にお問い合わせください。" },
+      { q: "マンジャロとはどんな薬ですか？", a: "チルゼパチドを有効成分とするGIP/GLP-1デュアル受容体作動薬です。週1回の自己注射で、食欲抑制・血糖コントロールに作用します。処方は医師の判断のもとに行います。" },
+      { q: "注射が苦手でも大丈夫ですか？", a: "注射が難しい方には経口薬（リベルサス等）をご提案する場合があります。医師の診察時にご相談ください。" },
+      { q: "副作用はありますか？", a: "悪心・嘔吐・下痢・便秘などの消化器症状が現れる場合があります。通常は投与開始直後に多く、時間とともに軽減することが一般的です。気になる症状はすぐにLINEでご連絡ください。" },
+      { q: "効果はいつ頃から感じられますか？", a: "個人差がありますので、特定の時期や結果についてお伝えすることはできません。医師とカウンセラーが継続的にサポートし、経過をともに確認していきます。" },
     ],
   },
   {
-    category: "薬・処方について",
+    category: "サポート・フォローについて",
     items: [
-      { q: "処方までどのくらいかかりますか？", a: "診察後、最短翌営業日に発送いたします。お届けまで通常2〜4営業日かかります。" },
-      { q: "薬はどこに届きますか？", a: "ご指定の住所に郵送いたします。プライバシーに配慮した梱包でお届けします。" },
-      { q: "副作用が心配です。", a: "各薬剤の副作用については薬の説明ページをご確認ください。副作用が疑われる場合はすぐにLINEよりご連絡ください。医師が対応いたします。" },
-      { q: "薬の返品・返金はできますか？", a: "医薬品という性質上、お客様都合による返品・返金はお受けできません。ただし、医師の判断により処方に問題があった場合はご相談ください。" },
-      { q: "継続して処方してもらえますか？", a: "はい、定期処方に対応しています。LINEにて「再診希望」とお送りください。" },
-    ],
-  },
-  {
-    category: "LINEでのご相談について",
-    items: [
-      { q: "経過写真はどのように送ればいいですか？", a: "LINEの「経過・ご相談」ボタンを押した後、そのままチャットに写真を送信してください。医師が確認いたします。" },
-      { q: "返信にどのくらいかかりますか？", a: "受付時間内（10:00〜18:00、土日祝除く）のメッセージは原則当日中にご返信いたします。" },
-      { q: "個人情報は安全ですか？", a: "お客様の個人情報は個人情報保護法に基づき厳重に管理いたします。詳細はプライバシーポリシーをご確認ください。" },
+      { q: "カウンセラーはどんな人ですか？", a: "女性カウンセラーが担当します。食事管理・体重管理を中心に、週1回のオンライン面談で生活習慣の改善をサポートします。" },
+      { q: "毎日LINEで報告するのは大変ですか？", a: "専用の報告フォーマットをご用意していますので、体重・食事・薬の3項目を入力するだけです。慣れると1〜2分で完了します。" },
+      { q: "仕事で忙しくても続けられますか？", a: "診察・面談はオンラインで、隙間時間に対応可能です。毎日の報告もスマートフォンから短時間で完了します。忙しい方こそ、プロにサポートを任せることをお勧めします。" },
     ],
   },
 ]
 
-export default function FAQPage() {
+export default function FaqPage() {
   return (
-    <main className="min-h-screen bg-clinic-black text-clinic-offwhite">
-      {/* Hero */}
-      <section className="py-24 border-b border-clinic-gray-light">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-[10px] tracking-[0.55em] text-clinic-gold mb-4 font-sans">FAQ</p>
-          <div className="w-6 h-px bg-clinic-gold mx-auto mb-8" />
-          <h1 className="font-serif font-light text-4xl tracking-[0.15em] mb-5 text-clinic-offwhite">よくある質問</h1>
-          <p className="text-sm text-clinic-offwhite/45 tracking-wider leading-relaxed">
-            ご不明な点はLINEよりお気軽にお問い合わせください
-          </p>
+    <div className="min-h-screen bg-clinic-black">
+      <div className="border-b border-clinic-gray-light pt-28 pb-16">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-4 font-sans">FAQ</p>
+          <div className="w-8 h-px bg-clinic-gold mx-auto mb-6" />
+          <h1 className="font-serif font-light text-3xl md:text-4xl tracking-[0.2em] text-clinic-offwhite">
+            よくある質問
+          </h1>
         </div>
-      </section>
+      </div>
 
-      {/* FAQ */}
-      <section className="max-w-3xl mx-auto px-6 py-20 space-y-16">
+      <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 space-y-16">
         {faqs.map((section) => (
-          <div key={section.category}>
-            <h2 className="font-serif font-light text-sm tracking-[0.25em] text-clinic-gold mb-8 flex items-center gap-4">
-              <span className="w-6 h-px bg-clinic-gold/40 flex-shrink-0" />
+          <section key={section.category}>
+            <p className="text-[9px] tracking-[0.4em] text-clinic-gold mb-2 font-sans">CATEGORY</p>
+            <h2 className="font-serif font-light text-lg tracking-[0.2em] text-clinic-offwhite mb-8 border-b border-clinic-gray-light pb-4">
               {section.category}
             </h2>
-            <div className="space-y-px">
+            <div className="space-y-0">
               {section.items.map((item, i) => (
-                <details
-                  key={i}
-                  className="group border border-clinic-gray-light bg-clinic-gray-mid open:bg-clinic-gray-dark"
-                >
-                  <summary className="flex items-start justify-between gap-4 px-6 py-5 cursor-pointer list-none select-none">
-                    <span className="flex items-start gap-3">
-                      <span className="text-clinic-gold font-serif text-sm mt-0.5 flex-shrink-0">Q</span>
-                      <span className="text-sm tracking-wide text-clinic-offwhite/70 leading-relaxed group-open:text-clinic-offwhite">
-                        {item.q}
-                      </span>
-                    </span>
-                    <span className="text-clinic-gold/50 flex-shrink-0 mt-0.5 transition-transform group-open:rotate-45 text-lg leading-none">+</span>
-                  </summary>
-                  <div className="px-6 pb-6 flex gap-3">
-                    <span className="text-clinic-gold font-serif text-sm flex-shrink-0">A</span>
-                    <p className="text-sm text-clinic-offwhite/55 leading-relaxed tracking-wide">{item.a}</p>
+                <div key={i} className="border-b border-clinic-gray-light py-7 last:border-b-0">
+                  <div className="flex gap-4 mb-3">
+                    <span className="font-serif text-clinic-gold text-sm flex-shrink-0 mt-0.5">Q.</span>
+                    <p className="text-sm text-clinic-offwhite tracking-wide font-medium leading-relaxed">{item.q}</p>
                   </div>
-                </details>
+                  <div className="flex gap-4">
+                    <span className="font-serif text-clinic-offwhite/30 text-sm flex-shrink-0 mt-0.5">A.</span>
+                    <p className="text-sm text-clinic-offwhite/70 leading-relaxed tracking-wide">{item.a}</p>
+                  </div>
+                </div>
               ))}
             </div>
-          </div>
+          </section>
         ))}
-      </section>
 
-      {/* CTA */}
-      <section className="border-t border-clinic-gray-light py-20">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-sm text-clinic-offwhite/45 tracking-wider mb-8">
-            解決しなかった場合はLINEよりご相談ください
+        <div className="text-center pt-4">
+          <p className="text-xs text-clinic-offwhite/55 tracking-wide mb-8 leading-relaxed">
+            他にご不明な点はLINEでお気軽にご相談ください。
           </p>
-          <a
-            href="https://line.me/R/ti/p/@555glibw"
-            className="inline-flex items-center gap-2.5 bg-[#06C755] text-white hover:opacity-85 transition-opacity px-8 py-3 text-xs tracking-[0.2em] font-sans"
+          <Link
+            href="/reservation"
+            className="inline-flex items-center gap-3 bg-clinic-gold text-white px-12 py-4 text-xs tracking-[0.2em] font-sans hover:opacity-85 transition-opacity"
           >
-            LINEで相談する
-          </a>
+            LINEで無料相談 →
+          </Link>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   )
 }

@@ -28,18 +28,17 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 }
 
 const TREATMENTS = [
-  { id: "aga",          label: "AGA治療",        en: "HAIR LOSS",  desc: "フィナステリド・デュタステリドによる男性型脱毛症の進行抑制", href: "/medication#aga" },
-  { id: "whitening",    label: "美白・肝斑",      en: "WHITENING",  desc: "トラネキサム酸・ビタミンC・L-システインによるシミ・肝斑改善", href: "/medication#whitening" },
-  { id: "acne",         label: "ニキビ治療",      en: "ACNE",       desc: "アダパレン・ベピオゲルによるコメド・炎症性ニキビへのアプローチ", href: "/medication#acne" },
-  { id: "obesity",      label: "肥満・ダイエット", en: "DIET",       desc: "マンジャロ・リベルサスなどGLP-1製剤による医学的肥満治療", href: "/medication#obesity" },
-  { id: "moisturizing", label: "保湿・外用薬",    en: "SKIN CARE",  desc: "ヒルドイド・ビマトプロストなど皮膚科医が処方する外用薬", href: "/medication#moisturizing" },
+  { id: "glp1",     label: "GLP-1受容体作動薬",  en: "GLP-1",       desc: "マンジャロ（チルゼパチド）など、医師が状態に合わせて処方する注射製剤", href: "/medication#glp1" },
+  { id: "oral",     label: "内服薬",              en: "ORAL MED",    desc: "リベルサス（セマグルチド経口）など、内服タイプの医療用製剤", href: "/medication#oral" },
+  { id: "diet",     label: "食事・栄養管理",       en: "NUTRITION",   desc: "カウンセラーによる週1回の面談で食事内容・カロリーを継続サポート", href: "/flow" },
+  { id: "follow",   label: "体重・進捗管理",       en: "TRACKING",    desc: "毎日LINEで体重・食事・体調を記録。専用フォーマットで見える化", href: "/flow" },
 ]
 
 const STEPS = [
-  { n: "01", title: "LINEから予約",  desc: "友だち追加後、メニューの「ご予約」からお申し込みください。" },
-  { n: "02", title: "問診票を記入",   desc: "症状・お悩み・現在の服薬などをご入力いただきます。" },
-  { n: "03", title: "医師が診察",    desc: "LINEチャットにて医師が直接診察・処方を判断します。" },
-  { n: "04", title: "薬が届く",      desc: "処方確定後、最短翌日発送。プライバシー配慮の梱包でお届け。" },
+  { n: "01", title: "LINEで無料相談",    desc: "まずはLINEから気軽にご相談ください。担当スタッフが対応します。" },
+  { n: "02", title: "医師の初回診察",    desc: "現在の体重・健康状態・ご希望を確認し、治療方針を決定します。" },
+  { n: "03", title: "プログラム開始",    desc: "薬の処方＋カウンセラーによる週1回面談＋毎日LINEフォローがスタート。" },
+  { n: "04", title: "医師が定期診察",    desc: "2週間に1回、同じ医師が経過を確認。必要に応じて処方を調整します。" },
 ]
 
 export default function HomePage() {
@@ -88,14 +87,14 @@ export default function HomePage() {
         </div>
         {/* テキストエリア */}
         <div className="bg-clinic-black px-6 py-10">
-          <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-4 font-sans">BEAUTY, BACKED BY MEDICINE.</p>
+          <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-4 font-sans">MEDICAL DIET, BACKED BY DOCTOR.</p>
           <div className="w-8 h-px bg-clinic-gold mb-6" />
           <h1 className="font-serif font-medium text-4xl leading-tight tracking-[0.03em] text-clinic-offwhite mb-5">
-            肌に、確かな選択を。
+            本気の人だけに。
           </h1>
           <p className="text-sm text-clinic-offwhite/80 font-medium leading-[1.9] tracking-wide mb-8">
-            医師の診療から処方・配送までオンラインで。<br />
-            あなたの毎日に、続けやすい美容医療を。
+            医師とカウンセラーが二人三脚でサポートする、<br />
+            10名限定の医療ダイエットプログラム。
           </p>
           <div className="flex flex-col gap-3">
             <Link href="/reservation" className="inline-flex items-center justify-center gap-2 bg-clinic-offwhite text-white px-8 py-4 text-sm tracking-[0.15em] font-sans">
@@ -106,7 +105,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="flex items-center gap-5 mt-8">
-            {["医師が診察", "明瞭な料金", "全国配送"].map((item, i) => (
+            {["10名限定", "医師が継続担当", "完全オンライン"].map((item, i) => (
               <span key={item} className="flex items-center gap-2 text-[11px] text-clinic-offwhite/55 tracking-wider font-sans">
                 {i > 0 && <span className="text-clinic-gold/40">|</span>}
                 {item}
@@ -132,14 +131,14 @@ export default function HomePage() {
         }} />
         <div className="relative z-10 w-full max-w-7xl mx-auto px-14 py-24">
           <div className="max-w-xl">
-            <p className="text-[11px] tracking-[0.5em] text-clinic-gold mb-5 font-sans">BEAUTY, BACKED BY MEDICINE.</p>
+            <p className="text-[11px] tracking-[0.5em] text-clinic-gold mb-5 font-sans">MEDICAL DIET, BACKED BY DOCTOR.</p>
             <div className="w-10 h-px bg-clinic-gold mb-8" />
             <h1 className="font-serif font-medium text-7xl leading-tight tracking-[0.03em] text-clinic-offwhite mb-7">
-              肌に、確かな選択を。
+              本気の人だけに。
             </h1>
             <p className="text-xl text-clinic-offwhite/90 font-medium leading-[1.9] tracking-wide mb-10">
-              医師の診療から処方・配送までオンラインで。<br />
-              あなたの毎日に、続けやすい美容医療を。
+              医師とカウンセラーが二人三脚でサポートする、<br />
+              10名限定の医療ダイエットプログラム。
             </p>
             <div className="flex gap-4 flex-wrap">
               <Link href="/reservation" className="inline-flex items-center gap-2 bg-clinic-offwhite text-white px-10 py-4 text-sm tracking-[0.15em] font-sans hover:opacity-85 transition-opacity">
@@ -150,7 +149,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="flex items-center gap-6 mt-10">
-              {["医師が診察", "明瞭な料金", "全国配送"].map((item, i) => (
+              {["10名限定", "医師が継続担当", "完全オンライン"].map((item, i) => (
                 <span key={item} className="flex items-center gap-2 text-xs text-clinic-offwhite/65 tracking-wider font-sans">
                   {i > 0 && <span className="text-clinic-gold/40">|</span>}
                   {item}
@@ -178,22 +177,22 @@ export default function HomePage() {
                 icon: (
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><circle cx="20" cy="14" r="7" stroke="#B89050" strokeWidth="1"/><path d="M8 36c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#B89050" strokeWidth="1"/></svg>
                 ),
-                title: "医師が直接対応",
-                desc: "全工程を医師が担当。AIや看護師への丸投げは一切ありません。",
+                title: "同じ医師が最後まで",
+                desc: "初回から担当医が変わりません。2週間に1回の定期診察で体調・経過を継続管理します。",
               },
               {
                 icon: (
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><rect x="8" y="6" width="24" height="28" rx="2" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="14" x2="27" y2="14" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="20" x2="27" y2="20" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="26" x2="20" y2="26" stroke="#B89050" strokeWidth="1"/></svg>
                 ),
-                title: "完全オンライン完結",
-                desc: "予約・診察・処方・配送まで全てスマートフォンで完結します。",
+                title: "毎日LINEでフォロー",
+                desc: "専用フォーマットで体重・食事・薬を毎日記録。女性カウンセラーが週1回の面談でサポートします。",
               },
               {
                 icon: (
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><path d="M20 6l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" stroke="#B89050" strokeWidth="1"/></svg>
                 ),
-                title: "プライバシー配慮",
-                desc: "個人情報は暗号化して管理。プライバシー配慮の梱包でお届けします。",
+                title: "10名限定プログラム",
+                desc: "一人ひとりに丁寧に向き合うため、受け入れは常時10名まで。質を落とさないための制限です。",
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 100} className="bg-clinic-gray-mid">
@@ -216,7 +215,7 @@ export default function HomePage() {
             <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-3 font-sans">TREATMENTS</p>
             <div className="w-6 h-px bg-clinic-gold mx-auto mb-6" />
             <h2 className="font-serif font-light text-2xl md:text-3xl tracking-[0.2em] text-clinic-offwhite">
-              診療カテゴリ
+              プログラムの内容
             </h2>
           </Reveal>
 
@@ -242,7 +241,7 @@ export default function HomePage() {
 
           <Reveal className="text-center mt-12">
             <Link href="/medication" className="inline-flex items-center gap-2 text-xs text-clinic-gold/70 hover:text-clinic-gold tracking-[0.3em] transition-colors border-b border-clinic-gold/30 hover:border-clinic-gold pb-1">
-              薬の詳しい説明を見る
+              使用する薬の詳しい説明を見る
             </Link>
           </Reveal>
         </div>
@@ -265,17 +264,17 @@ export default function HomePage() {
             </div>
 
             <div className="flex-1 text-center md:text-left">
-              <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-3 font-sans">LINE ONLY</p>
+              <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-3 font-sans">DAILY LINE SUPPORT</p>
               <h2 className="font-serif font-light text-2xl md:text-3xl tracking-[0.15em] text-clinic-offwhite mb-4">
-                全て、LINEで完結します。
+                毎日のフォローも、LINEで。
               </h2>
               <p className="text-clinic-offwhite/80 text-sm leading-relaxed tracking-wide mb-6">
-                アプリのインストールも、会員登録も不要。<br />
-                LINEの友だち追加だけで、予約・診察・処方・相談まで<br className="hidden md:block" />
-                すべてそのままチャットで完結します。
+                専用フォーマットで体重・食事・薬の服用を毎日LINE報告。<br />
+                カウンセラーが確認し、週1回の面談で軌道修正します。<br className="hidden md:block" />
+                アプリ不要、登録不要。LINEだけで全て完結します。
               </p>
               <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                {["予約・問診", "医師との相談", "経過フォロー", "薬の説明"].map(tag => (
+                {["体重・食事の記録", "カウンセラー面談", "医師の定期診察", "薬の処方・配送"].map(tag => (
                   <span key={tag} className="text-xs text-clinic-offwhite/82 border border-clinic-gray-light px-3 py-1.5 tracking-wider">
                     ✓ {tag}
                   </span>
@@ -327,10 +326,10 @@ export default function HomePage() {
           <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-6 font-sans">GET STARTED</p>
           <div className="w-6 h-px bg-clinic-gold mx-auto mb-8" />
           <h2 className="font-serif font-light text-3xl md:text-4xl tracking-[0.15em] text-clinic-offwhite mb-4">
-            まずは、ご予約から。
+            まずは、無料相談から。
           </h2>
           <p className="text-clinic-offwhite/78 text-sm tracking-wider leading-relaxed mb-12">
-            初診・再診どちらも対応しています。<br />
+            プログラムへの参加はご本人の意思と適応の確認が必要です。<br />
             気になることはLINEでお気軽にご相談ください。
           </p>
 
@@ -339,7 +338,7 @@ export default function HomePage() {
               href="/reservation"
               className="inline-flex items-center justify-center gap-3 bg-clinic-gold text-white px-10 py-4 text-xs tracking-[0.2em] font-sans hover:opacity-85 transition-opacity"
             >
-              予約・問診票はこちら →
+              LINEで無料相談 →
             </Link>
             <Link
               href="/faq"
@@ -352,7 +351,8 @@ export default function HomePage() {
           <div className="mt-16 pt-10 border-t border-clinic-gray-light">
             <p className="text-xs text-clinic-offwhite/55 tracking-wider leading-relaxed">
               ※ 本サービスは自由診療のみです。健康保険は適用されません。<br />
-              ※ 処方は医師の診察・判断のもとに行います。
+              ※ 処方は医師の診察・判断のもとに行います。<br />
+              ※ 効果には個人差があります。特定の結果を保証するものではありません。
             </p>
           </div>
         </Reveal>
