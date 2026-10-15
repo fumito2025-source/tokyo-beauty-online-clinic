@@ -124,7 +124,7 @@ export default function HomePage() {
           priority
           quality={100}
           sizes="100vw"
-          className="object-cover object-[60%_35%] hero-kenburns"
+          className="object-cover object-[75%_35%] hero-kenburns"
         />
         <div className="absolute inset-0" style={{
           background: "linear-gradient(to right, rgba(250,247,242,0.97) 0%, rgba(250,247,242,0.92) 30%, rgba(250,247,242,0.55) 55%, rgba(250,247,242,0.10) 78%, transparent 100%)"
