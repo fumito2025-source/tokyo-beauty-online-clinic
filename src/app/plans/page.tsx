@@ -40,7 +40,7 @@ export default function PlansPage() {
               <h2 className="font-serif font-light text-2xl tracking-[0.15em] text-clinic-offwhite mb-2">
                 医療ダイエット月額プログラム
               </h2>
-              <p className="text-xs text-clinic-offwhite/60 tracking-wide">定員10名限定 / 月額制（1ヶ月単位で継続）</p>
+              <p className="text-xs text-clinic-offwhite/60 tracking-wide">月額制（1ヶ月単位で継続）</p>
             </div>
             <div className="text-right">
               <p className="text-[10px] tracking-[0.3em] text-clinic-gold/70 font-sans mb-1">月額（税込）</p>

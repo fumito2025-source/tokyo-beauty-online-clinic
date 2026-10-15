@@ -94,7 +94,7 @@ export default function HomePage() {
           </h1>
           <p className="text-sm text-clinic-offwhite/80 font-medium leading-[1.9] tracking-wide mb-8">
             医師とカウンセラーが二人三脚でサポートする、<br />
-            10名限定の医療ダイエットプログラム。
+            医師とカウンセラーによる、完全オンライン医療ダイエット。
           </p>
           <div className="flex flex-col gap-3">
             <Link href="/reservation" className="inline-flex items-center justify-center gap-2 bg-clinic-offwhite text-white px-8 py-4 text-sm tracking-[0.15em] font-sans">
@@ -105,7 +105,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="flex items-center gap-5 mt-8">
-            {["10名限定", "医師が継続担当", "完全オンライン"].map((item, i) => (
+            {["医師が継続担当", "週1回カウンセラー", "完全オンライン"].map((item, i) => (
               <span key={item} className="flex items-center gap-2 text-[11px] text-clinic-offwhite/55 tracking-wider font-sans">
                 {i > 0 && <span className="text-clinic-gold/40">|</span>}
                 {item}
@@ -138,7 +138,7 @@ export default function HomePage() {
             </h1>
             <p className="text-xl text-clinic-offwhite/90 font-medium leading-[1.9] tracking-wide mb-10">
               医師とカウンセラーが二人三脚でサポートする、<br />
-              10名限定の医療ダイエットプログラム。
+              医師とカウンセラーによる、完全オンライン医療ダイエット。
             </p>
             <div className="flex gap-4 flex-wrap">
               <Link href="/reservation" className="inline-flex items-center gap-2 bg-clinic-offwhite text-white px-10 py-4 text-sm tracking-[0.15em] font-sans hover:opacity-85 transition-opacity">
@@ -149,7 +149,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="flex items-center gap-6 mt-10">
-              {["10名限定", "医師が継続担当", "完全オンライン"].map((item, i) => (
+              {["医師が継続担当", "週1回カウンセラー", "完全オンライン"].map((item, i) => (
                 <span key={item} className="flex items-center gap-2 text-xs text-clinic-offwhite/65 tracking-wider font-sans">
                   {i > 0 && <span className="text-clinic-gold/40">|</span>}
                   {item}
@@ -191,8 +191,8 @@ export default function HomePage() {
                 icon: (
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><path d="M20 6l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" stroke="#B89050" strokeWidth="1"/></svg>
                 ),
-                title: "10名限定プログラム",
-                desc: "一人ひとりに丁寧に向き合うため、受け入れは常時10名まで。質を落とさないための制限です。",
+                title: "プライバシーへの配慮",
+                desc: "診察・面談・薬の配送まで完全オンライン。来院不要で、周囲に知られることなく継続できます。",
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 100} className="bg-clinic-gray-mid">
