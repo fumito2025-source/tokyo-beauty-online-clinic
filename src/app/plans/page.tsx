@@ -32,6 +32,17 @@ export default function PlansPage() {
       {/* ─── MAIN PLAN ─── */}
       <div className="max-w-3xl mx-auto px-6 py-20 md:py-28">
 
+        {/* Monitor price banner */}
+        <div className="bg-clinic-gold/10 border border-clinic-gold/60 px-8 py-5 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div>
+            <p className="text-[10px] tracking-[0.4em] text-clinic-gold font-sans mb-1">MONITOR PRICE — 現在受付中</p>
+            <p className="text-sm text-clinic-offwhite/90 tracking-wide">モニター特別価格でご参加いただける方を若干名募集しています。</p>
+          </div>
+          <Link href="/reservation" className="flex-shrink-0 inline-flex items-center gap-2 bg-clinic-gold text-white px-6 py-2.5 text-xs tracking-[0.15em] font-sans hover:opacity-85 transition-opacity">
+            LINEで相談する →
+          </Link>
+        </div>
+
         {/* Price card */}
         <div className="border border-clinic-gold/50 bg-clinic-gray-dark p-10 md:p-14 mb-14">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
@@ -40,12 +51,13 @@ export default function PlansPage() {
               <h2 className="font-serif font-light text-2xl tracking-[0.15em] text-clinic-offwhite mb-2">
                 医療ダイエット月額プログラム
               </h2>
-              <p className="text-xs text-clinic-offwhite/60 tracking-wide">月額制（1ヶ月単位で継続）</p>
+              <p className="text-xs text-clinic-offwhite/60 tracking-wide">月額制（1ヶ月単位で継続）・薬代・配送料込み</p>
             </div>
             <div className="text-right">
-              <p className="text-[10px] tracking-[0.3em] text-clinic-gold/70 font-sans mb-1">月額（税込）</p>
-              <p className="font-serif text-4xl md:text-5xl text-clinic-offwhite tracking-tight">¥198,000</p>
-              <p className="text-xs text-clinic-offwhite/50 mt-1 tracking-wide">※ 薬代・配送料は別途</p>
+              <p className="text-[10px] tracking-[0.3em] text-clinic-gold/70 font-sans mb-1">モニター価格（税込）</p>
+              <p className="font-serif text-4xl md:text-5xl text-clinic-offwhite tracking-tight">¥99,000</p>
+              <p className="text-xs text-clinic-offwhite/50 mt-1 tracking-wide line-through">通常 ¥198,000</p>
+              <p className="text-[10px] text-clinic-gold/70 mt-1 tracking-wide">薬代・配送料込み</p>
             </div>
           </div>
 
@@ -66,18 +78,19 @@ export default function PlansPage() {
           </ul>
         </div>
 
-        {/* Drug cost note */}
+        {/* Medication included note */}
         <div className="border border-clinic-gray-light bg-clinic-gray-mid p-8 mb-14">
-          <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">MEDICATION COST</p>
+          <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">INCLUDED MEDICATION</p>
           <p className="text-sm text-clinic-offwhite/80 leading-relaxed tracking-wide">
-            薬代は使用する製剤・用量により異なります。代表的な目安は以下の通りです（税込・1ヶ月あたり）。<br />
-            実際の処方内容は医師の診察後に決定します。
+            月額には以下の医療用製剤の薬代・配送料が含まれます。<br />
+            使用する製剤・用量は医師の診察後に決定します。
           </p>
           <div className="mt-5 space-y-2">
             {[
-              ["マンジャロ®（チルゼパチド）", "約 ¥30,000〜¥60,000"],
-              ["リベルサス®（セマグルチド経口）", "約 ¥15,000〜¥25,000"],
-              ["その他補助薬（サプリ等）", "任意追加"],
+              ["マンジャロ®（チルゼパチド）", "月額に含む"],
+              ["リベルサス®（セマグルチド経口）", "月額に含む"],
+              ["大建中湯・便秘系補助薬", "月額に含む（必要時）"],
+              ["体調不良時の追加内服", "月額に含む（医師判断）"],
             ].map(([name, price]) => (
               <div key={name} className="flex justify-between items-center border-b border-clinic-gray-light pb-2 last:border-0">
                 <span className="text-xs text-clinic-offwhite/80 tracking-wide">{name}</span>

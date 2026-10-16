@@ -101,10 +101,10 @@ const TREATMENTS = [
 ]
 
 const STEPS = [
-  { n: "01", title: "LINEで無料相談",    desc: "まずはLINEから気軽にご相談ください。担当スタッフが対応します。" },
-  { n: "02", title: "医師の初回診察",    desc: "現在の体重・健康状態・ご希望を確認し、治療方針を決定します。" },
-  { n: "03", title: "プログラム開始",    desc: "薬の処方＋カウンセラーによる週1回面談＋毎日LINEフォローがスタート。" },
-  { n: "04", title: "医師が定期診察",    desc: "2週間に1回、同じ医師が経過を確認。必要に応じて処方を調整します。" },
+  { n: "01", title: "LINEで無料相談",       desc: "まずはLINEから気軽にご相談ください。カウンセラーが丁寧にお話を伺います。" },
+  { n: "02", title: "カウンセリング面談",    desc: "現在の生活習慣・目標・お悩みをじっくりヒアリング。プログラム内容をご説明します。" },
+  { n: "03", title: "医師の初回診察",        desc: "体重・健康状態・服薬歴を確認し、医師が治療方針と処方を決定します。" },
+  { n: "04", title: "プログラム開始",        desc: "薬の処方・配送＋週1カウンセラー面談＋毎日LINEフォローが一斉にスタート。" },
 ]
 
 export default function HomePage() {
@@ -152,7 +152,7 @@ export default function HomePage() {
           </h1>
           <p className="text-sm text-clinic-offwhite/80 font-medium leading-[1.9] tracking-wide mb-8">
             医師とカウンセラーが二人三脚でサポートする、<br />
-            医師とカウンセラーによる、完全オンライン医療ダイエット。
+            完全オンライン医療ダイエット。
           </p>
           <div className="flex flex-col gap-3">
             <Link href="/reservation" className="inline-flex items-center justify-center gap-2 bg-clinic-offwhite text-white px-8 py-4 text-sm tracking-[0.15em] font-sans">
@@ -163,13 +163,16 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="flex items-center gap-5 mt-8">
-            {["医師が継続担当", "週1回カウンセラー", "完全オンライン"].map((item, i) => (
+            {["医師が継続担当", "週1回カウンセラー", "薬代込み・完全オンライン"].map((item, i) => (
               <span key={item} className="flex items-center gap-2 text-[11px] text-clinic-offwhite/55 tracking-wider font-sans">
                 {i > 0 && <span className="text-clinic-gold/40">|</span>}
                 {item}
               </span>
             ))}
           </div>
+          <p className="text-[10px] text-clinic-gold/60 tracking-wider mt-5 font-sans">
+            ※ お一人おひとりに丁寧に向き合うため、受入人数に限りがございます。
+          </p>
         </div>
       </div>
 
@@ -188,7 +191,7 @@ export default function HomePage() {
             </h1>
             <p className="text-xl text-clinic-offwhite/90 font-medium leading-[1.9] tracking-wide mb-10">
               医師とカウンセラーが二人三脚でサポートする、<br />
-              医師とカウンセラーによる、完全オンライン医療ダイエット。
+              薬代込みの完全オンライン医療ダイエット。
             </p>
             <div className="flex gap-4 flex-wrap">
               <Link href="/reservation" className="inline-flex items-center gap-2 bg-clinic-offwhite text-white px-10 py-4 text-sm tracking-[0.15em] font-sans hover:opacity-85 transition-opacity">
@@ -199,13 +202,16 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="flex items-center gap-6 mt-10">
-              {["医師が継続担当", "週1回カウンセラー", "完全オンライン"].map((item, i) => (
+              {["医師が継続担当", "週1回カウンセラー", "薬代込み・完全オンライン"].map((item, i) => (
                 <span key={item} className="flex items-center gap-2 text-xs text-clinic-offwhite/65 tracking-wider font-sans">
                   {i > 0 && <span className="text-clinic-gold/40">|</span>}
                   {item}
                 </span>
               ))}
             </div>
+            <p className="text-[10px] text-clinic-gold/55 tracking-wider mt-6 font-sans">
+              ※ お一人おひとりに丁寧に向き合うため、受入人数に限りがございます。
+            </p>
           </div>
         </div>
       </section>
@@ -228,21 +234,21 @@ export default function HomePage() {
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><circle cx="20" cy="14" r="7" stroke="#B89050" strokeWidth="1"/><path d="M8 36c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#B89050" strokeWidth="1"/></svg>
                 ),
                 title: "同じ医師が最後まで",
-                desc: "初回から担当医が変わりません。2週間に1回の定期診察で体調・経過を継続管理します。",
+                desc: "担当医が変わりません。体質・経過をすべて把握した医師が、2週間に1回継続して診ます。お一人おひとりに丁寧に向き合うため、受入人数に限りがございます。",
               },
               {
                 icon: (
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><rect x="8" y="6" width="24" height="28" rx="2" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="14" x2="27" y2="14" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="20" x2="27" y2="20" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="26" x2="20" y2="26" stroke="#B89050" strokeWidth="1"/></svg>
                 ),
-                title: "毎日LINEでフォロー",
-                desc: "専用フォーマットで体重・食事・薬を毎日記録。女性カウンセラーが週1回の面談でサポートします。",
+                title: "薬代・配送料込みの月額制",
+                desc: "マンジャロ・リベルサスなど医療用製剤の薬代と配送料がすべて月額に含まれます。隠れた追加費用がありません。",
               },
               {
                 icon: (
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><path d="M20 6l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" stroke="#B89050" strokeWidth="1"/></svg>
                 ),
-                title: "プライバシーへの配慮",
-                desc: "診察・面談・薬の配送まで完全オンライン。来院不要で、周囲に知られることなく継続できます。",
+                title: "忙しい方でも続けられる",
+                desc: "診察・面談・薬の配送まで完全オンライン。来院不要で、毎日のLINE報告もスマートフォンから短時間で完了します。",
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 100} className="bg-clinic-gray-mid">
