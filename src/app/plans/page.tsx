@@ -7,11 +7,12 @@ export const metadata: Metadata = {
 }
 
 const INCLUDES = [
-  { label: "医師の初回診察", detail: "現在の体重・健康状態・服薬歴を確認し、治療方針を決定します。" },
+  { label: "カウンセリング面談（初回）", detail: "生活習慣・目標・お悩みをじっくりヒアリング。プログラム内容をご説明します。" },
+  { label: "医師の初回診察", detail: "体重・健康状態・服薬歴を確認し、個人目標BMIと治療方針を決定します。" },
   { label: "医師の定期診察（月2回）", detail: "2週間に1回、同じ医師が経過を確認。薬の用量調整も行います。" },
   { label: "女性カウンセラーによる週1回面談", detail: "食事内容・体重推移・生活習慣をもとに次週の目標を設定します。" },
   { label: "毎日LINEフォロー", detail: "専用フォーマットで体重・食事・薬を毎日記録。カウンセラーが確認します。" },
-  { label: "医療用痩身薬の処方・配送", detail: "マンジャロ（チルゼパチド）等、医師の判断により処方。薬代は別途。" },
+  { label: "医療用製剤の処方・配送（薬代込み）", detail: "マンジャロ・リベルサス・補助薬など、医師の判断により処方。薬代・配送料込み。" },
   { label: "24時間LINEでの体調相談", detail: "急な体調変化や不安点はいつでもチャットでご連絡ください。" },
 ]
 
@@ -102,6 +103,36 @@ export default function PlansPage() {
             ※ 薬価は仕入れ状況により変動することがあります。<br />
             ※ 効果には個人差があります。特定の結果を保証するものではありません。
           </p>
+        </div>
+
+        {/* Graduation & re-enrollment */}
+        <div className="border border-clinic-gray-light bg-clinic-gray-mid p-8 mb-14 space-y-8">
+          <div>
+            <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">PROGRAM COMPLETION</p>
+            <h3 className="font-serif font-light text-base tracking-[0.15em] text-clinic-offwhite mb-3">プログラム卒業の基準</h3>
+            <p className="text-sm text-clinic-offwhite/75 leading-relaxed tracking-wide">
+              医師と相談して設定した個人目標BMIに達した時点で、プログラムを卒業となります。<br />
+              なお、BMI 18.5以下は健康上の理由からプログラムを終了します。
+            </p>
+          </div>
+          <div className="w-full h-px bg-clinic-gray-light" />
+          <div>
+            <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">MONITOR PERIOD</p>
+            <h3 className="font-serif font-light text-base tracking-[0.15em] text-clinic-offwhite mb-3">モニター価格について</h3>
+            <p className="text-sm text-clinic-offwhite/75 leading-relaxed tracking-wide">
+              モニター価格（¥99,000/月）は、ご契約日から<strong className="text-clinic-offwhite font-medium">3ヶ月間</strong>適用されます。<br />
+              4ヶ月目以降は通常価格（¥198,000/月）となります。
+            </p>
+          </div>
+          <div className="w-full h-px bg-clinic-gray-light" />
+          <div>
+            <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">RE-ENROLLMENT</p>
+            <h3 className="font-serif font-light text-base tracking-[0.15em] text-clinic-offwhite mb-3">卒業後のリバウンド対応</h3>
+            <p className="text-sm text-clinic-offwhite/75 leading-relaxed tracking-wide">
+              プログラム卒業後にリバウンドを感じた際は、いつでもLINEよりご連絡ください。<br />
+              再入会は通常価格（¥198,000/月・薬代込み）でお受けします。
+            </p>
+          </div>
         </div>
 
         {/* CTA */}
