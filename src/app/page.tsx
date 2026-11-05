@@ -155,10 +155,10 @@ export default function HomePage() {
             オンライン完結の医療ダイエット。
           </p>
           <div className="flex flex-col gap-3">
-            <Link href="/reservation" className="inline-flex items-center justify-center gap-2 bg-clinic-offwhite text-white px-8 py-4 text-sm tracking-[0.15em] font-sans">
-              オンライン診療を予約 <span className="text-clinic-gold">›</span>
+            <Link href="https://line.me/R/ti/p/@555glibw" className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm tracking-[0.15em] font-sans text-white hover:opacity-85 transition-opacity" style={{backgroundColor: "#06C755"}}>
+              LINEで無料相談する <span>›</span>
             </Link>
-            <Link href="/plans" className="inline-flex items-center justify-center gap-2 border border-clinic-offwhite/40 text-clinic-offwhite px-8 py-4 text-sm tracking-[0.15em] font-sans">
+            <Link href="/plans" className="inline-flex items-center justify-center gap-2 border border-clinic-offwhite/40 text-clinic-offwhite px-8 py-4 text-sm tracking-[0.15em] font-sans hover:border-clinic-gold hover:text-clinic-gold transition-colors">
               プランを見る <span>›</span>
             </Link>
           </div>
@@ -194,8 +194,8 @@ export default function HomePage() {
               薬代込みのオンライン完結の医療ダイエット。
             </p>
             <div className="flex gap-4 flex-wrap">
-              <Link href="/reservation" className="inline-flex items-center gap-2 bg-clinic-offwhite text-white px-10 py-4 text-sm tracking-[0.15em] font-sans hover:opacity-85 transition-opacity">
-                オンライン診療を予約 <span className="text-clinic-gold">›</span>
+              <Link href="https://line.me/R/ti/p/@555glibw" className="inline-flex items-center gap-2 px-10 py-4 text-sm tracking-[0.15em] font-sans text-white hover:opacity-85 transition-opacity" style={{backgroundColor: "#06C755"}}>
+                LINEで無料相談する <span>›</span>
               </Link>
               <Link href="/plans" className="inline-flex items-center gap-2 border border-clinic-offwhite/40 text-clinic-offwhite px-10 py-4 text-sm tracking-[0.15em] font-sans hover:border-clinic-gold hover:text-clinic-gold transition-colors">
                 プランを見る <span>›</span>
