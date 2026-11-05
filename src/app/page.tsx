@@ -171,7 +171,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="text-[10px] text-clinic-gold/60 tracking-wider mt-5 font-sans">
-            ※ お一人おひとりに丁寧に向き合うため、受入人数に限りがございます。
+            ※ お一人お一人に丁寧に向き合うため、受入人数に限りがございます。
           </p>
         </div>
       </div>
@@ -210,7 +210,7 @@ export default function HomePage() {
               ))}
             </div>
             <p className="text-[10px] text-clinic-gold/55 tracking-wider mt-6 font-sans">
-              ※ お一人おひとりに丁寧に向き合うため、受入人数に限りがございます。
+              ※ お一人お一人に丁寧に向き合うため、受入人数に限りがございます。
             </p>
           </div>
         </div>
