@@ -281,7 +281,7 @@ export default function HomePage() {
             </p>
             <div className="space-y-px">
               {[
-                { en: "DOCTOR", label: "医師が月1回ビデオ診察", desc: "処方・経過をずっと同じ医師が担当します。" },
+                { en: "DOCTOR", label: "医師が月1回ビデオ診察", desc: "処方・経過をずっと同じ医師が担当します。診察に基づいてGLP-1製剤など、あなたに合った薬を処方します。" },
                 { en: "COUNSELOR", label: "カウンセラーが週1回面談＋毎日食事コメント", desc: "食事写真を送るだけ。生活習慣を継続サポートします。" },
                 { en: "TRACKING", label: "体重・食事・体調を専用ツールで記録・管理", desc: "BMI自動計算、副作用チェックなど一元管理できます。" },
                 { en: "LINE", label: "体調の変化や不安はLINEでいつでも相談", desc: "気になることがあればすぐに連絡できます。" },
@@ -306,33 +306,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── 専用サイトで記録 ────────────────────────────── */}
+      {/* ─── LINEで完結 ──────────────────────────────── */}
       <section className="py-20 md:py-28 bg-clinic-gray-dark border-b border-clinic-gray-light">
         <Reveal className="max-w-4xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
             <div className="flex-shrink-0">
-              <div className="w-20 h-20 rounded-2xl bg-clinic-gold/10 border border-clinic-gold/30 flex items-center justify-center">
+              <div className="w-20 h-20 rounded-2xl bg-[#06C755]/15 border border-[#06C755]/40 flex items-center justify-center">
                 <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
-                  <rect x="8" y="6" width="24" height="28" rx="2" stroke="#B89050" strokeWidth="1.2"/>
-                  <line x1="13" y1="13" x2="27" y2="13" stroke="#B89050" strokeWidth="1"/>
-                  <line x1="13" y1="19" x2="27" y2="19" stroke="#B89050" strokeWidth="1"/>
-                  <line x1="13" y1="25" x2="22" y2="25" stroke="#B89050" strokeWidth="1"/>
+                  <path d="M20 4C11.163 4 4 10.268 4 18c0 4.418 2.343 8.372 6 11.07V34l5.333-2.933C16.82 31.68 18.38 32 20 32c8.837 0 16-6.268 16-14S28.837 4 20 4z" fill="#06C755" opacity=".25"/>
+                  <path d="M20 4C11.163 4 4 10.268 4 18c0 4.418 2.343 8.372 6 11.07V34l5.333-2.933C16.82 31.68 18.38 32 20 32c8.837 0 16-6.268 16-14S28.837 4 20 4z" stroke="#06C755" strokeWidth="1.5"/>
+                  <circle cx="13" cy="18" r="1.5" fill="#06C755"/>
+                  <circle cx="20" cy="18" r="1.5" fill="#06C755"/>
+                  <circle cx="27" cy="18" r="1.5" fill="#06C755"/>
                 </svg>
               </div>
             </div>
 
             <div className="flex-1 text-center md:text-left">
-              <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-3 font-sans">DAILY TRACKING</p>
+              <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-3 font-sans">DAILY LINE SUPPORT</p>
               <h2 className="font-serif font-light text-2xl md:text-3xl tracking-[0.15em] text-clinic-offwhite mb-4">
-                毎日の記録は、専用サイトで。
+                毎日のフォローも、LINEで。
               </h2>
               <p className="text-clinic-offwhite/80 text-sm leading-relaxed tracking-wide mb-6">
-                スマートフォンのホーム画面に追加するだけで使える専用サイト。<br />
-                体重・食事写真・体調を毎日記録します。<br className="hidden md:block" />
-                カウンセラーが確認し、週1回の面談で軌道修正します。
+                専用フォーマットで体重・食事・薬の服用を毎日LINE報告。<br />
+                カウンセラーが確認し、週1回の面談で軌道修正します。<br className="hidden md:block" />
+                アプリ不要、登録不要。LINEだけで全て完結します。
               </p>
               <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                {["体重・BMI記録", "食事写真の管理", "カウンセラー面談", "医師の定期診察"].map(tag => (
+                {["体重・食事の記録", "カウンセラー面談", "医師の定期診察", "薬の処方・配送"].map(tag => (
                   <span key={tag} className="text-xs text-clinic-offwhite/82 border border-clinic-gray-light px-3 py-1.5 tracking-wider">
                     ✓ {tag}
                   </span>
