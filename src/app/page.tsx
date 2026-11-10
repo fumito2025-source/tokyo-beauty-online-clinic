@@ -245,14 +245,14 @@ export default function HomePage() {
               },
               {
                 icon: (
-                  <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><path d="M20 6l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" stroke="#B89050" strokeWidth="1"/></svg>
+                  <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><circle cx="20" cy="20" r="13" stroke="#B89050" strokeWidth="1"/><path d="M14 20h12M20 14v12" stroke="#B89050" strokeWidth="1" strokeLinecap="round"/></svg>
                 ),
-                title: "忙しい方でも続けられる",
-                desc: "診察・面談・薬の配送までオンラインで完結。来院不要で、毎日のLINE報告もスマートフォンから短時間で完了します。",
+                title: "カウンセラーが週1で伴走",
+                desc: "医師診察とは別に、担当カウンセラーが週1回面談。食事・生活習慣を継続サポートします。医療と生活支援の両輪体制で、無理なく続けられます。",
               },
             ].map((item, i) => (
-              <Reveal key={item.title} delay={i * 100} className="bg-clinic-gray-mid">
-                <div className="text-center px-10 py-14">
+              <Reveal key={item.title} delay={i * 150} className="bg-clinic-gray-mid">
+                <div className="feature-card text-center px-10 py-14">
                   <div className="flex justify-center mb-7 opacity-80">{item.icon}</div>
                   <div className="w-6 h-px bg-clinic-gold/40 mx-auto mb-5" />
                   <h3 className="font-serif font-light text-base tracking-[0.2em] text-clinic-offwhite mb-4">{item.title}</h3>

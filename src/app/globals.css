@@ -59,6 +59,39 @@
   .hero-kenburns { animation: none; }
 }
 
+/* ─── Scroll reveal ─── */
+.reveal-block {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-block.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-block { opacity: 1; transform: none; transition: none; }
+}
+
+/* ─── Feature card hover line ─── */
+.feature-card {
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  width: 0; height: 1px;
+  background: #B89050;
+  transform: translateX(-50%);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.feature-card:hover::after {
+  width: 60%;
+}
+
 /* カスタムスクロールバー */
 ::-webkit-scrollbar {
   width: 4px;
