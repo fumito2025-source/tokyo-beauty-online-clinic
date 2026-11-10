@@ -325,12 +325,15 @@ export default function HomePage() {
             <div className="flex-1 text-center md:text-left">
               <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-3 font-sans">DAILY LINE SUPPORT</p>
               <h2 className="font-serif font-light text-2xl md:text-3xl tracking-[0.15em] text-clinic-offwhite mb-4">
-                毎日のフォローも、LINEで。
+                なんでも、LINEで相談を。
               </h2>
-              <p className="text-clinic-offwhite/80 text-sm leading-relaxed tracking-wide mb-6">
-                専用フォーマットで体重・食事・薬の服用を毎日LINE報告。<br />
-                カウンセラーが確認し、週1回の面談で軌道修正します。<br className="hidden md:block" />
-                アプリ不要、登録不要。LINEだけで全て完結します。
+              <p className="text-clinic-offwhite/80 text-sm leading-relaxed tracking-wide mb-4">
+                副作用の不安、食事の悩み、体重が止まった…。<br />
+                気になることはいつでもLINEで相談できます。<br className="hidden md:block" />
+                カウンセラーが確認し、週1回の面談で丁寧にお答えします。
+              </p>
+              <p className="text-clinic-offwhite/40 text-xs tracking-wide mb-6">
+                ※ 日々の体重・食事記録は専用サイトで管理します。
               </p>
               <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                 {["体重・食事の記録", "カウンセラー面談", "医師の定期診察", "薬の処方・配送"].map(tag => (
