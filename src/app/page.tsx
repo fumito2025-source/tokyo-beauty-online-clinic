@@ -227,7 +227,7 @@ export default function HomePage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-clinic-gray-light">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-clinic-gray-light">
             {[
               {
                 icon: (
@@ -248,14 +248,7 @@ export default function HomePage() {
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><circle cx="20" cy="20" r="13" stroke="#B89050" strokeWidth="1"/><path d="M14 20h12M20 14v12" stroke="#B89050" strokeWidth="1" strokeLinecap="round"/></svg>
                 ),
                 title: "カウンセラーが週1で伴走",
-                desc: "医師診察とは別に、担当カウンセラーが週1回面談。食事・生活習慣を継続サポートします。医療と生活支援の両輪体制で、無理なく続けられます。",
-              },
-              {
-                icon: (
-                  <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><path d="M20 8v6M20 26v6M8 20h6M26 20h6" stroke="#B89050" strokeWidth="1" strokeLinecap="round"/><circle cx="20" cy="20" r="6" stroke="#B89050" strokeWidth="1"/></svg>
-                ),
-                title: "初回カウンセリング無料",
-                desc: "申し込み前に、まずカウンセラーと無料でご相談いただけます。費用・薬・生活スタイルへの影響を確認してから判断できます。",
+                desc: "医師診察とは別に、担当カウンセラーが週1回面談。食事・生活習慣を継続サポートします。医療と生活支援の両輪体制で、無理なく続けられます。初回カウンセリングは無料です。",
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 150} className="bg-clinic-gray-mid">
