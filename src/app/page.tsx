@@ -227,21 +227,21 @@ export default function HomePage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-clinic-gray-light">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-clinic-gray-light">
             {[
               {
                 icon: (
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><circle cx="20" cy="14" r="7" stroke="#B89050" strokeWidth="1"/><path d="M8 36c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#B89050" strokeWidth="1"/></svg>
                 ),
                 title: "同じ医師が最後まで",
-                desc: "担当医が変わりません。体質・経過をすべて把握した医師が、2週間に1回継続して診ます。お一人おひとりに丁寧に向き合うため、受入人数に限りがございます。",
+                desc: "担当医が変わりません。体質・経過をすべて把握した医師が、2週間に1回継続して診ます。お一人お一人に丁寧に向き合うため、受入人数に限りがございます。",
               },
               {
                 icon: (
                   <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><rect x="8" y="6" width="24" height="28" rx="2" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="14" x2="27" y2="14" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="20" x2="27" y2="20" stroke="#B89050" strokeWidth="1"/><line x1="13" y1="26" x2="20" y2="26" stroke="#B89050" strokeWidth="1"/></svg>
                 ),
                 title: "薬代・配送料込みの月額制",
-                desc: "マンジャロ・リベルサスなど医療用製剤の薬代と配送料がすべて月額に含まれます。隠れた追加費用がありません。",
+                desc: "マンジャロ・リベルサスなど医療用製剤の薬代と配送料がすべて月額に含まれます。追加費用はありません。",
               },
               {
                 icon: (
@@ -249,6 +249,13 @@ export default function HomePage() {
                 ),
                 title: "カウンセラーが週1で伴走",
                 desc: "医師診察とは別に、担当カウンセラーが週1回面談。食事・生活習慣を継続サポートします。医療と生活支援の両輪体制で、無理なく続けられます。",
+              },
+              {
+                icon: (
+                  <svg viewBox="0 0 40 40" fill="none" className="w-8 h-8"><path d="M20 8v6M20 26v6M8 20h6M26 20h6" stroke="#B89050" strokeWidth="1" strokeLinecap="round"/><circle cx="20" cy="20" r="6" stroke="#B89050" strokeWidth="1"/></svg>
+                ),
+                title: "初回カウンセリング無料",
+                desc: "申し込み前に、まずカウンセラーと無料でご相談いただけます。費用・薬・生活スタイルへの影響を確認してから判断できます。",
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 150} className="bg-clinic-gray-mid">
