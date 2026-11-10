@@ -264,41 +264,44 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── 診療カテゴリ ─────────────────────────────── */}
+      {/* ─── プログラムの内容 ──────────────────────────── */}
       <section className="py-28 md:py-36 bg-clinic-black border-b border-clinic-gray-light">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-4xl mx-auto px-6">
           <Reveal className="text-center mb-16">
-            <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-3 font-sans">TREATMENTS</p>
+            <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-3 font-sans">PROGRAM</p>
             <div className="w-6 h-px bg-clinic-gold mx-auto mb-6" />
             <h2 className="font-serif font-light text-2xl md:text-3xl tracking-[0.2em] text-clinic-offwhite">
               プログラムの内容
             </h2>
           </Reveal>
 
-          <div className="space-y-px">
-            {TREATMENTS.map((t, i) => (
-              <Reveal key={t.id} delay={i * 60}>
-                <Link href={t.href} className="group flex items-center gap-6 md:gap-10 px-6 md:px-10 py-7 bg-clinic-gray-mid border border-clinic-gray-light hover:border-clinic-gold hover:bg-clinic-gray-dark transition-all duration-300 block">
-                  <span className="font-serif text-2xl text-clinic-offwhite/20 tracking-wider w-8 flex-shrink-0 text-right group-hover:text-clinic-gold/50 transition-colors">
-                    {String(i+1).padStart(2,"0")}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[9px] tracking-[0.4em] text-clinic-gold mb-1 font-sans">{t.en}</p>
-                    <h3 className="font-serif font-light text-base md:text-lg tracking-[0.15em] text-clinic-offwhite group-hover:text-clinic-gold transition-colors duration-300">
-                      {t.label}
-                    </h3>
-                    <p className="text-xs text-clinic-offwhite/72 mt-1.5 tracking-wide leading-relaxed hidden md:block">{t.desc}</p>
+          <Reveal delay={100}>
+            <p className="text-center font-serif font-light text-lg md:text-xl tracking-[0.12em] text-clinic-offwhite mb-12 leading-relaxed">
+              医師とカウンセラーが3ヶ月、二人三脚でサポートします。
+            </p>
+            <div className="space-y-px">
+              {[
+                { en: "DOCTOR", label: "医師が月1回ビデオ診察", desc: "処方・経過をずっと同じ医師が担当します。" },
+                { en: "COUNSELOR", label: "カウンセラーが週1回面談＋毎日食事コメント", desc: "食事写真を送るだけ。生活習慣を継続サポートします。" },
+                { en: "TRACKING", label: "体重・食事・体調を専用ツールで記録・管理", desc: "BMI自動計算、副作用チェックなど一元管理できます。" },
+                { en: "LINE", label: "体調の変化や不安はLINEでいつでも相談", desc: "気になることがあればすぐに連絡できます。" },
+              ].map((item, i) => (
+                <Reveal key={item.en} delay={i * 80}>
+                  <div className="flex items-start gap-6 md:gap-10 px-6 md:px-10 py-7 bg-clinic-gray-mid border border-clinic-gray-light">
+                    <span className="font-serif text-2xl text-clinic-gold/20 tracking-wider w-8 flex-shrink-0 text-right mt-1">
+                      {String(i+1).padStart(2,"0")}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[9px] tracking-[0.4em] text-clinic-gold mb-1 font-sans">{item.en}</p>
+                      <h3 className="font-serif font-light text-base md:text-lg tracking-[0.1em] text-clinic-offwhite">
+                        {item.label}
+                      </h3>
+                      <p className="text-xs text-clinic-offwhite/60 mt-1.5 tracking-wide leading-relaxed hidden md:block">{item.desc}</p>
+                    </div>
                   </div>
-                  <span className="text-clinic-gold/30 group-hover:text-clinic-gold transition-colors duration-300 text-lg flex-shrink-0">→</span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal className="text-center mt-12">
-            <Link href="/medication" className="inline-flex items-center gap-2 text-xs text-clinic-gold/70 hover:text-clinic-gold tracking-[0.3em] transition-colors border-b border-clinic-gold/30 hover:border-clinic-gold pb-1">
-              使用する薬の詳しい説明を見る
-            </Link>
+                </Reveal>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>
