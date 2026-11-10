@@ -59,6 +59,57 @@
   .hero-kenburns { animation: none; }
 }
 
+/* ─── Page load animation ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes lineExpand {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.hero-eyebrow {
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+.hero-line {
+  animation: lineExpand 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.6s;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+.hero-title {
+  animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.8s;
+  opacity: 0;
+}
+.hero-body {
+  animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 1.1s;
+  opacity: 0;
+}
+.hero-cta {
+  animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 1.4s;
+  opacity: 0;
+}
+.hero-badges {
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1.8s;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow, .hero-line, .hero-title, .hero-body, .hero-cta, .hero-badges {
+    animation: none; opacity: 1; transform: none;
+  }
+}
+
 /* ─── Scroll reveal ─── */
 .reveal-block {
   opacity: 0;

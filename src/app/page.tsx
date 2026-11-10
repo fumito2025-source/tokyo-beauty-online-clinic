@@ -184,16 +184,16 @@ export default function HomePage() {
         }} />
         <div className="relative z-10 w-full max-w-7xl mx-auto px-14 py-24">
           <div className="max-w-xl">
-            <p className="text-[11px] tracking-[0.5em] text-clinic-gold mb-5 font-sans">MEDICAL DIET, BACKED BY DOCTOR.</p>
-            <div className="w-10 h-px bg-clinic-gold mb-8" />
-            <h1 className="font-serif font-medium text-7xl leading-tight tracking-[0.03em] text-clinic-offwhite mb-7">
+            <p className="hero-eyebrow text-[11px] tracking-[0.5em] text-clinic-gold mb-5 font-sans">MEDICAL DIET, BACKED BY DOCTOR.</p>
+            <div className="hero-line w-10 h-px bg-clinic-gold mb-8" />
+            <h1 className="hero-title font-serif font-medium text-7xl leading-tight tracking-[0.03em] text-clinic-offwhite mb-7">
               本気の人だけに。
             </h1>
-            <p className="text-xl text-clinic-offwhite/90 font-medium leading-[1.9] tracking-wide mb-10">
+            <p className="hero-body text-xl text-clinic-offwhite/90 font-medium leading-[1.9] tracking-wide mb-10">
               医師とカウンセラーが二人三脚でサポートする、<br />
               薬代込みのオンライン完結の医療ダイエット。
             </p>
-            <div className="flex gap-4 flex-wrap">
+            <div className="hero-cta flex gap-4 flex-wrap">
               <Link href="https://line.me/R/ti/p/@555glibw" className="inline-flex items-center gap-2 px-10 py-4 text-sm tracking-[0.15em] font-sans text-white hover:opacity-85 transition-opacity" style={{backgroundColor: "#06C755"}}>
                 LINEで無料相談する <span>›</span>
               </Link>
@@ -201,7 +201,7 @@ export default function HomePage() {
                 プランを見る <span>›</span>
               </Link>
             </div>
-            <div className="flex items-center gap-6 mt-10">
+            <div className="hero-badges flex items-center gap-6 mt-10">
               {["医師が継続担当", "週1回カウンセラー", "薬代込み・オンライン完結"].map((item, i) => (
                 <span key={item} className="flex items-center gap-2 text-xs text-clinic-offwhite/65 tracking-wider font-sans">
                   {i > 0 && <span className="text-clinic-gold/40">|</span>}
@@ -306,34 +306,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── LINEで完結 ──────────────────────────────── */}
+      {/* ─── 専用サイトで記録 ────────────────────────────── */}
       <section className="py-20 md:py-28 bg-clinic-gray-dark border-b border-clinic-gray-light">
         <Reveal className="max-w-4xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
             <div className="flex-shrink-0">
-              <div className="w-20 h-20 rounded-2xl bg-[#06C755]/15 border border-[#06C755]/40 flex items-center justify-center">
+              <div className="w-20 h-20 rounded-2xl bg-clinic-gold/10 border border-clinic-gold/30 flex items-center justify-center">
                 <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
-                  <path d="M20 4C11.163 4 4 10.268 4 18c0 4.418 2.343 8.372 6 11.07V34l5.333-2.933C16.82 31.68 18.38 32 20 32c8.837 0 16-6.268 16-14S28.837 4 20 4z" fill="#06C755" opacity=".25"/>
-                  <path d="M20 4C11.163 4 4 10.268 4 18c0 4.418 2.343 8.372 6 11.07V34l5.333-2.933C16.82 31.68 18.38 32 20 32c8.837 0 16-6.268 16-14S28.837 4 20 4z" stroke="#06C755" strokeWidth="1.5"/>
-                  <circle cx="13" cy="18" r="1.5" fill="#06C755"/>
-                  <circle cx="20" cy="18" r="1.5" fill="#06C755"/>
-                  <circle cx="27" cy="18" r="1.5" fill="#06C755"/>
+                  <rect x="8" y="6" width="24" height="28" rx="2" stroke="#B89050" strokeWidth="1.2"/>
+                  <line x1="13" y1="13" x2="27" y2="13" stroke="#B89050" strokeWidth="1"/>
+                  <line x1="13" y1="19" x2="27" y2="19" stroke="#B89050" strokeWidth="1"/>
+                  <line x1="13" y1="25" x2="22" y2="25" stroke="#B89050" strokeWidth="1"/>
                 </svg>
               </div>
             </div>
 
             <div className="flex-1 text-center md:text-left">
-              <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-3 font-sans">DAILY LINE SUPPORT</p>
+              <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-3 font-sans">DAILY TRACKING</p>
               <h2 className="font-serif font-light text-2xl md:text-3xl tracking-[0.15em] text-clinic-offwhite mb-4">
-                毎日のフォローも、LINEで。
+                毎日の記録は、専用サイトで。
               </h2>
               <p className="text-clinic-offwhite/80 text-sm leading-relaxed tracking-wide mb-6">
-                専用フォーマットで体重・食事・薬の服用を毎日LINE報告。<br />
-                カウンセラーが確認し、週1回の面談で軌道修正します。<br className="hidden md:block" />
-                アプリ不要、登録不要。LINEだけで全て完結します。
+                スマートフォンのホーム画面に追加するだけで使える専用サイト。<br />
+                体重・食事写真・体調を毎日記録します。<br className="hidden md:block" />
+                カウンセラーが確認し、週1回の面談で軌道修正します。
               </p>
               <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                {["体重・食事の記録", "カウンセラー面談", "医師の定期診察", "薬の処方・配送"].map(tag => (
+                {["体重・BMI記録", "食事写真の管理", "カウンセラー面談", "医師の定期診察"].map(tag => (
                   <span key={tag} className="text-xs text-clinic-offwhite/82 border border-clinic-gray-light px-3 py-1.5 tracking-wider">
                     ✓ {tag}
                   </span>
