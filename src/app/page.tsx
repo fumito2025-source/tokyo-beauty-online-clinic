@@ -104,7 +104,7 @@ const STEPS = [
   { n: "01", title: "LINEで無料相談",       desc: "まずはLINEから気軽にご相談ください。カウンセラーが丁寧にお話を伺います。" },
   { n: "02", title: "カウンセリング面談",    desc: "現在の生活習慣・目標・お悩みをじっくりヒアリング。プログラム内容をご説明します。" },
   { n: "03", title: "医師の初回診察",        desc: "体重・健康状態・服薬歴を確認し、医師が治療方針と処方を決定します。" },
-  { n: "04", title: "プログラム開始",        desc: "薬の処方・配送＋週1カウンセラー面談＋毎日LINEフォローが一斉にスタート。" },
+  { n: "04", title: "プログラム開始",        desc: "薬の処方・配送＋週1カウンセラー面談。体調の変化や不安はいつでもLINEで相談できます。" },
 ]
 
 export default function HomePage() {
@@ -363,12 +363,12 @@ export default function HomePage() {
               <Reveal key={s.n} delay={i * 100}>
                 <div className="relative flex md:flex-col items-start md:items-center gap-5 md:gap-0 p-6 md:px-6 md:py-0 md:text-center">
                   {i < STEPS.length - 1 && (
-                    <div className="hidden md:block absolute top-6 left-[calc(50%+28px)] right-0 h-px bg-gradient-to-r from-clinic-gold/25 to-transparent" />
+                    <div className="step-connector revealed hidden md:block absolute top-6 left-[calc(50%+28px)] right-0 h-px bg-gradient-to-r from-clinic-gold/25 to-transparent" style={{transitionDelay: `${i * 150 + 300}ms`}} />
                   )}
                   {i < STEPS.length - 1 && (
                     <div className="md:hidden absolute left-11 top-16 bottom-0 w-px bg-gradient-to-b from-clinic-gold/25 to-transparent" />
                   )}
-                  <div className="w-12 h-12 border border-clinic-gold/40 bg-clinic-black flex items-center justify-center flex-shrink-0 relative z-10 md:mx-auto md:mb-6">
+                  <div className="step-number w-12 h-12 border border-clinic-gold/40 bg-clinic-black flex items-center justify-center flex-shrink-0 relative z-10 md:mx-auto md:mb-6">
                     <span className="font-serif text-xs text-clinic-gold tracking-wider">{s.n}</span>
                   </div>
                   <div>

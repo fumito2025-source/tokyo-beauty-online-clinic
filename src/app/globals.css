@@ -125,6 +125,29 @@
   .reveal-block { opacity: 1; transform: none; transition: none; }
 }
 
+/* ─── Step connector line animation ─── */
+@keyframes lineGrow {
+  from { width: 0; opacity: 0; }
+  to   { width: 100%; opacity: 1; }
+}
+.step-connector {
+  width: 0;
+  opacity: 0;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.4s ease;
+}
+.step-connector.revealed {
+  width: 100%;
+  opacity: 1;
+}
+.step-number {
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+.step-number:hover {
+  border-color: #B89050;
+  background: rgba(184,144,80,0.08);
+}
+
 /* ─── Feature card hover line ─── */
 .feature-card {
   position: relative;
