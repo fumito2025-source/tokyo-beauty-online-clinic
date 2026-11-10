@@ -281,7 +281,7 @@ export default function HomePage() {
             </p>
             <div className="space-y-px">
               {[
-                { en: "DOCTOR", label: "医師が月1回ビデオ診察", desc: "処方・経過をずっと同じ医師が担当します。診察に基づいてGLP-1製剤など、あなたに合った薬を処方します。" },
+                { en: "DOCTOR", label: "医師が月1回ビデオ診察", desc: "処方・経過をずっと同じ医師が担当します。" },
                 { en: "COUNSELOR", label: "カウンセラーが週1回面談＋毎日食事コメント", desc: "食事写真を送るだけ。生活習慣を継続サポートします。" },
                 { en: "TRACKING", label: "体重・食事・体調を専用ツールで記録・管理", desc: "BMI自動計算、副作用チェックなど一元管理できます。" },
                 { en: "LINE", label: "体調の変化や不安はLINEでいつでも相談", desc: "気になることがあればすぐに連絡できます。" },
