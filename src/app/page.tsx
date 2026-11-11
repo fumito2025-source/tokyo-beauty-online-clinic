@@ -392,6 +392,11 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
+          <Reveal className="text-center mt-12">
+            <Link href="/plans" className="inline-flex items-center gap-2 text-xs text-clinic-gold/70 hover:text-clinic-gold tracking-[0.3em] transition-colors border-b border-clinic-gold/30 hover:border-clinic-gold pb-1 font-sans">
+              プランと料金を確認する →
+            </Link>
+          </Reveal>
         </div>
       </section>
 
@@ -410,16 +415,17 @@ export default function HomePage() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/reservation"
-              className="inline-flex items-center justify-center gap-3 bg-clinic-gold text-white px-10 py-4 text-xs tracking-[0.2em] font-sans hover:opacity-85 transition-opacity"
+              href="https://line.me/R/ti/p/@555glibw"
+              className="inline-flex items-center justify-center gap-3 text-white px-10 py-4 text-xs tracking-[0.2em] font-sans hover:opacity-85 transition-opacity"
+              style={{backgroundColor: "#06C755"}}
             >
               LINEで無料相談 →
             </Link>
             <Link
-              href="/faq"
+              href="/plans"
               className="inline-flex items-center justify-center border border-clinic-gold/50 text-clinic-gold px-8 py-4 text-xs tracking-[0.2em] font-sans hover:border-clinic-gold hover:bg-clinic-gold/10 transition-colors"
             >
-              よくある質問
+              プランと料金を確認する
             </Link>
           </div>
 
