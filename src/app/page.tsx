@@ -272,7 +272,7 @@ export default function HomePage() {
           <p className="font-serif font-light text-base md:text-lg tracking-[0.1em] text-clinic-offwhite leading-relaxed">
             医療ダイエットは痩せることではなく、健康的な体重に近づくことが目的です。<br className="hidden md:block" />
             そのため本プログラムはBMI 18以上の方を対象としています。<br className="hidden md:block" />
-            処方する薬は診察のうえ、医師が一人ひとりに合わせて決定します。
+            処方する薬は診察のうえ、医師が一人一人に合わせて決定します。
           </p>
         </Reveal>
       </section>
