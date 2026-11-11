@@ -31,7 +31,7 @@ const PLANS = [
     desc: "本体3ヶ月を一括払い。割引価格で本気で取り組む方に。",
     oral: { price: "¥198,000", unit: "/ 3ヶ月（税込）" },
     injection: { price: "¥298,000", unit: "/ 3ヶ月（税込）" },
-    note: "月払いと比べて約5〜7%割引",
+    note: null,
     recommended: true,
   },
 ]
