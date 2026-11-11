@@ -129,11 +129,13 @@ export default function PlansPage() {
               <p className="text-[9px] tracking-[0.4em] text-clinic-gold/70 font-sans mb-1">内服コース</p>
               <p className="font-serif text-2xl text-clinic-offwhite">¥39,800</p>
               <p className="text-xs text-clinic-offwhite/50 mt-1">/ 1ヶ月（税込）</p>
+              <p className="text-xs text-clinic-offwhite/50">薬代込み</p>
             </div>
             <div>
               <p className="text-[9px] tracking-[0.4em] text-clinic-gold/70 font-sans mb-1">注射コース</p>
               <p className="font-serif text-2xl text-clinic-offwhite">¥49,800</p>
-              <p className="text-xs text-clinic-offwhite/50 mt-1">/ 1ヶ月（税込・薬代込み）</p>
+              <p className="text-xs text-clinic-offwhite/50 mt-1">/ 1ヶ月（税込）</p>
+              <p className="text-xs text-clinic-offwhite/50">薬代込み</p>
             </div>
           </div>
         </div>
