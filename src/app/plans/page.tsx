@@ -2,18 +2,38 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "プログラム・料金 | 東京美容オンラインクリニック",
-  description: "東京美容オンラインクリニックの医療ダイエットプログラムの内容と料金をご案内します。",
+  title: "プランと料金 | 東京美容オンラインクリニック",
+  description: "東京美容オンラインクリニックの医療ダイエットプログラムのプランと料金をご案内します。",
 }
 
 const INCLUDES = [
-  { label: "カウンセリング面談（初回）", detail: "生活習慣・目標・お悩みをじっくりヒアリング。プログラム内容をご説明します。" },
-  { label: "医師の初回診察", detail: "体重・健康状態・服薬歴を確認し、個人目標BMIと治療方針を決定します。" },
-  { label: "医師の定期診察（月2回）", detail: "2週間に1回、同じ医師が経過を確認。薬の用量調整も行います。" },
-  { label: "女性カウンセラーによる週1回面談", detail: "食事内容・体重推移・生活習慣をもとに次週の目標を設定します。" },
-  { label: "毎日LINEフォロー", detail: "専用フォーマットで体重・食事・薬を毎日記録。カウンセラーが確認します。" },
-  { label: "医療用製剤の処方・配送（薬代込み）", detail: "マンジャロ・リベルサス・補助薬など、医師の判断により処方。薬代・配送料込み。" },
-  { label: "24時間LINEでの体調相談", detail: "急な体調変化や不安点はいつでもチャットでご連絡ください。" },
+  "医師による初回診察・定期診察（月1回）",
+  "カウンセラーによる週1回面談",
+  "医療用製剤の処方・薬代・配送料",
+  "体調変化・不安のLINE相談",
+  "専用サイトでの体重・食事管理",
+]
+
+const PLANS = [
+  {
+    id: "monthly",
+    period: "月払い",
+    en: "MONTHLY",
+    desc: "1ヶ月ずつ継続。まず試してみたい方に。",
+    oral: { price: "¥69,800", unit: "/ 月（税込）" },
+    injection: { price: "¥104,800", unit: "/ 月（税込）" },
+    note: null,
+  },
+  {
+    id: "bulk",
+    period: "3ヶ月一括",
+    en: "3-MONTH PROGRAM",
+    desc: "本体3ヶ月を一括払い。割引価格で本気で取り組む方に。",
+    oral: { price: "¥198,000", unit: "/ 3ヶ月（税込）" },
+    injection: { price: "¥298,000", unit: "/ 3ヶ月（税込）" },
+    note: "月払いと比べて約5〜7%割引",
+    recommended: true,
+  },
 ]
 
 export default function PlansPage() {
@@ -25,130 +45,115 @@ export default function PlansPage() {
           <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-4 font-sans">PROGRAM & PRICE</p>
           <div className="w-8 h-px bg-clinic-gold mx-auto mb-6" />
           <h1 className="font-serif font-light text-3xl md:text-4xl tracking-[0.2em] text-clinic-offwhite">
-            プログラムと料金
+            プランと料金
           </h1>
+          <p className="text-xs text-clinic-offwhite/55 mt-6 tracking-wider">
+            ※ 金額はすべて税込・薬代・配送料込みです。
+          </p>
         </div>
       </div>
 
-      {/* ─── MAIN PLAN ─── */}
-      <div className="max-w-3xl mx-auto px-6 py-20 md:py-28">
+      <div className="max-w-4xl mx-auto px-6 py-20 md:py-28">
 
-        {/* Monitor price banner */}
-        <div className="bg-clinic-gold/10 border border-clinic-gold/60 px-8 py-5 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div>
-            <p className="text-[10px] tracking-[0.4em] text-clinic-gold font-sans mb-1">MONITOR PRICE — 現在受付中</p>
-            <p className="text-sm text-clinic-offwhite/90 tracking-wide">モニター特別価格でご参加いただける方を若干名募集しています。</p>
-          </div>
-          <Link href="/reservation" className="flex-shrink-0 inline-flex items-center gap-2 bg-clinic-gold text-white px-6 py-2.5 text-xs tracking-[0.15em] font-sans hover:opacity-85 transition-opacity">
-            LINEで相談する →
-          </Link>
+        {/* ─── PLAN CARDS ─── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-clinic-gray-light mb-16">
+          {PLANS.map((plan) => (
+            <div key={plan.id} className={`relative bg-clinic-gray-dark p-10 md:p-12 ${plan.recommended ? "border border-clinic-gold/50" : ""}`}>
+              {plan.recommended && (
+                <p className="absolute top-4 right-4 text-[9px] tracking-[0.3em] text-clinic-gold border border-clinic-gold/50 px-3 py-1 font-sans">
+                  おすすめ
+                </p>
+              )}
+              <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-3 font-sans">{plan.en}</p>
+              <h2 className="font-serif font-light text-xl tracking-[0.15em] text-clinic-offwhite mb-2">
+                {plan.period}
+              </h2>
+              <p className="text-xs text-clinic-offwhite/55 tracking-wide mb-8 leading-relaxed">{plan.desc}</p>
+
+              <div className="w-full h-px bg-clinic-gray-light mb-8" />
+
+              {/* 内服 */}
+              <div className="mb-6">
+                <p className="text-[9px] tracking-[0.4em] text-clinic-gold/70 font-sans mb-2">内服コース</p>
+                <div className="flex items-end gap-2">
+                  <span className="font-serif text-3xl text-clinic-offwhite">{plan.oral.price}</span>
+                  <span className="text-xs text-clinic-offwhite/50 mb-1 tracking-wide">{plan.oral.unit}</span>
+                </div>
+              </div>
+
+              {/* 注射 */}
+              <div className="mb-6">
+                <p className="text-[9px] tracking-[0.4em] text-clinic-gold/70 font-sans mb-2">注射コース</p>
+                <div className="flex items-end gap-2">
+                  <span className="font-serif text-3xl text-clinic-offwhite">{plan.injection.price}</span>
+                  <span className="text-xs text-clinic-offwhite/50 mb-1 tracking-wide">{plan.injection.unit}</span>
+                </div>
+              </div>
+
+              {plan.note && (
+                <p className="text-[10px] text-clinic-gold/60 tracking-wide mt-2">{plan.note}</p>
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* Price card */}
-        <div className="border border-clinic-gold/50 bg-clinic-gray-dark p-10 md:p-14 mb-14">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-            <div>
-              <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-3 font-sans">MONTHLY PROGRAM</p>
-              <h2 className="font-serif font-light text-2xl tracking-[0.15em] text-clinic-offwhite mb-2">
-                医療ダイエット月額プログラム
-              </h2>
-              <p className="text-xs text-clinic-offwhite/60 tracking-wide">月額制（1ヶ月単位で継続）・薬代・配送料込み</p>
-            </div>
-            <div className="text-right">
-              <p className="text-[10px] tracking-[0.3em] text-clinic-gold/70 font-sans mb-1">モニター価格（税込）</p>
-              <p className="font-serif text-4xl md:text-5xl text-clinic-offwhite tracking-tight">¥99,000</p>
-              <p className="text-xs text-clinic-offwhite/50 mt-1 tracking-wide line-through">通常 ¥198,000</p>
-              <p className="text-[10px] text-clinic-gold/70 mt-1 tracking-wide">薬代・配送料込み</p>
-            </div>
-          </div>
-
-          <div className="w-full h-px bg-clinic-gray-light mb-10" />
-
-          {/* Includes */}
-          <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-6 font-sans">INCLUDES</p>
-          <ul className="space-y-5">
+        {/* ─── INCLUDES ─── */}
+        <div className="border border-clinic-gray-light bg-clinic-gray-mid p-10 md:p-12 mb-16">
+          <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-6 font-sans">INCLUDES — 両プラン共通</p>
+          <ul className="space-y-4">
             {INCLUDES.map((item) => (
-              <li key={item.label} className="flex gap-4">
-                <span className="text-clinic-gold mt-0.5 flex-shrink-0 text-sm">✓</span>
-                <div>
-                  <p className="text-sm text-clinic-offwhite tracking-wide font-medium">{item.label}</p>
-                  <p className="text-xs text-clinic-offwhite/60 mt-1 leading-relaxed tracking-wide">{item.detail}</p>
-                </div>
+              <li key={item} className="flex gap-4 items-start">
+                <span className="text-clinic-gold flex-shrink-0 text-sm mt-0.5">✓</span>
+                <span className="text-sm text-clinic-offwhite/80 tracking-wide leading-relaxed">{item}</span>
               </li>
             ))}
           </ul>
-        </div>
-
-        {/* Medication included note */}
-        <div className="border border-clinic-gray-light bg-clinic-gray-mid p-8 mb-14">
-          <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">INCLUDED MEDICATION</p>
-          <p className="text-sm text-clinic-offwhite/80 leading-relaxed tracking-wide">
-            月額には以下の医療用製剤の薬代・配送料が含まれます。<br />
-            使用する製剤・用量は医師の診察後に決定します。
-          </p>
-          <div className="mt-5 space-y-2">
-            {[
-              ["マンジャロ®（チルゼパチド）", "月額に含む"],
-              ["リベルサス®（セマグルチド経口）", "月額に含む"],
-              ["大建中湯・便秘系補助薬", "月額に含む（必要時）"],
-              ["体調不良時の追加内服", "月額に含む（医師判断）"],
-            ].map(([name, price]) => (
-              <div key={name} className="flex justify-between items-center border-b border-clinic-gray-light pb-2 last:border-0">
-                <span className="text-xs text-clinic-offwhite/80 tracking-wide">{name}</span>
-                <span className="text-xs text-clinic-gold tracking-wide">{price}</span>
-              </div>
-            ))}
-          </div>
-          <p className="text-[11px] text-clinic-offwhite/40 mt-4 leading-relaxed">
-            ※ 薬価は仕入れ状況により変動することがあります。<br />
+          <p className="text-[11px] text-clinic-offwhite/35 mt-8 leading-relaxed tracking-wide">
+            ※ 内服・注射の選択および処方する薬の種類・用量は、医師の診察のうえ決定します。<br />
             ※ 効果には個人差があります。特定の結果を保証するものではありません。
           </p>
         </div>
 
-        {/* Graduation & re-enrollment */}
-        <div className="border border-clinic-gray-light bg-clinic-gray-mid p-8 mb-14 space-y-8">
-          <div>
-            <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">PROGRAM COMPLETION</p>
-            <h3 className="font-serif font-light text-base tracking-[0.15em] text-clinic-offwhite mb-3">プログラム卒業の基準</h3>
-            <p className="text-sm text-clinic-offwhite/75 leading-relaxed tracking-wide">
-              医師と相談して設定した個人目標BMIに達した時点で、プログラムを卒業となります。<br />
-              なお、BMI 18.5以下は健康上の理由からプログラムを終了します。
-            </p>
-          </div>
-          <div className="w-full h-px bg-clinic-gray-light" />
-          <div>
-            <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">MONITOR PERIOD</p>
-            <h3 className="font-serif font-light text-base tracking-[0.15em] text-clinic-offwhite mb-3">モニター価格について</h3>
-            <p className="text-sm text-clinic-offwhite/75 leading-relaxed tracking-wide">
-              モニター価格（¥99,000/月）は、ご契約日から<strong className="text-clinic-offwhite font-medium">3ヶ月間</strong>適用されます。<br />
-              4ヶ月目以降は通常価格（¥198,000/月）となります。
-            </p>
-          </div>
-          <div className="w-full h-px bg-clinic-gray-light" />
-          <div>
-            <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">RE-ENROLLMENT</p>
-            <h3 className="font-serif font-light text-base tracking-[0.15em] text-clinic-offwhite mb-3">卒業後のリバウンド対応</h3>
-            <p className="text-sm text-clinic-offwhite/75 leading-relaxed tracking-wide">
-              プログラム卒業後にリバウンドを感じた際は、いつでもLINEよりご連絡ください。<br />
-              再入会は通常価格（¥198,000/月・薬代込み）でお受けします。
-            </p>
+        {/* ─── AFTERCARE ─── */}
+        <div className="border border-clinic-gray-light bg-clinic-gray-mid p-10 md:p-12 mb-16">
+          <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-4 font-sans">AFTERCARE</p>
+          <h3 className="font-serif font-light text-base tracking-[0.15em] text-clinic-offwhite mb-3">
+            アフターケア（任意・別途）
+          </h3>
+          <p className="text-sm text-clinic-offwhite/75 leading-relaxed tracking-wide">
+            3ヶ月プログラム卒業後、希望される方には1ヶ月のアフターケアをご用意しています。<br />
+            リバウンド防止のサポートと薬の段階的な減量を行います。
+          </p>
+          <div className="mt-6 flex gap-8">
+            <div>
+              <p className="text-[9px] tracking-[0.4em] text-clinic-gold/70 font-sans mb-1">内服コース</p>
+              <p className="font-serif text-2xl text-clinic-offwhite">¥39,800</p>
+              <p className="text-xs text-clinic-offwhite/50 mt-1">/ 1ヶ月（税込）</p>
+            </div>
+            <div>
+              <p className="text-[9px] tracking-[0.4em] text-clinic-gold/70 font-sans mb-1">注射コース</p>
+              <p className="font-serif text-2xl text-clinic-offwhite">¥49,800</p>
+              <p className="text-xs text-clinic-offwhite/50 mt-1">/ 1ヶ月・薬別（税込）</p>
+            </div>
           </div>
         </div>
 
-        {/* CTA */}
+        {/* ─── CTA ─── */}
         <div className="text-center">
           <p className="text-xs text-clinic-offwhite/60 tracking-wider mb-8 leading-relaxed">
-            まずはLINEで無料相談をお申し込みください。<br />
-            担当スタッフが詳しくご説明します。
+            内服・注射の選択はカウンセリングと医師の診察を経て決まります。<br />
+            まずはLINEでお気軽にご相談ください。初回カウンセリングは無料です。
           </p>
           <Link
-            href="/reservation"
-            className="inline-flex items-center gap-3 bg-clinic-gold text-white px-12 py-4 text-xs tracking-[0.2em] font-sans hover:opacity-85 transition-opacity"
+            href="https://line.me/R/ti/p/@555glibw"
+            className="inline-flex items-center gap-3 text-white px-12 py-4 text-xs tracking-[0.2em] font-sans hover:opacity-85 transition-opacity"
+            style={{backgroundColor: "#06C755"}}
           >
             LINEで無料相談 →
           </Link>
-          <p className="text-[11px] text-clinic-offwhite/35 mt-6 tracking-wide">
-            ※ 本サービスは自由診療のみです。健康保険は適用されません。
+          <p className="text-[11px] text-clinic-offwhite/35 mt-8 tracking-wide leading-relaxed">
+            ※ 本サービスは自由診療のみです。健康保険は適用されません。<br />
+            ※ 医師が必要と判断した場合、対面での診察をお願いすることがございます。
           </p>
         </div>
       </div>
