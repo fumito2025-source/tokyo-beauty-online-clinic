@@ -264,6 +264,19 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── 対象となる方 ────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-clinic-gray-dark border-b border-clinic-gray-light">
+        <Reveal className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-3 font-sans">FOR WHOM</p>
+          <div className="w-6 h-px bg-clinic-gold mx-auto mb-8" />
+          <p className="font-serif font-light text-base md:text-lg tracking-[0.1em] text-clinic-offwhite leading-relaxed">
+            医療ダイエットは痩せることではなく、健康的な体重に近づくことが目的です。<br className="hidden md:block" />
+            そのため本プログラムはBMI 18以上の方を対象としています。<br className="hidden md:block" />
+            処方する薬は診察のうえ、医師が一人ひとりに合わせて決定します。
+          </p>
+        </Reveal>
+      </section>
+
       {/* ─── プログラムの内容 ──────────────────────────── */}
       <section className="py-28 md:py-36 bg-clinic-black border-b border-clinic-gray-light">
         <div className="max-w-4xl mx-auto px-6">
