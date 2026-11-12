@@ -1,6 +1,29 @@
-export const metadata = {
-  title: "使用する薬について | 東京美容オンラインクリニック",
-  description: "当クリニックの医療ダイエットプログラムで使用する薬の種類・特徴・注意点をご説明します。",
+"use client"
+import Link from "next/link"
+import { useEffect, useRef } from "react"
+
+function useReveal(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add("revealed"); observer.disconnect() } },
+      { threshold }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [threshold])
+  return ref
+}
+
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const ref = useReveal()
+  return (
+    <div ref={ref} className={`reveal-block ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  )
 }
 
 const DRUGS = [
@@ -36,73 +59,94 @@ const DRUGS = [
   },
 ]
 
+const NOTES = [
+  "本ページに記載の薬はすべて医療用医薬品です。医師の処方なしに購入・使用することはできません。",
+  "処方する薬・用量は医師の診察結果により決定します。必ずしも希望の薬が処方されるとは限りません。",
+  "副作用（悪心・嘔吐・下痢等）が現れる場合があります。気になる症状はすぐにLINEでご連絡ください。",
+  "妊娠中・授乳中の方、重篤な疾患をお持ちの方は処方できない場合があります。",
+  "効果には個人差があります。特定の体重減少を保証するものではありません。",
+  "本サービスは自由診療です。健康保険は適用されません。",
+]
+
 export default function MedicationPage() {
   return (
     <div className="min-h-screen bg-clinic-black">
       {/* ─── PAGE HEADER ─── */}
       <div className="border-b border-clinic-gray-light pt-28 pb-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+        <Reveal className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-4 font-sans">MEDICATION</p>
           <div className="w-8 h-px bg-clinic-gold mx-auto mb-6" />
           <h1 className="font-serif font-light text-3xl md:text-4xl tracking-[0.2em] text-clinic-offwhite">
-            使用する薬について
+            処方薬について
           </h1>
           <p className="text-sm text-clinic-offwhite/60 mt-6 tracking-wide leading-relaxed max-w-xl mx-auto">
             当プログラムで使用する薬はすべて医療用医薬品です。<br />
             処方は医師の診察・判断のもとに行います。
           </p>
-        </div>
+        </Reveal>
       </div>
 
       {/* ─── DRUG LIST ─── */}
       <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 space-y-16">
-        {DRUGS.map((cat) => (
+        {DRUGS.map((cat, ci) => (
           <section key={cat.id} id={cat.id}>
-            <p className="text-[9px] tracking-[0.4em] text-clinic-gold mb-2 font-sans">{cat.en}</p>
-            <h2 className="font-serif font-light text-xl tracking-[0.15em] text-clinic-offwhite mb-4">{cat.label}</h2>
-            <p className="text-sm text-clinic-offwhite/70 leading-relaxed tracking-wide mb-8">{cat.description}</p>
+            <Reveal delay={ci * 80}>
+              <p className="text-[9px] tracking-[0.4em] text-clinic-gold mb-2 font-sans">{cat.en}</p>
+              <h2 className="font-serif font-light text-xl tracking-[0.15em] text-clinic-offwhite mb-4">{cat.label}</h2>
+              <p className="text-sm text-clinic-offwhite/70 leading-relaxed tracking-wide mb-8">{cat.description}</p>
+            </Reveal>
 
             <div className="space-y-px bg-clinic-gray-light">
-              {cat.drugs.map((d) => (
-                <div key={d.name} className="bg-clinic-gray-mid px-8 py-7">
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-3">
-                    <h3 className="font-serif text-base text-clinic-offwhite tracking-wide">{d.name}</h3>
-                    <span className="text-[11px] text-clinic-offwhite/40 tracking-wider flex-shrink-0">{d.maker}</span>
+              {cat.drugs.map((d, di) => (
+                <Reveal key={d.name} delay={ci * 80 + di * 60 + 100}>
+                  <div className="bg-clinic-gray-mid px-8 py-7">
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-3">
+                      <h3 className="font-serif text-base text-clinic-offwhite tracking-wide">{d.name}</h3>
+                      <span className="text-[11px] text-clinic-offwhite/40 tracking-wider flex-shrink-0">{d.maker}</span>
+                    </div>
+                    <p className="text-sm text-clinic-offwhite/70 leading-relaxed tracking-wide mb-3">{d.detail}</p>
+                    {d.note && (
+                      <p className="text-xs text-clinic-gold/80 tracking-wide">{d.note}</p>
+                    )}
                   </div>
-                  <p className="text-sm text-clinic-offwhite/70 leading-relaxed tracking-wide mb-3">{d.detail}</p>
-                  {d.note && (
-                    <p className="text-xs text-clinic-gold/80 tracking-wide">{d.note}</p>
-                  )}
-                </div>
+                </Reveal>
               ))}
             </div>
 
-            <div className="mt-4 flex gap-3 items-start">
-              <span className="text-clinic-gold/60 text-xs mt-0.5 flex-shrink-0">⚠</span>
-              <p className="text-xs text-clinic-offwhite/50 leading-relaxed tracking-wide">{cat.caution}</p>
-            </div>
+            <Reveal delay={ci * 80 + 160}>
+              <div className="mt-4 flex gap-3 items-start">
+                <span className="text-clinic-gold/60 text-xs mt-0.5 flex-shrink-0">⚠</span>
+                <p className="text-xs text-clinic-offwhite/50 leading-relaxed tracking-wide">{cat.caution}</p>
+              </div>
+            </Reveal>
           </section>
         ))}
 
-        {/* General notes */}
-        <div className="border-t border-clinic-gray-light pt-12">
-          <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-6 font-sans">IMPORTANT NOTES</p>
-          <ul className="space-y-4">
-            {[
-              "本ページに記載の薬はすべて医療用医薬品です。医師の処方なしに購入・使用することはできません。",
-              "処方する薬・用量は医師の診察結果により決定します。必ずしも希望の薬が処方されるとは限りません。",
-              "副作用（悪心・嘔吐・下痢等）が現れる場合があります。気になる症状はすぐにLINEでご連絡ください。",
-              "妊娠中・授乳中の方、重篤な疾患をお持ちの方は処方できない場合があります。",
-              "効果には個人差があります。特定の体重減少を保証するものではありません。",
-              "本サービスは自由診療です。健康保険は適用されません。",
-            ].map((note, i) => (
-              <li key={i} className="flex gap-3 items-start">
-                <span className="text-clinic-gold/40 flex-shrink-0 text-xs mt-0.5">※</span>
-                <p className="text-xs text-clinic-offwhite/55 leading-relaxed tracking-wide">{note}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* ─── IMPORTANT NOTES ─── */}
+        <Reveal>
+          <div className="border-t border-clinic-gray-light pt-12">
+            <p className="text-[10px] tracking-[0.4em] text-clinic-gold mb-6 font-sans">IMPORTANT NOTES</p>
+            <ul className="space-y-4">
+              {NOTES.map((note, i) => (
+                <li key={i} className="flex gap-3 items-start">
+                  <span className="text-clinic-gold/40 flex-shrink-0 text-xs mt-0.5">※</span>
+                  <p className="text-xs text-clinic-offwhite/55 leading-relaxed tracking-wide">{note}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
+
+        {/* ─── CTA ─── */}
+        <Reveal className="text-center">
+          <Link
+            href="https://line.me/R/ti/p/@555glibw"
+            className="inline-flex items-center gap-3 text-white px-12 py-4 text-xs tracking-[0.2em] font-sans hover:opacity-85 transition-opacity"
+            style={{ backgroundColor: "#06C755" }}
+          >
+            LINEで無料相談 →
+          </Link>
+        </Reveal>
       </div>
     </div>
   )

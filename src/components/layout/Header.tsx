@@ -8,7 +8,7 @@ export function Header() {
   const nav = [
     { href: "/plans", label: "プログラム・料金" },
     { href: "/flow", label: "プログラムの流れ" },
-    { href: "/medication", label: "使用する薬" },
+    { href: "/medication", label: "処方薬について" },
     { href: "/faq", label: "よくある質問" },
     { href: "/contact", label: "お問い合わせ" },
   ]
