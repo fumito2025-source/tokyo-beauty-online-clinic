@@ -25,9 +25,9 @@ export function Footer() {
             </div>
             <div className="w-8 h-px bg-clinic-gold/40 mb-5" />
             <p className="text-xs text-white/55 leading-loose tracking-wide max-w-xs">
-              自由診療専門のオンラインクリニックです。<br />
-              美白・AGA・ニキビ・ダイエットなど、<br />
-              医師が丁寧にサポートします。
+              医療ダイエット専門のオンラインクリニックです。<br />
+              GLP-1製剤を用いた医師・カウンセラーによる<br />
+              3ヶ月サポートプログラムを提供しています。
             </p>
             <p className="text-[10px] text-white/40 mt-4 tracking-wide">
               ※本サービスは自由診療のみです。保険診療は行っておりません。
@@ -39,10 +39,10 @@ export function Footer() {
               <p className="text-[10px] tracking-[0.35em] text-clinic-gold/70 mb-5 font-sans">MENU</p>
               <ul className="space-y-3">
                 {[
-                  ["診療の流れ", "/flow"],
-                  ["薬の説明", "/medication"],
+                  ["プログラム・料金", "/plans"],
+                  ["プログラムの流れ", "/flow"],
+                  ["処方薬について", "/medication"],
                   ["よくある質問", "/faq"],
-                  ["お問い合わせ", "/contact"],
                 ].map(([label, href]) => (
                   <li key={href}>
                     <Link href={href} className="text-[11px] text-white/55 hover:text-clinic-gold transition-colors tracking-wide">{label}</Link>
@@ -69,9 +69,6 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
           <p className="text-[10px] text-white/40 tracking-wide">
             © {new Date().getFullYear()} Tokyo Beauty Online Clinic. All rights reserved.
-          </p>
-          <p className="text-[10px] text-white/40 tracking-wide">
-            医療機関コード: XXXXXXXX（都道府県知事許可）
           </p>
         </div>
       </div>
