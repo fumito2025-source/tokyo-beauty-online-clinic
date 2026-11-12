@@ -1,9 +1,29 @@
-import type { Metadata } from "next"
+"use client"
 import Link from "next/link"
+import { useEffect, useRef } from "react"
 
-export const metadata: Metadata = {
-  title: "よくある質問 | 東京美容オンラインクリニック",
-  description: "医療ダイエットプログラムに関するよくある質問をまとめました。",
+function useReveal(threshold = 0.1) {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add("revealed"); observer.disconnect() } },
+      { threshold }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [threshold])
+  return ref
+}
+
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const ref = useReveal()
+  return (
+    <div ref={ref} className={`reveal-block ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  )
 }
 
 const faqs = [
@@ -20,14 +40,14 @@ const faqs = [
   {
     category: "料金・支払いについて",
     items: [
-      { q: "月額に含まれるものは？", a: "カウンセリング面談・医師の初回診察・月2回の定期診察、週1回のカウンセラー面談、毎日のLINEフォロー、24時間相談対応、薬代・配送料がすべて含まれます。追加費用はありません。" },
+      { q: "月額に含まれるものは？", a: "カウンセリング面談・医師の初回診察・2週間に1回の定期診察、週1回のカウンセラー面談、体調相談のLINEサポート、薬代・配送料がすべて含まれます。追加費用はありません。" },
       { q: "卒業後にリバウンドしたらどうすればいいですか？", a: "卒業後でもLINEよりご連絡ください。再入会や薬の処方など、状況に応じた対応が可能です。一人で悩まずにご相談ください。" },
       { q: "健康保険は使えますか？", a: "本サービスは自由診療のため、健康保険は適用されません。全額自己負担となります。" },
       { q: "支払い方法は？", a: "クレジットカード・銀行振込に対応しています。詳細はカウンセリング時にご案内します。" },
     ],
   },
   {
-    category: "薬・治療について",
+    category: "処方薬について",
     items: [
       { q: "マンジャロとはどんな薬ですか？", a: "チルゼパチドを有効成分とするGIP/GLP-1デュアル受容体作動薬です。週1回の自己注射で、食欲抑制・血糖コントロールに作用します。処方は医師の判断のもとに行います。" },
       { q: "リベルサスとはどんな薬ですか？", a: "セマグルチドを有効成分とするGLP-1受容体作動薬の経口製剤です。毎日1錠を服用するタイプで、注射が難しい方の選択肢として処方します。注射薬に比べ効果は緩やかですが、内服のみで継続できます。処方は医師の診察・判断のもとに行います。" },
@@ -40,8 +60,8 @@ const faqs = [
     category: "サポート・フォローについて",
     items: [
       { q: "カウンセラーはどんな人ですか？", a: "女性カウンセラーが担当します。食事管理・体重管理を中心に、週1回のオンライン面談で生活習慣の改善をサポートします。" },
-      { q: "毎日LINEで報告するのは大変ですか？", a: "専用の報告フォーマットをご用意していますので、体重・食事・薬の3項目を入力するだけです。慣れると1〜2分で完了します。" },
-      { q: "仕事で忙しくても続けられますか？", a: "診察・面談はオンラインで、隙間時間に対応可能です。毎日の報告もスマートフォンから短時間で完了します。忙しい方こそ、プロにサポートを任せることをお勧めします。" },
+      { q: "毎日の記録は大変ですか？", a: "専用サイトから体重・食事・薬の3項目を入力するだけです。慣れると1〜2分で完了します。" },
+      { q: "仕事で忙しくても続けられますか？", a: "診察・面談はオンラインで、隙間時間に対応可能です。毎日の記録もスマートフォンから短時間で完了します。忙しい方こそ、プロにサポートを任せることをお勧めします。" },
     ],
   },
 ]
@@ -50,50 +70,55 @@ export default function FaqPage() {
   return (
     <div className="min-h-screen bg-clinic-black">
       <div className="border-b border-clinic-gray-light pt-28 pb-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+        <Reveal className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-[10px] tracking-[0.5em] text-clinic-gold mb-4 font-sans">FAQ</p>
           <div className="w-8 h-px bg-clinic-gold mx-auto mb-6" />
           <h1 className="font-serif font-light text-3xl md:text-4xl tracking-[0.2em] text-clinic-offwhite">
             よくある質問
           </h1>
-        </div>
+        </Reveal>
       </div>
 
       <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 space-y-16">
-        {faqs.map((section) => (
+        {faqs.map((section, si) => (
           <section key={section.category}>
-            <p className="text-[9px] tracking-[0.4em] text-clinic-gold mb-2 font-sans">CATEGORY</p>
-            <h2 className="font-serif font-light text-lg tracking-[0.2em] text-clinic-offwhite mb-8 border-b border-clinic-gray-light pb-4">
-              {section.category}
-            </h2>
+            <Reveal delay={si * 60}>
+              <p className="text-[9px] tracking-[0.4em] text-clinic-gold mb-2 font-sans">CATEGORY</p>
+              <h2 className="font-serif font-light text-lg tracking-[0.2em] text-clinic-offwhite mb-8 border-b border-clinic-gray-light pb-4">
+                {section.category}
+              </h2>
+            </Reveal>
             <div className="space-y-0">
               {section.items.map((item, i) => (
-                <div key={i} className="border-b border-clinic-gray-light py-7 last:border-b-0">
-                  <div className="flex gap-4 mb-3">
-                    <span className="font-serif text-clinic-gold text-sm flex-shrink-0 mt-0.5">Q.</span>
-                    <p className="text-sm text-clinic-offwhite tracking-wide font-medium leading-relaxed">{item.q}</p>
+                <Reveal key={i} delay={si * 60 + i * 50 + 80}>
+                  <div className="border-b border-clinic-gray-light py-7 last:border-b-0">
+                    <div className="flex gap-4 mb-3">
+                      <span className="font-serif text-clinic-gold text-sm flex-shrink-0 mt-0.5">Q.</span>
+                      <p className="text-sm text-clinic-offwhite tracking-wide font-medium leading-relaxed">{item.q}</p>
+                    </div>
+                    <div className="flex gap-4">
+                      <span className="font-serif text-clinic-offwhite/30 text-sm flex-shrink-0 mt-0.5">A.</span>
+                      <p className="text-sm text-clinic-offwhite/70 leading-relaxed tracking-wide">{item.a}</p>
+                    </div>
                   </div>
-                  <div className="flex gap-4">
-                    <span className="font-serif text-clinic-offwhite/30 text-sm flex-shrink-0 mt-0.5">A.</span>
-                    <p className="text-sm text-clinic-offwhite/70 leading-relaxed tracking-wide">{item.a}</p>
-                  </div>
-                </div>
+                </Reveal>
               ))}
             </div>
           </section>
         ))}
 
-        <div className="text-center pt-4">
+        <Reveal className="text-center pt-4">
           <p className="text-xs text-clinic-offwhite/55 tracking-wide mb-8 leading-relaxed">
             他にご不明な点はLINEでお気軽にご相談ください。
           </p>
           <Link
-            href="/reservation"
-            className="inline-flex items-center gap-3 bg-clinic-gold text-white px-12 py-4 text-xs tracking-[0.2em] font-sans hover:opacity-85 transition-opacity"
+            href="https://line.me/R/ti/p/@555glibw"
+            className="inline-flex items-center gap-3 text-white px-12 py-4 text-xs tracking-[0.2em] font-sans hover:opacity-85 transition-opacity"
+            style={{ backgroundColor: "#06C755" }}
           >
             LINEで無料相談 →
           </Link>
-        </div>
+        </Reveal>
       </div>
     </div>
   )
