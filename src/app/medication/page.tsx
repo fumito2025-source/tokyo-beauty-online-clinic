@@ -100,9 +100,8 @@ export default function MedicationPage() {
               {cat.drugs.map((d, di) => (
                 <Reveal key={d.name} delay={ci * 80 + di * 60 + 100}>
                   <div className="bg-clinic-gray-mid px-8 py-7">
-                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-3">
+                    <div className="mb-3">
                       <h3 className="font-serif text-base text-clinic-offwhite tracking-wide">{d.name}</h3>
-                      <span className="text-[11px] text-clinic-offwhite/40 tracking-wider flex-shrink-0">{d.maker}</span>
                     </div>
                     <p className="text-sm text-clinic-offwhite/70 leading-relaxed tracking-wide mb-3">{d.detail}</p>
                     {d.note && (
