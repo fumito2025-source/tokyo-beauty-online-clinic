@@ -25,9 +25,7 @@ export function Footer() {
             </div>
             <div className="w-8 h-px bg-clinic-gold/40 mb-5" />
             <p className="text-xs text-white/55 leading-loose tracking-wide max-w-xs">
-              医療ダイエット専門のオンラインクリニックです。<br />
-              GLP-1製剤を用いた医師・カウンセラーによる<br />
-              3ヶ月サポートプログラムを提供しています。
+              医療ダイエットに特化したオンラインクリニックです。
             </p>
             <p className="text-[10px] text-white/40 mt-4 tracking-wide">
               ※本サービスは自由診療のみです。保険診療は行っておりません。
