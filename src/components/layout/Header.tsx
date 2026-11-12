@@ -10,7 +10,6 @@ export function Header() {
     { href: "/flow", label: "プログラムの流れ" },
     { href: "/medication", label: "処方薬について" },
     { href: "/faq", label: "よくある質問" },
-    { href: "/contact", label: "お問い合わせ" },
   ]
 
   return (
@@ -60,12 +59,14 @@ export function Header() {
               <svg viewBox="0 0 14 14" fill="currentColor" className="w-3 h-3"><path d="M7 1C3.69 1 1 3.29 1 6.11c0 1.55.82 2.94 2.1 3.9V12L5 10.97c.63.18 1.3.27 2 .27 3.31 0 6-2.29 6-5.11S10.31 1 7 1z"/></svg>
               LINEで相談
             </a>
-            <Link
-              href="/reservation"
+            <a
+              href="https://line.me/R/ti/p/@555glibw"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden md:inline-flex items-center bg-clinic-gold text-clinic-gray-mid hover:opacity-85 transition-opacity px-5 py-2 text-[10px] tracking-[0.22em] font-sans"
             >
-              ご予約
-            </Link>
+              無料相談
+            </a>
 
             <button
               className="md:hidden p-2"
@@ -107,13 +108,15 @@ export function Header() {
               >
                 LINEで相談
               </a>
-              <Link
-                href="/reservation"
+              <a
+                href="https://line.me/R/ti/p/@555glibw"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-center bg-clinic-gold text-clinic-gray-mid py-3 text-xs tracking-[0.3em] font-sans"
                 onClick={() => setMenuOpen(false)}
               >
-                ご予約
-              </Link>
+                無料相談
+              </a>
             </div>
           </nav>
         </div>
