@@ -16,21 +16,21 @@ const INCLUDES = [
 
 const PLANS = [
   {
-    id: "monthly",
-    period: "月払い",
-    en: "MONTHLY",
-    desc: "1ヶ月ずつ継続。まず試してみたい方に。",
-    oral: { price: "¥69,800", unit: "/ 月（税込）" },
-    injection: { price: "¥104,800", unit: "/ 月（税込）" },
+    id: "three",
+    period: "3ヶ月プログラム",
+    en: "3-MONTH PROGRAM",
+    desc: "まずは3ヶ月。医師とカウンセラーが体質・生活習慣から見直します。",
+    oral: { price: "¥198,000", unit: "/ 3ヶ月（税込）" },
+    injection: { price: "¥298,000", unit: "/ 3ヶ月（税込）" },
     note: null,
   },
   {
-    id: "bulk",
-    period: "3ヶ月一括",
-    en: "3-MONTH PROGRAM",
-    desc: "本体3ヶ月を一括払い。割引価格で本気で取り組む方に。",
-    oral: { price: "¥198,000", unit: "/ 3ヶ月（税込）" },
-    injection: { price: "¥298,000", unit: "/ 3ヶ月（税込）" },
+    id: "six",
+    period: "6ヶ月プログラム",
+    en: "6-MONTH PROGRAM",
+    desc: "本気で変わりたい方へ。じっくり時間をかけて、体重と習慣を変えます。",
+    oral: { price: "¥368,000", unit: "/ 6ヶ月（税込）" },
+    injection: { price: "¥558,000", unit: "/ 6ヶ月（税込）" },
     note: null,
     recommended: true,
   },
@@ -144,6 +144,7 @@ export default function PlansPage() {
         <div className="text-center">
           <p className="text-xs text-clinic-offwhite/60 tracking-wider mb-8 leading-relaxed">
             内服・注射の選択はカウンセリングと医師の診察を経て決まります。<br />
+            お支払いはクレジットカード・銀行振込・提携ローンに対応しています。<br />
             まずはLINEでお気軽にご相談ください。初回カウンセリングは無料です。
           </p>
           <Link
